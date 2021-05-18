@@ -16,7 +16,9 @@
     </div>
     <div class="card__add-box">
       <AddBox />
-      <Button :filled="true">Посмотреть</Button>
+      <Button :filled="true" @click="openWineCard">
+        Посмотреть
+      </Button>
     </div>
     <div class="card__actions">
       <Discount class="card__icon-discount" />
@@ -36,6 +38,17 @@ export default {
   },
   data () {
     return {}
+  },
+  methods: {
+    openWineCard () {
+      this.$openModal('WineCard', {})
+        .then((data) => {
+          console.log(data)
+        })
+        .catch((e) => {
+          console.log(e)
+        })
+    }
   }
 }
 </script>

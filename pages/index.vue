@@ -18,6 +18,27 @@ export default {
     SubHero: () => import('../components/layouts/SubHero'),
     FilterBox: () => import('../components/pages/FilterBox'),
     Catalog: () => import('../components/pages/Catalog')
+  },
+  created () {
+    // await this.$openModal('WineOwner')
+    //   .then((data) => {
+    //     console.log(data)
+    //   })
+    //   .catch((e) => {
+    //     console.log(e)
+    //   })
+  },
+  methods: {
+    openInitModals () {
+      this.$openModal('Is18YearsOld')
+        .then(() => this.$openModal('WineOwner'))
+        .then((data) => {
+          console.log(data)
+        })
+        .catch((e) => {
+          console.log(e)
+        })
+    }
   }
 }
 </script>

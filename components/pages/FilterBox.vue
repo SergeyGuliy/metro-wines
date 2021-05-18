@@ -4,7 +4,7 @@
       ФИЛЬТРЫ
     </div>
     <div class="filter-box__row">
-      <InputBox :depresed="true" placeholder="Поиск по названию" class="filter-box__cubic" :search="true" />
+      <InputBox v-model="searchField" :depresed="true" placeholder="Поиск по названию" class="filter-box__cubic" :search="true" />
       <Button class="filter-box__cubic" :depresed="true">
         ИСКАТЬ
       </Button>
@@ -20,7 +20,9 @@ export default {
     Button: () => import('../form/Button')
   },
   data () {
-    return {}
+    return {
+      searchField: ''
+    }
   }
 }
 </script>
