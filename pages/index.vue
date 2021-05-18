@@ -1,0 +1,35 @@
+<template>
+  <div class="page-main">
+    <Hero />
+    <SubHero />
+    <div class="page-main__container">
+      <div class="container">
+        <FilterBox />
+        <Catalog />
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  components: {
+    Hero: () => import('../components/layouts/Hero'),
+    SubHero: () => import('../components/layouts/SubHero'),
+    FilterBox: () => import('../components/pages/FilterBox'),
+    Catalog: () => import('../components/pages/Catalog')
+  }
+}
+</script>
+
+<style lang="scss">
+  .page-main{
+    .page-main__container{
+      padding: 111px 0 50px 0;
+      background: url("../assets/images/page-main_top.png"), #f4f4f4;
+      background-repeat: no-repeat;
+      background-size: 100%;
+      min-height: 1000px;
+    }
+  }
+</style>

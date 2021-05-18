@@ -1,0 +1,51 @@
+@import "./variables";
+
+@mixin desktopHd() {
+  @media screen and (max-width: $bp-desktop-hd) {
+    @content;
+  }
+}
+
+//          max-width === 1279
+@mixin desktop() {
+  @media screen and (max-width: $bp-desktop) {
+    @content;
+  }
+}
+
+//          max-width === 1023
+@mixin tablets() {
+  @media screen and (max-width: $bp-tablets) {
+    @content;
+  }
+}
+
+//          max-width === 767
+@mixin phones() {
+  @media screen and (max-width: $bp-phones) {
+    @content;
+  }
+}
+
+//          max-width === 320
+@mixin phones-small() {
+  @media screen and (max-width: $bp-phones-small) {
+    @content;
+  }
+}
+
+//          max-width === 1279px
+@mixin retina() {
+  @media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min-device-pixel-ratio: 2) {
+    @content;
+  }
+}
+
+@mixin FontStyle($title-font, $weight, $color, $size, $lineHeight) {
+  font-family: $title-font;
+  font-weight: $weight;
+  color: $color;
+  font-size: $size;
+  line-height: $lineHeight;
+  @content;
+}

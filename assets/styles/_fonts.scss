@@ -1,0 +1,116 @@
+@font-face {
+  font-family: 'Acrom';
+  src: url('../fonts/acorn/Acrom-Light.eot');
+  src: local('Acrom Light'), local('Acrom-Light'),
+  url('../fonts/acorn/Acrom-Light.eot?#iefix') format('embedded-opentype'),
+  url('../fonts/acorn/Acrom-Light.woff2') format('woff2'),
+  url('../fonts/acorn/Acrom-Light.woff') format('woff'),
+  url('../fonts/acorn/Acrom-Light.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Acrom';
+  src: url('../fonts/acorn/Acrom-Thin.eot');
+  src: local('Acrom Thin'), local('Acrom-Thin'),
+  url('../fonts/acorn/Acrom-Thin.eot?#iefix') format('embedded-opentype'),
+  url('../fonts/acorn/Acrom-Thin.woff2') format('woff2'),
+  url('../fonts/acorn/Acrom-Thin.woff') format('woff'),
+  url('../fonts/acorn/Acrom-Thin.ttf') format('truetype');
+  font-weight: 100;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Acrom';
+  src: url('../fonts/acorn/Acrom-Bold.eot');
+  src: local('Acrom Bold'), local('Acrom-Bold'),
+  url('../fonts/acorn/Acrom-Bold.eot?#iefix') format('embedded-opentype'),
+  url('../fonts/acorn/Acrom-Bold.woff2') format('woff2'),
+  url('../fonts/acorn/Acrom-Bold.woff') format('woff'),
+  url('../fonts/acorn/Acrom-Bold.ttf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Acrom';
+  src: url('../fonts/acorn/Acrom-Regular.eot');
+  src: local('Acrom'), local('Acrom-Regular'),
+  url('../fonts/acorn/Acrom-Regular.eot?#iefix') format('embedded-opentype'),
+  url('../fonts/acorn/Acrom-Regular.woff2') format('woff2'),
+  url('../fonts/acorn/Acrom-Regular.woff') format('woff'),
+  url('../fonts/acorn/Acrom-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Acrom';
+  src: url('../fonts/acorn/Acrom-ExtraBold.eot');
+  src: local('Acrom ExtraBold'), local('Acrom-ExtraBold'),
+  url('../fonts/acorn/Acrom-ExtraBold.eot?#iefix') format('embedded-opentype'),
+  url('../fonts/acorn/Acrom-ExtraBold.woff2') format('woff2'),
+  url('../fonts/acorn/Acrom-ExtraBold.woff') format('woff'),
+  url('../fonts/acorn/Acrom-ExtraBold.ttf') format('truetype');
+  font-weight: 800;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Acrom';
+  src: url('../fonts/acorn/Acrom-Medium.eot');
+  src: local('Acrom Medium'), local('Acrom-Medium'),
+  url('../fonts/acorn/Acrom-Medium.eot?#iefix') format('embedded-opentype'),
+  url('../fonts/acorn/Acrom-Medium.woff2') format('woff2'),
+  url('../fonts/acorn/Acrom-Medium.woff') format('woff'),
+  url('../fonts/acorn/Acrom-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "TimesNewRomanRegular";
+  src: url("../fonts/TimesNewRoman/TimesNewRomanRegular/TimesNewRomanRegular.eot");
+  src: url("../fonts/TimesNewRoman/TimesNewRomanRegular/TimesNewRomanRegular.eot?#iefix")format("embedded-opentype"),
+  url("../fonts/TimesNewRoman/TimesNewRomanRegular/TimesNewRomanRegular.woff") format("woff"),
+  url("../fonts/TimesNewRoman/TimesNewRomanRegular/TimesNewRomanRegular.ttf") format("truetype");
+  font-style: normal;
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: "TimesNewRomanBold";
+  src: url("../fonts/TimesNewRoman/TimesNewRomanBold/TimesNewRomanBold.eot");
+  src: url("../fonts/TimesNewRoman/TimesNewRomanBold/TimesNewRomanBold.eot?#iefix")format("embedded-opentype"),
+  url("../fonts/TimesNewRoman/TimesNewRomanBold/TimesNewRomanBold.woff") format("woff"),
+  url("../fonts/TimesNewRoman/TimesNewRomanBold/TimesNewRomanBold.ttf") format("truetype");
+  font-style: normal;
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: "TimesNewRomanItalic";
+  src: url("../fonts/TimesNewRoman/TimesNewRomanItalic/TimesNewRomanItalic.eot");
+  src: url("../fonts/TimesNewRoman/TimesNewRomanItalic/TimesNewRomanItalic.eot?#iefix")format("embedded-opentype"),
+  url("../fonts/TimesNewRoman/TimesNewRomanItalic/TimesNewRomanItalic.woff") format("woff"),
+  url("../fonts/TimesNewRoman/TimesNewRomanItalic/TimesNewRomanItalic.ttf") format("truetype");
+  font-style: normal;
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: "TimesNewRomanBoldItalic";
+  src: url("../fonts/TimesNewRoman/TimesNewRomanBoldItalic/TimesNewRomanBoldItalic.eot");
+  src: url("../fonts/TimesNewRoman/TimesNewRomanBoldItalic/TimesNewRomanBoldItalic.eot?#iefix")format("embedded-opentype"),
+  url("../fonts/TimesNewRoman/TimesNewRomanBoldItalic/TimesNewRomanBoldItalic.woff") format("woff"),
+  url("../fonts/TimesNewRoman/TimesNewRomanBoldItalic/TimesNewRomanBoldItalic.ttf") format("truetype");
+  font-style: normal;
+  font-weight: normal;
+}
+
+
+*{
+  font-family: 'Acrom';
+}

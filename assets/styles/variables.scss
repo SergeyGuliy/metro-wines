@@ -1,0 +1,69 @@
+$main-color: #00D7CC;
+$text-color: #fff;
+$main-dark: #2D3942;
+$main-dark-alter: #1A1A18;
+$main-soft: #D8D1CA;
+$main-text-color: $main-dark-alter;
+$main-blue: $main-color;
+$main-color-hover: darken($main-color, 10%);
+
+$links-color: #237BFF;
+$links-color-hover: darken($links-color, 10%);
+$danger-color: #E60012;
+$warning-color: #FEA815;
+$success-color: #35B37E;
+$footer-color: $main-dark;
+
+$font-color: #1D2328;
+$gray-color: #888B90;
+$border-color: #A0B3BC;
+$background-muted: #F6F7F8;
+
+$bp-desktop-hd: 1366px;
+$bp-desktop: 1279px;
+$bp-tablets: 1023px;
+$bp-phones: 767px;
+$bp-phones-small: 320px;
+
+$ease: ease-in-out;
+
+// BS GRID
+$col1: 8.333333%;
+$col2: 16.666667%;
+$col3: 25%;
+$col4: 33.333333%;
+$col5: 41.666667%;
+$col6: 50%;
+$col7: 58.333333%;
+$col8: 66.666667%;
+$col9: 75%;
+$col10: 83.333333%;
+$col11: 91.666667%;
+$col12: 100%;
+
+
+// PLAYER
+
+$main-player-color: $main-color;
+$player-question-action-color: #fff;
+//$player-chat-header-background: #231F20;
+//$player-aside-background: #313131;
+//$player-chat-footer-background: $main-blue;
+//$player-chat-form-input-background: $player-chat-footer-background;
+//$player-aside-header-title-active-color: #fff;
+//$player-aside-header-title-color: #fff;
+//$player-aside-header-border-color: #3D3638;
+//$player-chat-speaker-name-color: #000000;
+//$player-chat-speaker-name-weight: 600;
+//$player-chat-name-color: #659EF0;
+//$player-chat-date-color: rgba(256, 256, 256, .4);
+//$player-chat-message-color: #fff;
+//
+//$player-chat-quote-text-color: #fff;
+//$player-chat-reply-name-color: #fff;
+//$player-vote-title-color: #fff;
+//$player-vote-label-color: #fff;
+//$player-question-name-color: rgba(255,255,255, 0.4);
+//$player-question-text-color: #fff;
+//$player-question-highlight-color: #fff;
+//$player-question-me-background: $main-blue;
