@@ -15,11 +15,15 @@ export default {
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
-    '@/assets/styles/index.scss'
+    '@/assets/styles/index.scss',
+    '@/node_modules/veeno/node_modules/nouislider/distribute/nouislider.css'
   ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: ['~/plugins/vuePrototype.js'],
+  plugins: [
+    '~/plugins/vuePrototype.js',
+    // '~/plugins/slider.js'
+  ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,

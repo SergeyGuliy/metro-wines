@@ -41,3 +41,123 @@ input, button, textarea{
   top: 18px;
   right: 18px;
 }
+
+
+.noselect{
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Old versions of Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none;
+}
+
+
+.checkbox{
+  width: 22px;
+  height: 22px;
+  border: 1px solid #000000;
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .svg-ok{
+    display: none;
+  }
+}
+.checkbox--active{
+  .svg-ok{
+    display: block;
+    path{
+      stroke: black;
+    }
+  }
+}
+
+.custom-input-box {
+  height: 70px;
+  width: calc(25% - 20px);
+  margin: 0 10px 20px 10px;
+  background: #FFFFFF;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 28px 0 25px;
+  cursor: pointer;
+  position: relative;
+  @include FontStyle('Acrom', normal, #000000, 20px, 24px);
+  .custom-input-box__inner-box{
+    max-width: 100%;
+    z-index: 1;
+    position: absolute;
+    width: 100%;
+    top: -10px;
+    left: 0;
+    background: #FFFFFF;
+    box-shadow: 0px 16px 32px rgba(48, 49, 51, 0.24);
+    border-radius: 5px;
+    padding: 30px 20px 11px 20px;
+    @include FontStyle('Acrom', normal, #000000, 20px, 24px);
+  }
+  .custom-input-box__outer{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+  }
+  .custom-input-box__icon{
+    min-width: 56px;
+  }
+  .custom-input-box__outer-text{
+    margin-right: auto;
+  }
+  .custom-input-box__arrow{
+  }
+}
+
+
+.veeno{
+  background: #C4C4C4;
+  border-radius: 5px;
+  height: 3px !important;
+  margin-right: 4px;
+  margin-left: 4px;
+  margin-bottom: 20px;
+  cursor: pointer;
+  .noUi-base{
+    background: #C4C4C4;
+    border-radius: 5px;
+    height: 3px;
+    .noUi-connects {
+      background: #C4C4C4;
+      border-radius: 5px;
+      height: 3px;
+      .noUi-connect{
+        background: #710000;
+        border-radius: 5px;
+      }
+    }
+    .noUi-handle{
+      height: 16px;
+      width: 16px;
+      border-radius: 50%;
+      background: #FFFFFF;
+      border: 1px solid #710000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      left: -8px;
+    }
+    .noUi-handle::before{
+      position: static;
+      background: #710000;
+      height: 10px;
+      width: 10px;
+      border-radius: 50%;
+    }
+    .noUi-handle::after{
+      display: none;
+    }
+  }
+}

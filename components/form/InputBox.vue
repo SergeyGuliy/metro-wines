@@ -4,7 +4,7 @@
     :class="depresed? 'input-box--depresed' : null"
   >
     <input
-      v-model="lovalValue"
+      v-model="localValue"
       type="text"
       class="input-field"
       :placeholder="placeholder"
@@ -46,7 +46,7 @@ export default {
     return {}
   },
   computed: {
-    lovalValue: {
+    localValue: {
       get () {
         return this.value
       },
