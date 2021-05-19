@@ -1,9 +1,7 @@
 <template>
-  <div class="hero">
+  <div class="hero" :class="{'hero-retail': retail}">
     <div class="container">
-      <h1 class="hero__text">
-        Винная карта <br> для вашего <br> ресторана
-      </h1>
+      <h1 class="hero__text" v-html="retail? retailText: restorauntText" />
     </div>
   </div>
 </template>
@@ -11,9 +9,17 @@
 <script>
 export default {
   name: 'Hero',
-  components: {},
+  props: {
+    retail: {
+      default: () => false,
+      type: Boolean
+    }
+  },
   data () {
-    return {}
+    return {
+      restorauntText: 'Винная карта <br> для вашего <br> ресторана',
+      retailText: 'Ваша карта <br> любимых вин'
+    }
   }
 }
 </script>
@@ -30,7 +36,14 @@ export default {
     display: flex;
     align-items: center;
     .hero__text{
+      text-transform: uppercase;
       @include FontStyle('TimesNewRoman', normal, #ffffff, 86px, 99px);
     }
+  }
+  .hero-retail{
+    background-image: linear-gradient(90deg, #000000 0%, rgba(123, 9, 9, 0) 97.7%), url("../../assets/images/hero-retail.jpg");
+    background-blend-mode: multiply;
+    mix-blend-mode: multiply;
+    background-size: cover;
   }
 </style>

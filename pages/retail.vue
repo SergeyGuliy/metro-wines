@@ -1,6 +1,6 @@
 <template>
   <div class="page-main">
-    <Hero />
+    <Hero :retail="true" />
     <SubHero :sub-hero-items="subHeroItems" />
     <div class="page-main__container">
       <div class="container">
@@ -22,9 +22,9 @@ export default {
   data () {
     return {
       subHeroItems: [
-        'ВЫБЕРИТЕ <br>вина, соответствующие <br> концепции вашего<br> заведения',
-        'СФОРМИРУЙТЕ<br> вашу винную<br> карту в PDF формате <br>с выбранным<br> дизайном',
-        'ОТПРАВЬТЕ <br> cформированный <br> Excel файл вашему<br> менеджеру для заказа'
+        'ВЫБЕРИТЕ<br> вина из предложенного<br> ассортимента',
+        'СФОРМИРУЙТЕ<br> список вин<br> в Excel файл',
+        'СОБЕРИТЕ <br>выбранный ассортимент<br> в ТЦ или оформите<br> самовывоз'
       ]
     }
   },

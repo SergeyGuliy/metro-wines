@@ -2,7 +2,14 @@
   <div class="sub-hero">
     <div class="container">
       <div class="sub-hero__row">
-        <SubHeroColumn v-for="column in columns" :key="column.number" :column="column" />
+        <SubHeroColumn
+          v-for="(text, index) in subHeroItems"
+          :key="index"
+          :column="{
+            text,
+            number: index + 1
+          }"
+        />
       </div>
     </div>
   </div>
@@ -14,22 +21,10 @@ export default {
   components: {
     SubHeroColumn: () => import('./SubHeroColumn')
   },
-  data () {
-    return {
-      columns: [
-        {
-          number: '1',
-          text: 'ВЫБЕРИТЕ <br>вина, соответствующие <br> концепции вашего<br> заведения'
-        },
-        {
-          number: '2',
-          text: 'СФОРМИРУЙТЕ<br> вашу винную<br> карту в PDF формате <br>с выбранным<br> дизайном'
-        },
-        {
-          number: '3',
-          text: 'ОТПРАВЬТЕ <br> cформированный <br> Excel файл вашему<br> менеджеру для заказа'
-        }
-      ]
+  props: {
+    subHeroItems: {
+      type: Array,
+      required: true
     }
   }
 }
