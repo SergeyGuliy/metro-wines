@@ -20,7 +20,10 @@ export default {
     Catalog: () => import('../components/pages/Catalog')
   },
   created () {
-    // await this.$openModal('WineOwner')
+    // this.openInitModals()
+
+    // this.$openModal('Bucket')
+    //   .then(() => this.$openModal('WineOwner'))
     //   .then((data) => {
     //     console.log(data)
     //   })

@@ -1,10 +1,13 @@
 <template>
   <button
     class="button"
-    :class="{'button--depresed': depresed, 'button--outlined': outlined, 'button--filled': filled}"
+    :class="{'button--depresed': depresed, 'button--rounded': rounded, 'button--outlined': outlined, 'button--filled': filled}"
     @click.stop="$emit('click')"
   >
-    <span class="button__text">
+    <span
+      class="button__text"
+      :class="{'button__text__bold': bold, 'button__text__uppercase': uppercase,}"
+    >
       <slot />
     </span>
   </button>
@@ -25,6 +28,18 @@ export default {
     filled: {
       default: () => false,
       type: Boolean
+    },
+    rounded: {
+      default: () => false,
+      type: Boolean
+    },
+    uppercase: {
+      default: () => false,
+      type: Boolean
+    },
+    bold: {
+      default: () => false,
+      type: Boolean
     }
   },
 
@@ -41,7 +56,12 @@ export default {
     cursor: pointer;
     .button__text{
       @include FontStyle('Acrom', normal, #710000, 14px, 16px);
-
+    }
+    .button__text__uppercase{
+      text-transform: uppercase !important;
+    }
+    .button__text__bold{
+      font-weight: bold !important;
     }
   }
   .button--outlined{
@@ -71,5 +91,11 @@ export default {
       font-weight: normal;
       color: #FFFFFF;
     }
+  }
+  .button--rounded{
+    background-color: transparent;
+    border: 2px solid #710000;
+    height: 100%;
+    border-radius: 5px;
   }
 </style>

@@ -31,9 +31,9 @@
       <div class="footer__title">
         на лучшие предложения
       </div>
-      <InputBox class="footer-col__input" v-model="email" placeholder="E-mail">
+      <InputBox v-model="email" class="footer-col__input" placeholder="E-mail">
         <template #append>
-          <Button :outlined="true">
+          <Button :outlined="true" @click="openFeedBackModal">
             Подписаться
           </Button>
         </template>
@@ -76,6 +76,17 @@ export default {
   data () {
     return {
       email: ''
+    }
+  },
+  methods: {
+    openFeedBackModal () {
+      this.$openModal('Feedback')
+        .then((data) => {
+          console.log(data)
+        })
+        .catch((e) => {
+          console.log(e)
+        })
     }
   }
 }

@@ -25,11 +25,19 @@ a{
 
 }
 
-input, button{
+input, button, textarea{
   outline: none !important;
 }
 
 .overflow-hidden{
   //overflow: hidden;
   //max-height: 100vh;
+}
+
+
+.svg-close {
+  cursor: pointer;
+  position: absolute;
+  top: 18px;
+  right: 18px;
 }
