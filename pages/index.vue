@@ -62,7 +62,6 @@ export default {
       background: url("../assets/images/page-main_top.png"), #f4f4f4;
       background-repeat: no-repeat;
       background-size: 100%;
-      min-height: 1000px;
     }
   }
 </style>
