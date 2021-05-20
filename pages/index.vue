@@ -29,7 +29,9 @@ export default {
     }
   },
   created () {
-    // this.openInitModals()
+    // setTimeout(() => {
+    //   this.openInitModals()
+    // }, 1000)
 
     // this.$openModal('Bucket')
     //   .then(() => this.$openModal('WineOwner'))

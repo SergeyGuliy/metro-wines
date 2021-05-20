@@ -19,6 +19,7 @@
     "core-js": "^3.9.1",
     "nuxt": "^2.15.3",
     "veeno": "0.0.4",
+    "vue-bus": "^1.2.1",
     "vue-click-outside": "^1.1.0",
     "vue-nouislider": "^1.0.1"
   },

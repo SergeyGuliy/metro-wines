@@ -1,12 +1,12 @@
 <template>
-  <div class="bucket-modal">
+  <div class="bucket-user-modal">
     <Close class="svg-close" @click="close" />
-    <div class="bucket-modal__outset">
-      <div class="bucket-modal__title">
+    <div class="bucket-user-modal__outset">
+      <div class="bucket-user-modal__title">
         Ваша корзина
       </div>
-      <div class="bucket-modal__devider" />
-      <div class="bucket-modal__body">
+      <div class="bucket-user-modal__devider" />
+      <div class="bucket-user-modal__body">
         <BucketCard />
         <BucketCard />
         <BucketCard />
@@ -14,12 +14,12 @@
         <BucketCard />
       </div>
     </div>
-    <div class="bucket-modal__footer">
-      <div class="bucket-modal__symm">
+    <div class="bucket-user-modal__footer">
+      <div class="bucket-user-modal__symm">
         Всего товаров на сумму:
-        <span class="bucket-modal__symm-inner">12 358,12 ₽</span>
+        <span class="bucket-user-modal__symm-inner">12 358,12 ₽</span>
       </div>
-      <div class="bucket-modal__actions">
+      <div class="bucket-user-modal__actions">
         <Button :rounded="true" :uppercase="true" :bold="true" @click="close(true)">
           Скачать спецификацию
         </Button>
@@ -35,7 +35,7 @@
 import modalMixin from './modalMixin'
 
 export default {
-  name: 'Bucket',
+  name: 'BucketUser',
   components: {
     Button: () => import('../form/Button'),
     BucketCard: () => import('./components/BucketCard'),
@@ -58,7 +58,7 @@ export default {
 <style lang='scss'>
   @import "@/assets/styles/mixins.scss";
 
-  .bucket-modal {
+  .bucket-user-modal {
     width: 1024px;
     max-height: 609px;
     filter: drop-shadow(0px 4px 30px rgba(0, 0, 0, 0.25));
@@ -70,24 +70,24 @@ export default {
     background-color: #ffffff;
     padding-top: 30px;
     margin: 0 20px;
-    .bucket-modal__outset{
+    .bucket-user-modal__outset{
       margin: 0 20px;
     }
-    .bucket-modal__title{
+    .bucket-user-modal__title{
       @include FontStyle('Acrom', normal, #000000, 26px, 31px);
     }
-    .bucket-modal__devider{
+    .bucket-user-modal__devider{
       background: #710000;
       width: 100%;
       height: 2px;
       margin-top: 9px;
     }
-    .bucket-modal__body{
+    .bucket-user-modal__body{
       height: 457px;
       margin-top: 15px;
       overflow: auto;
     }
-    .bucket-modal__footer{
+    .bucket-user-modal__footer{
       padding: 0 20px;
       height: 90px;
       width: 100%;
@@ -96,13 +96,13 @@ export default {
       align-items: center;
       justify-content: space-between;
     }
-    .bucket-modal__symm{
+    .bucket-user-modal__symm{
       @include FontStyle('Acrom', bold, #000000, 16px, 19px);
     }
-    .bucket-modal__symm-inner{
+    .bucket-user-modal__symm-inner{
       @include FontStyle('Acrom', bold, #000000, 25px, 30px);
     }
-    .bucket-modal__actions{
+    .bucket-user-modal__actions{
       height: 40px;
       .button:first-child{
         margin-right: 15px;

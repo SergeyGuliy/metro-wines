@@ -32,11 +32,8 @@ export default {
   components: {
     Button: () => import('../form/Button')
   },
-  mixins: [modalMixin],
+  mixins: [modalMixin]
 
-  data () {
-    return {}
-  }
 }
 </script>
 

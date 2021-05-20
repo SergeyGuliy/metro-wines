@@ -1,6 +1,10 @@
 <template>
-  <div v-if="getComponent" class="modal-wrapper">
-    <component :is="getComponent" v-if="getComponent" />
+  <div class="modal-wrapper" @click="clickModalWrapper">
+    <transition name="fade">
+      <template v-if="getComponent">
+        <component :is="getComponent" />
+      </template>
+    </transition>
   </div>
 </template>
 
@@ -20,6 +24,11 @@ export default {
         return null
       }
     }
+  },
+  methods: {
+    clickModalWrapper () {
+      this.$bus.emit('clickModalWrapper')
+    }
   }
 }
 </script>
@@ -33,5 +42,17 @@ export default {
     left: 0;
     z-index: 1;
     background: rgba(000, 000, 000, 0.5);
+    /*visibility: hidden;*/
   }
+  .modal-wrapper--active{
+    /*visibility: visible;*/
+  }
+
+  .fade-enter-active, .fade-leave-active {
+    transition: opacity 0.5s;
+  }
+  .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+    opacity: 0;
+  }
+
 </style>

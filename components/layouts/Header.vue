@@ -5,13 +5,15 @@
         <LogoMetro class="svg-logo-metro" />
         <Geolocation />
       </div>
-      <div class="header__bucket-box">
+      <div id="bucket-activator" class="header__bucket-box" @click="openBucket">
         <nuxt-link to="">
           Моя винная карта
         </nuxt-link>
         <div class="bucket">
           <Bucket />
-          <div class="bucket__chip">12</div>
+          <div class="bucket__chip">
+            12
+          </div>
         </div>
       </div>
     </div>
@@ -29,6 +31,17 @@ export default {
   },
   data () {
     return {}
+  },
+  methods: {
+    openBucket () {
+      this.$openModal('BucketRestoraunt', { activator: '#bucket-activator' })
+        .then((data) => {
+          console.log(data)
+        })
+        .catch((e) => {
+          console.log(e)
+        })
+    }
   }
 }
 </script>
@@ -55,6 +68,7 @@ export default {
     .header__bucket-box{
       display: flex;
       align-items: center;
+      position: relative;
       a{
         @include FontStyle('Acrom', normal, #ffffff, 18px, 22px);
       }

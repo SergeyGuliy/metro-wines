@@ -98,12 +98,6 @@ export default {
     display: flex;
     align-items: center;
     padding-bottom: 10px;
-    .svg-close{
-      cursor: pointer;
-      position: absolute;
-      top: 18px;
-      right: 18px;
-    }
     .card-modal__left{
       max-height: 100%;
       padding: 0 82px 0 66px;

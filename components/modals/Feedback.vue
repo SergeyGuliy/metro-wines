@@ -59,13 +59,6 @@ export default {
     transform: translate(-50%, -50%);
     background-color: #ffffff;
     padding: 30px;
-
-    .svg-close {
-      cursor: pointer;
-      position: absolute;
-      top: 18px;
-      right: 18px;
-    }
     .feedback-modal__title{
       @include FontStyle('Acrom', normal, #000000, 20px, 140%);
       margin-bottom: 18px;

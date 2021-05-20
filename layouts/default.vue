@@ -6,7 +6,9 @@
     </div>
     <Footer />
     <client-only>
-      <ModalController />
+      <transition name="fade">
+        <ModalController v-if="component" />
+      </transition>
     </client-only>
   </div>
 </template>

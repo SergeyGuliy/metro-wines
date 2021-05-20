@@ -1,5 +1,5 @@
 <template>
-  <div class="geolocation">
+  <div class="geolocation" @click="openSelectCity" id="geolocation-activator">
     <geolocation class="svg-geolocation" />
     <div class="dropdown-box">
       <div class="dropdown-box__top">
@@ -7,7 +7,7 @@
       </div>
       <div class="dropdown-box__bottom">
         Москва, Ленинградское ш., д.71Г
-        <arrow class="svg-arrow"/>
+        <arrow class="svg-arrow" />
       </div>
     </div>
   </div>
@@ -22,6 +22,17 @@ export default {
   },
   data () {
     return {}
+  },
+  methods: {
+    openSelectCity () {
+      this.$openModal('SelectCity', { activator: '#geolocation-activator' })
+        .then((data) => {
+          console.log(data)
+        })
+        .catch((e) => {
+          console.log(e)
+        })
+    }
   }
 }
 </script>
@@ -32,6 +43,7 @@ export default {
     display: flex;
     align-items: center;
     cursor: pointer;
+    position: relative;
     .svg-geolocation{
       margin-right: 19px;
     }
