@@ -1,11 +1,13 @@
 <template>
   <div class="card-item">
     <img src="../../assets/images/mock-wine.png" alt="" class="card-item__img">
-    <h5 class="card-item__title">
-      LOREM IPSUM DOLOR
-    </h5>
-    <div class="card-item__description">
-      Lorem ipsum dolor sit amet, adipiscing elit
+    <div class="card-item__box">
+      <h5 class="card-item__title">
+        LOREM IPSUM DOLOR
+      </h5>
+      <div class="card-item__description">
+        Lorem ipsum dolor sit amet, adipiscing elit
+      </div>
     </div>
     <div class="card-item__add-box">
       <div class="card-item__price-box">
@@ -92,7 +94,40 @@ export default {
       width: 50%;
     }
     @media (max-width: 767px) {
+      padding: 0 10px;
       width: 100%;
+      flex-direction: row;
+      flex-wrap: wrap;
+      align-items: end;
+      .card-item__img{
+        max-height: 100px;
+        margin-top: 15px;
+        margin-right: 15px;
+      }
+      .card-item__title{
+        margin-top: 22px;
+        @include FontStyle('TimesNewRoman', normal, #710000, 20px, 23px);
+      }
+      .card-item__description{
+        display: none;
+      }
+      .card-item__box{
+        max-width: calc(100% - 45px);
+        flex: 1 1 auto;
+      }
+      .card-item__add-box{
+        padding: 0 10px;
+        align-items: center;
+        flex-direction: row-reverse;
+        margin: 15px 0;
+        .card-item__price-item{
+          display: none;
+        }
+        .card-item__price-total{
+          margin-top: 0;
+          @include FontStyle('Acrom', bold, #000000, 18px, 22px);
+        }
+      }
     }
   }
 </style>

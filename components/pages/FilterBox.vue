@@ -146,5 +146,9 @@ export default {
         @include FontStyle('Acrom', normal, #ffffff, 20px, 24px);
       }
     }
+
+    @media (max-width: 1300px) {
+      display: none;
+    }
   }
 </style>

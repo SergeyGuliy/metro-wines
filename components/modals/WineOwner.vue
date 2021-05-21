@@ -74,5 +74,39 @@ export default {
       margin-top: 36px;
       @include FontStyle('Acrom', normal, #000000, 12px, 14px);
     }
+
+    @media (max-width: 1080px) {
+
+    }
+
+    @media (max-width: 767px) {
+      width: 300px;
+      height: 234px;
+      padding: 26px 0 20px 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      .wine-owner-modal__title{
+        text-align: center;
+        margin-bottom: 32px;
+        @include FontStyle('Acrom', normal, #000000, 20px, 24px);
+      }
+      .wine-owner-modal__star{
+        margin-top: 28px;
+      }
+      .wine-owner-modal__actions{
+        display: flex;
+        height: unset;
+        margin-top: 0;
+        flex-direction: column;
+        .button{
+          min-height: 40px;
+          width: 172px;
+        }
+        .button:first-child{
+          margin-bottom: 10px;
+        }
+      }
+    }
   }
 </style>

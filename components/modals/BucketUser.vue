@@ -69,7 +69,6 @@ export default {
     transform: translate(-50%, -50%);
     background-color: #ffffff;
     padding-top: 30px;
-    margin: 0 20px;
     .bucket-user-modal__outset{
       margin: 0 20px;
     }
@@ -95,6 +94,7 @@ export default {
       display: flex;
       align-items: center;
       justify-content: space-between;
+      border-radius: 0 0 5px 5px;
     }
     .bucket-user-modal__symm{
       @include FontStyle('Acrom', bold, #000000, 16px, 19px);
@@ -107,6 +107,26 @@ export default {
       .button:first-child{
         margin-right: 15px;
       }
+    }
+
+    @media (max-width: 1080px) {
+      width: 708px;
+      max-height: 609px;
+      padding-top: 20px;
+      .bucket-user-modal__outset{
+        margin: 0 30px;
+      }
+      .bucket-user-modal__footer{
+        padding: 0 30px;
+      }
+      .bucket-user-modal__symm{
+        display: flex;
+        flex-direction: column;
+      }
+    }
+
+    @media (max-width: 767px) {
+
     }
 
   }

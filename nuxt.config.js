@@ -1,6 +1,6 @@
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
-  ssr: false,
+  ssr: true,
   head: {
     title: 'wines',
     meta: [
@@ -16,7 +16,7 @@ export default {
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
     '@/assets/styles/index.scss',
-    '@/node_modules/veeno/node_modules/nouislider/distribute/nouislider.css'
+    '@/node_modules/nouislider/distribute/nouislider.css'
   ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
@@ -40,11 +40,15 @@ export default {
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
     // https://go.nuxtjs.dev/pwa
-    '@nuxtjs/pwa'
+    '@nuxtjs/pwa',
+    '@nuxtjs/proxy'
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
-  axios: {},
+  axios: {
+    proxy: true,
+    proxyHeaders: false
+  },
 
   // PWA module configuration: https://go.nuxtjs.dev/pwa
   pwa: {
@@ -52,6 +56,10 @@ export default {
       lang: 'en'
     }
   },
+  proxy: {
+    '/api/': { target: 'https://api.metro-cc.ru', pathRewrite: { '^/api/': '' }, changeOrigin: true }
+  },
+  // ''
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {

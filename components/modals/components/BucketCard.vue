@@ -35,7 +35,7 @@ export default {
     border-bottom: 1px solid #E6E6E6;
     display: flex;
     align-items: center;
-    padding-right: 5px;
+    padding-right: 10px;
     justify-content: space-between;
     .bucket-card__img-box{
       width: 30px;
@@ -73,6 +73,22 @@ export default {
     }
     .add-box{
       max-height: 41px;
+    }
+
+    @media (max-width: 1080px) {
+      .bucket-card__price-box{
+        padding-left: 28px;
+      }
+      .add-box{
+        max-height: 41px;
+        width: 100%;
+        max-width: 118px;
+        min-width: unset;
+        .add-box__minus, .add-box__plus{
+          padding: 0;
+          max-width: 25px;
+        }
+      }
     }
   }
 </style>

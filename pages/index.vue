@@ -12,6 +12,8 @@
 </template>
 
 <script>
+// import { api } from '../assets/api'
+
 export default {
   components: {
     Hero: () => import('../components/layouts/Hero'),
@@ -19,6 +21,10 @@ export default {
     FilterBox: () => import('../components/pages/FilterBox'),
     Catalog: () => import('../components/pages/Catalog')
   },
+  // async asyncData ({ $axios }) {
+  //   const a = await $axios.$get('https://api.metro-cc.ru/api/v1/5C63A1CB1E8954499E3BB93939B7B/tradecenters')
+  //   console.log(a)
+  // },
   data () {
     return {
       subHeroItems: [
@@ -38,19 +44,32 @@ export default {
       ]
     }
   },
-  created () {
+  mounted () {
+    try {
+      // const a = await this.$axios.$get('https://api.metro-cc.ru/api/v1/5C63A1CB1E8954499E3BB93939B7B/tradecenters')
+      // console.log(a)
+    } catch (e) {
+      console.error(e)
+    }
     // setTimeout(() => {
     //   this.openInitModals()
     // }, 1000)
 
-    // this.$openModal('Bucket')
-    //   .then(() => this.$openModal('WineOwner'))
+    //                        BucketUser
+
+    //                        BucketRestoraunt
+    //                        SelectCity
+
+    // this.$openModal('BucketUser')
     //   .then((data) => {
     //     console.log(data)
     //   })
     //   .catch((e) => {
     //     console.log(e)
     //   })
+    // api.tradecenters.getAll().then((res) => {
+    //   console.log(res)
+    // })
   },
   methods: {
     openInitModals () {

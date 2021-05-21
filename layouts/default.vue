@@ -39,7 +39,10 @@ export default {
     disableScrolling () {
       const x = window.scrollX
       const y = window.scrollY
-      window.onscroll = function () { window.scrollTo(x, y) }
+      window.onscroll = function (e) {
+        e.preventDefault()
+        window.scrollTo(x, y)
+      }
     },
 
     enableScrolling () {

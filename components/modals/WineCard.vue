@@ -182,5 +182,88 @@ export default {
         }
       }
     }
+
+    @media (max-width: 1080px) {
+      height: unset;
+      width: 707px;
+      align-items: end;
+      padding-bottom: 37px;
+      max-height: calc(100vh - 73px);
+      overflow: auto;
+      .card-modal__left{
+        padding-right: 18px;
+        padding-left: 30px;
+        .svg-SearchPlus{
+          top: 30px;
+          left: 41px;
+        }
+      }
+      .card-modal__right{
+        margin-top: 55px;
+      }
+      .card-modal__right{
+        margin-right: 37px;
+      }
+      .card-modal__parrams-box{
+        flex-direction: column;
+      }
+
+    }
+
+    @media (max-width: 767px) {
+      height: unset;
+      width: 300px;
+      max-height: calc(100vh - 30px);
+      overflow: auto;
+      flex-direction: column;
+      padding: 0 15px 40px 15px;
+
+      .card-modal__left{
+        padding: 0;
+        margin: 0 auto;
+        max-height: 326px;
+        img{
+          max-height: 326px;
+        }
+        .svg-SearchPlus{
+          left: -14px;
+        }
+      }
+
+      .card-modal__right{
+        margin: 0;
+        margin-top: 28px;
+      }
+
+      .card-modal__title{
+        @include FontStyle('TimesNewRoman', normal, #710000, 25px, 29px);
+        margin-bottom: 14px;
+      }
+      .card-modal__attr{
+        @include FontStyle('Acrom', normal, #000000, 18px, 22px);
+        margin-bottom: 30px;
+      }
+      .card-modal__parram.parram{
+        width: 100%;
+        margin: 0;
+        display: flex;
+        align-items: center;
+        .parram__key{
+          width: 100px;
+        }
+      }
+
+      .card-modal__price-discounted{
+        margin-top: 39px;
+
+      }
+      .card-modal__new-price{
+        margin-top: 10px;
+        @include FontStyle('Acrom', bold, #000000, 25px, 30px);
+      }
+      .card-modal__add-box{
+        margin-top: 34px;
+      }
+    }
   }
 </style>

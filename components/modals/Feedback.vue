@@ -14,7 +14,7 @@
       <TextareaBox v-model="form.name" placeholder="Сообщение" />
     </div>
     <div class="feedback-modal__action">
-      <Button :filled="true" @click="close(true)">
+      <Button :filled="true" :bold="true" @click="close(true)">
         ОТПРАВИТЬ
       </Button>
     </div>
@@ -93,6 +93,39 @@ export default {
       height: 40px;
       .button{
         width: 100%;
+      }
+    }
+
+    @media (max-width: 1080px) {
+
+    }
+
+    @media (max-width: 767px) {
+      width: 100vw;
+      height: 100vh;
+      overflow: auto;
+      border-radius: 0;
+      left: 0;
+      top: 0;
+      transform: translate(0,0);
+      padding: 52px 10px 20px 10px;
+      display: flex;
+      flex-direction: column;
+      .feedback-modal__title{
+        @include FontStyle('Acrom', normal, #000000, 18px, 21px);
+        margin-bottom: 3px;
+      }
+      .feedback-modal__description{
+        @include FontStyle('Acrom', normal, #000000, 14px, 17px);
+        margin-bottom: 30px;
+      }
+      .feedback-modal__action{
+        flex: 1 1 auto;
+        display: flex;
+        align-items: flex-end;
+        .button{
+          height: 40px;
+        }
       }
     }
   }

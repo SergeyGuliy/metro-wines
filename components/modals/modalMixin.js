@@ -16,7 +16,11 @@ export default {
       // eslint-disable-next-line no-unused-vars
       const { left, right, x, y, width, top, height } = domActivator.getBoundingClientRect()
       if (this.data.activator === '#bucket-activator') {
-        this.positionWithActivator = `top: ${top + height + 30}px; left: ${right - 378}px; transform: translate(0,0)`
+        if (window.innerWidth > 768) {
+          this.positionWithActivator = `top: ${top + height + 30}px; left: ${right - 378}px; transform: translate(0,0)`
+        } else {
+          this.positionWithActivator = 'transform: translate(0, 0)'
+        }
       } else {
         this.positionWithActivator = `top: ${top + height + 40}px; left: ${left}px; transform: translate(0,0)`
       }

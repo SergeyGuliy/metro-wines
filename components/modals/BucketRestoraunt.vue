@@ -20,25 +20,27 @@
       </div>
       <div class="bucket-restoraunt__devider" />
       <div class="bucket-restoraunt__body">
-        <div class="bucket-restoraunt__card r-card">
-          <Close class="svg-close" @click="close" />
-          <img src="../../assets/images/mock-wine.png" alt="" class="r-card__img">
-          <div class="r-card__right">
-            <div class="r-card__title">
-              MAKEDONS KO CRVENO STOBI WINERY
-            </div>
-            <div class="r-card__atricle">
-              Арт. 448800
-            </div>
-            <div class="r-card__actions">
-              <AddBox />
-              <div class="r-card__price">
-                12 358,12 ₽
+        <template v-for="item in Array(10)">
+          <div :key="item" class="bucket-restoraunt__card r-card">
+            <Close class="svg-close" @click="close" />
+            <img src="../../assets/images/mock-wine.png" alt="" class="r-card__img">
+            <div class="r-card__right">
+              <div class="r-card__title">
+                MAKEDONS KO CRVENO STOBI WINERY
+              </div>
+              <div class="r-card__atricle">
+                Арт. 448800
+              </div>
+              <div class="r-card__actions">
+                <AddBox />
+                <div class="r-card__price">
+                  12 358,12 ₽
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        <div class="bucket-restoraunt__card-border" />
+          <div :key="item" class="bucket-restoraunt__card-border" />
+        </template>
       </div>
       <div class="bucket-restoraunt__devider" />
       <div class="bucket-restoraunt__actions">
@@ -84,7 +86,7 @@ export default {
   mixins: [modalMixin],
   data () {
     return {
-      itemsLength: 0
+      itemsLength: 1
     }
   },
   created () {
@@ -155,6 +157,8 @@ export default {
       }
     }
     .bucket-restoraunt__body{
+      max-height: 560px;
+      overflow: auto;
       .bucket-restoraunt__card.r-card{
         padding: 0 30px;
         margin: 10px 0 15px 0;
@@ -202,6 +206,22 @@ export default {
         transform: rotate(-180deg);
         height: 6px;
         margin-bottom: 5px;
+      }
+    }
+
+    @media (max-width: 1080px) {
+
+    }
+
+    @media (max-width: 767px) {
+      position: static;
+      .bucket-restoraunt__actions{
+        position: fixed;
+        bottom: 0;
+        right: 0;
+        width: 100vw;
+        height: 120px;
+        background: #F4F3F1;
       }
     }
   }

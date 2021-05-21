@@ -1,12 +1,16 @@
 <template>
   <div class="old-modal">
     <div class="old-modal__left">
-      <img src="../../assets/images/bottle.png" alt="">
+      <img class="old-modal__img-big" src="../../assets/images/bottle.png" alt="">
+      <img class="old-modal__img-medium" src="../../assets/images/bottle-2.jpg" alt="">
       <div class="old-modal__18">
         18+
       </div>
     </div>
     <div class="old-modal__right">
+      <div class="old-modal__18-small">
+        18+
+      </div>
       <div class="old-modal__title">
         Для доступа на сайт необходимо подтвердить возраст
       </div>
@@ -14,10 +18,10 @@
         Сайт содержит информацию, не рекомендованную для лиц, не достигших совершеннолетнего возраста. Сведения, размещенные на сайте, носят исключительно информационный характер и предназначены только для личного использования.
       </div>
       <div class="old-modal__buttons">
-        <Button :filled="true" @click="close(true)">
+        <Button :filled="true" :uppercase="true" :bold="true" @click="close(true)">
           Мне исполнилось 18 лет
         </Button>
-        <Button :filled="true" @click="close()">
+        <Button :filled="true" :uppercase="true" :bold="true" @click="close()">
           Мне меньше 18 лет
         </Button>
       </div>
@@ -52,15 +56,21 @@ export default {
     background-color: #ffffff;
     display: flex;
     align-items: center;
+    .old-modal__18-small{
+      display: none;
+    }
     .old-modal__left{
       max-height: 100%;
       flex: 1 1 auto;
       position: relative;
-      img{
+      .old-modal__img-big{
         max-width: 230px;
         max-height: 610px;
         display: block;
         margin: 0 auto;
+      }
+      .old-modal__img-medium{
+        display: none;
       }
     }
     .old-modal__18{
@@ -85,7 +95,7 @@ export default {
       .old-modal__buttons{
         height: 40px;
         .button{
-          padding: 0 20px;
+          padding: 0 18.5px;
           span{
             text-transform: uppercase;
           }
@@ -93,6 +103,69 @@ export default {
         .button:first-child{
           margin-right: 10px;
 
+        }
+      }
+    }
+
+    @media (max-width: 1080px) {
+      width: 708px;
+      max-height: calc(100vh - 40px);
+      overflow: auto;
+      .old-modal__left{
+        margin-left: 14px;
+        margin-right: 29px;
+        .old-modal__img-big{
+          display: none;
+        }
+        .old-modal__img-medium{
+          display: block;
+        }
+      }
+      .old-modal__title{
+        max-width: 420px;
+      }
+
+    }
+
+    @media (max-width: 767px) {
+      width: 300px;
+      max-height: calc(100vh - 73px);
+      overflow: auto;
+      align-items: baseline;
+      height: 520px;
+      .old-modal__18-small{
+        display: block;
+        margin-bottom: 7px;
+        @include FontStyle('Acrom', bold, #710000, 50px, 60px);
+      }
+      .old-modal__left{
+        display: none;
+      }
+      .old-modal__right{
+        padding: 23px 20px 0 20px;
+        .old-modal__title{
+          margin-bottom: 7px;
+          @include FontStyle('TimesNewRoman', normal, #710000, 20px, 23px);
+        }
+        .old-modal__description{
+          margin-top: 0;
+          @include FontStyle('Acrom', normal, #000000, 16px, 140%);
+        }
+      }
+      .old-modal__buttons{
+        display: flex;
+        flex-direction: column;
+        height: unset !important;
+        .button{
+          width: 100%;
+          height: 40px;
+          min-height: 40px;
+        }
+        .button:first-child{
+          margin-bottom: 18px;
+        }
+        .button:last-child{
+          margin-bottom: 20px;
         }
       }
     }

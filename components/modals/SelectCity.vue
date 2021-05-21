@@ -166,5 +166,13 @@ export default {
         margin-right: 10px;
       }
     }
+
+    @media (max-width: 1080px) {
+
+    }
+
+    @media (max-width: 767px) {
+
+    }
   }
 </style>

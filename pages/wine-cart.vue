@@ -16,7 +16,7 @@
           </Button>
         </div>
 
-        <div class="wine-cart-main__title">
+        <div class="wine-cart-main__title wine-cart-main__title-last">
           Выберите шаблон для винной карты
         </div>
         <WIneConstructor />
@@ -96,6 +96,7 @@ export default {
     .wine-cart-main__warning{
       margin-top: 72px;
       display: flex;
+      text-align: center;
       justify-content: center;
       @include FontStyle('Acrom', normal, #000000, 34px, 40px);
     }
@@ -106,8 +107,84 @@ export default {
       }
     }
     @media (max-width: 1080px) {
+      .wine-cart-main__container{
+        padding-top: 80px;
+      }
+      .wine-cart-main__actions{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        height: unset;
+        margin-top: 40px;
+        margin-bottom: 80px;
+        .button{
+          height: 68px;
+        }
+        .button:first-child{
+          margin-bottom: 30px;
+        }
+      }
+
+      .wine-cart-main__warning{
+        margin-top: 30px;
+        max-width: 684px;
+        margin-left: auto;
+        margin-right: auto;
+      }
     }
     @media (max-width: 767px) {
+      .wine-cart-main__actions{
+        margin-top: 20px;
+        margin-bottom: 50px;
+        .button{
+          height: 40px;
+          max-width: 100%;
+          margin-right: 0 !important;
+          margin-left: 0 !important;
+          .button__text{
+            text-transform: uppercase !important;
+            @include FontStyle('Acrom', bold, #FFFFFF, 14px, 16px);
+          }
+        }
+        .button:first-child{
+          margin-bottom: 10px;
+        }
+        .button:last-child{
+          &::after{
+            display: block;
+            text-transform: uppercase !important;
+            @include FontStyle('Acrom', bold, #FFFFFF, 14px, 16px);
+            content: 'Отправить менеджеру'
+          }
+          .button__text{
+            display: none;
+          }
+        }
+
+      }
+      .wine-cart-main__container{
+        padding-top: 40px;
+      }
+      .wine-cart-main__title{
+        @include FontStyle('Acrom', normal, #000000, 16px, 19px);
+        margin-bottom: 102px;
+      }
+      .wine-cart-main__title.wine-cart-main__title-last{
+        margin-bottom: 20px;
+        max-width: 158px;
+      }
+      .wine-cart-main__warning{
+        max-width: 270px;
+        margin-left: auto;
+        margin-right: auto;
+        @include FontStyle('Acrom', normal, #000000, 18px, 22px);
+      }
+    }
+
+    @media (max-width: 500px) {
+      .wine-cart-main__actions .button{
+        width: 100%;
+      }
     }
   }
 </style>

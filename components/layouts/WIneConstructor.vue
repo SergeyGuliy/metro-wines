@@ -65,6 +65,7 @@ export default {
       padding: 0 10px;
       align-items: flex-end;
       min-height: 345px;
+      overflow-x: auto;
       .wine-constructor__shablone-select-box{
         margin: 0 10px;
         width: calc(25% - 20px);
@@ -72,6 +73,7 @@ export default {
         cursor: pointer;
         display: flex;
         align-items: flex-end;
+        min-width: 336px;
         img{
           object-fit: cover;
           height: 295px;
@@ -126,6 +128,87 @@ export default {
       }
       .button:first-child{
         margin-right: 12px;
+      }
+    }
+    @media (max-width: 1080px) {
+      .wine-constructor__shablones{
+        min-height: 336px;
+        margin: 0 -25px;
+      }
+      .wine-constructor__shablone-wrapper{
+        margin: 0 -30px;
+      }
+      .wine-constructor__text{
+        @include FontStyle('Acrom', normal, #000000, 26px, 30px);
+        margin-bottom: 30px;
+      }
+      .wine-constructor__actions{
+        margin-top: 30px;
+      }
+    }
+    @media (max-width: 767px) {
+      .wine-constructor__shablones{
+        min-height: unset;
+        margin: 0 -15px;
+      }
+      .wine-constructor__shablone-wrapper{
+        margin: 0 -20px;
+        padding-bottom: 26px;
+      }
+      .wine-constructor__text{
+        @include FontStyle('Acrom', normal, #000000, 12px, 14px);
+        margin-bottom: 30px;
+        max-width: 276px;
+      }
+      .wine-constructor__actions{
+        margin-top: 20px;
+        margin-bottom: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        height: unset;
+        .button {
+          height: 40px;
+          max-width: 100%;
+          margin-right: 0 !important;
+          margin-left: 0 !important;
+
+          .button__text {
+            text-transform: uppercase !important;
+            @include FontStyle('Acrom', bold, #FFFFFF, 14px, 16px);
+          }
+        }
+        .button:first-child{
+          margin-bottom: 10px;
+        }
+        .button:last-child{
+          &::after{
+            display: block;
+            text-transform: uppercase !important;
+            @include FontStyle('Acrom', bold, #FFFFFF, 14px, 16px);
+            content: 'Отправить менеджеру'
+          }
+          .button__text{
+            display: none;
+          }
+        }
+      }
+      .wine-constructor__shablones{
+        min-height: unset;
+        .wine-constructor__shablone-select-box{
+          max-width: 188px;
+          margin: 0 5px;
+          width: 100%;
+          min-width: 188px;
+          img{
+            height: unset;
+          }
+        }
+      }
+    }
+    @media (max-width: 500px) {
+      .wine-constructor__actions .button{
+        width: 100%;
       }
     }
   }
