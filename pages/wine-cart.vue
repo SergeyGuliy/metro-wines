@@ -99,5 +99,15 @@ export default {
       justify-content: center;
       @include FontStyle('Acrom', normal, #000000, 34px, 40px);
     }
+    @media (max-width: 1450px) {
+      .wine-cart-main__title{
+        @include FontStyle('Acrom', normal, #000000, 30px, 36px);
+        margin-bottom: 43px;
+      }
+    }
+    @media (max-width: 1080px) {
+    }
+    @media (max-width: 767px) {
+    }
   }
 </style>

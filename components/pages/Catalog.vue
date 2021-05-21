@@ -39,6 +39,24 @@ export default {
       display: flex;
       justify-content: center;
       @include FontStyle('Acrom', normal, #000000, 34px, 40px);
+      text-align: center;
+    }
+
+    @media (max-width: 1080px) {
+      .catalog__warning{
+        margin-top: 30px;
+        max-width: 684px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+    }
+    @media (max-width: 767px) {
+      .catalog__warning{
+        max-width: 270px;
+        margin-left: auto;
+        margin-right: auto;
+        @include FontStyle('Acrom', normal, #000000, 18px, 22px);
+      }
     }
   }
 </style>

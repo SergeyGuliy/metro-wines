@@ -85,5 +85,14 @@ export default {
       margin-bottom: 40px;
       @include FontStyle('Acrom', normal, #000000, 18px, 22px);
     }
+    @media (max-width: 1450px) {
+      width: 33.33%;
+    }
+    @media (max-width: 1080px) {
+      width: 50%;
+    }
+    @media (max-width: 767px) {
+      width: 100%;
+    }
   }
 </style>

@@ -96,5 +96,30 @@ export default {
         border-radius:  0 6px 6px 0;
       }
     }
+
+    @media (max-width: 1080px) {
+      flex-direction: column;
+      height: unset;
+      padding: 20px 0 24px 0;
+      .paginator-box__total{
+        order: 1;
+        text-align: center;
+      }
+      .paginator{
+        order: 2;
+        margin: 27px 0;
+      }
+      .paginator-box__button{
+        order: 3;
+        height: 40px;
+        padding: 0 35px;
+      }
+    }
+    @media (max-width: 767px) {
+      margin-top: 10px;
+      margin-left: -10px;
+      margin-right: -10px;
+
+    }
   }
 </style>
