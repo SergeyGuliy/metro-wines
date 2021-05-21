@@ -16,7 +16,7 @@
     </div>
     <div class="card__add-box">
       <AddBox />
-      <Button :filled="true" @click="openWineCard">
+      <Button :filled="true" :uppercase="true" :bold="true" @click="openWineCard">
         Посмотреть
       </Button>
     </div>
@@ -70,6 +70,8 @@ export default {
     &:hover{
       filter: drop-shadow(0px 16px 32px rgba(48, 49, 51, 0.24));
       transform: scale(1.042);
+      position: relative;
+      z-index: 1;
       .card__add-box{
         display: flex;
         align-items: center;
@@ -136,6 +138,64 @@ export default {
     .card__new-price{
       @include FontStyle('Acrom', bold, #000000, 25px, 30px);
       margin-bottom: 119px;
+    }
+    @media (max-width: 1240px) {
+      width: 33.33%;
+    }
+    @media (max-width: 1080px) {
+      width: 50%;
+      .card__title{
+        font-size: 25px;
+        line-height: 29px;
+        margin-top: 7px;
+      }
+      .card__description{
+        font-size: 18px;
+        line-height: 22px;
+      }
+      .card__price-discounted{
+        font-size: 18px;
+        line-height: 22px;
+      }
+      .card__old-price{
+        font-size: 18px;
+        line-height: 22px;
+      }
+      .card__discount{
+        font-size: 18px;
+        line-height: 22px;
+      }
+      .card__new-price{
+        font-size: 25px;
+        line-height: 30px;
+      }
+    }
+    @media (max-width: 767px) {
+      width: 100%;
+      .card__add-box{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 40px;
+        width: 100%;
+      }
+      .button {
+        margin-left: 10px;
+      }
+
+      &:hover{
+        filter: none;
+        transform: scale(1);
+        .card__add-box{
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          height: 40px;
+        }
+      }
+      .card__new-price{
+        margin-bottom: 0;
+      }
     }
   }
 </style>

@@ -1,9 +1,9 @@
 <template>
   <div class="footer container">
-    <div class="footer-col">
+    <div class="footer-col footer-col__1">
       <img src="../../assets/images/metro.png" alt="" class="img-metro">
     </div>
-    <div class="footer-col">
+    <div class="footer-col footer-col__2">
       <div class="footer__title">
         Горячая линия METRO
       </div>
@@ -24,7 +24,7 @@
         <span>Обратная связь</span>
       </a>
     </div>
-    <div class="footer-col">
+    <div class="footer-col footer-col__3">
       <div class="footer__title mb-0">
         Подпишитесь
       </div>
@@ -39,7 +39,7 @@
         </template>
       </InputBox>
     </div>
-    <div class="footer-col">
+    <div class="footer-col footer-col__4">
       <div class="footer__link-box">
         <nuxt-link to="" class="footer__link">
           Конфиденциальность
@@ -142,5 +142,71 @@ export default {
       margin-bottom: 20px;
     }
 
+    @media (max-width: 1080px) {
+      flex-wrap: wrap;
+      .footer-col__1{
+        width: 100%;
+        max-width: unset;
+        margin-top: 32px;
+        margin-bottom: 40px;
+      }
+      .footer-col__2{
+        width: 100%;
+        margin-top: 0;
+        margin-right: 55px;
+        max-width: fit-content;
+      }
+      .footer-col__3{
+        width: 100%;
+        margin-right: 0;
+        margin-top: 0;
+        max-width: fit-content;
+      }
+      .footer-col__4{
+        width: 100%;
+        margin-top: 0;
+        max-width: unset;
+        .footer__link-box{
+          display: flex;
+          flex-direction: row;
+          flex-wrap: wrap;
+          .footer__link{
+            margin-right: 20px;
+          }
+        }
+      }
+    }
+    @media (max-width: 767px) {
+      padding: 0 20px;
+      .footer-col{
+        max-width: unset;
+        margin-top: 0;
+        margin-right: 0;
+      }
+      .footer-col__1{
+        margin-top: 32px;
+        margin-bottom: 40px;
+      }
+      .footer-col__2{
+      }
+      .footer-col__3{
+      }
+      .footer-col__4{
+        .footer__link-box{
+          display: flex;
+          flex-direction: column;
+          flex-wrap: wrap;
+        }
+      }
+      .footer__work-time{
+        margin-left: 0;
+      }
+      .footer__contact{
+        display: block;
+        div{
+          margin-bottom: 2px;
+        }
+      }
+    }
   }
 </style>
