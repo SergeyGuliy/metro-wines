@@ -23,7 +23,8 @@ module.exports = {
       skipHTMLAttributeValues: true,
       skipHTMLTextContents: true
     }],
-    "no-irregular-whitespace": 0,
-    "no-multi-str": 0
+    'no-irregular-whitespace': 0,
+    'no-trailing-spaces': 0,
+    'no-multi-str': 0
   }
 }

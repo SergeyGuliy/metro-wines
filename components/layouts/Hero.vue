@@ -39,6 +39,22 @@ export default {
       text-transform: uppercase;
       @include FontStyle('TimesNewRoman', normal, #ffffff, 86px, 99px);
     }
+
+    @media (max-width: 1080px) {
+      height: 450px;
+      .hero__text{
+        margin-top: 125px;
+        @include FontStyle('TimesNewRoman', normal, #ffffff, 60px, 69px);
+      }
+    }
+    @media (max-width: 767px) {
+      height: 222px;
+      .hero__text{
+        margin-top: 0;
+        margin-left: 10px;
+        @include FontStyle('TimesNewRoman', normal, #ffffff, 30px, 34px);
+      }
+    }
   }
   .hero-retail{
     background-image: linear-gradient(90deg, #000000 0%, rgba(123, 9, 9, 0) 97.7%), url("../../assets/images/hero-retail.jpg");
@@ -46,4 +62,5 @@ export default {
     mix-blend-mode: multiply;
     background-size: cover;
   }
+
 </style>
