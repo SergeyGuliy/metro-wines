@@ -106,6 +106,12 @@ export default {
       }
     }
     @media (max-width: 1080px) {
+      .wine-cart-main__container{
+        padding-top: 110px;
+      }
+      .wine-cart-main__actions{
+        flex-direction: column;
+      }
     }
     @media (max-width: 767px) {
     }
