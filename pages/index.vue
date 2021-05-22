@@ -55,12 +55,17 @@ export default {
     //   this.openInitModals()
     // }, 1000)
 
+    //                        Feedback
+    //                        FeedbackManadger
+    //                        Is18YearsOld
+    //                        WineCard
+    //                        WineOwner
     //                        BucketUser
 
     //                        BucketRestoraunt
     //                        SelectCity
 
-    // this.$openModal('BucketUser')
+    // this.$openModal('BucketRestoraunt')
     //   .then((data) => {
     //     console.log(data)
     //   })

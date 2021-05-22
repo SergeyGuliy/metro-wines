@@ -214,14 +214,44 @@ export default {
     }
 
     @media (max-width: 767px) {
+      width: 300px;
+      top: calc(100vh - 366px);
+      filter: unset;
       position: static;
+      transform: unset;
+      margin-top: calc(100vh - 570px);
+      margin-left: auto;
+      margin-right: auto;
+      height: 450px;
       .bucket-restoraunt__actions{
         position: fixed;
-        bottom: 0;
-        right: 0;
-        width: 100vw;
-        height: 120px;
         background: #F4F3F1;
+        bottom: 0;
+        left: 0;
+        width: 100vw;
+        height: 122px;
+        flex-direction: column;
+        align-items: baseline;
+        padding: 14px 20px 20px 20px;
+        .bucket-restoraunt__top{
+          margin: 0;
+          margin-bottom: 11px;
+        }
+        .bucket-restoraunt__total{
+          @include FontStyle('Acrom', bold, #000000, 12px, 14px);
+        }
+        .bucket-restoraunt__old{
+          @include FontStyle('Acrom', normal, #000000, 14px, 17px);
+        }
+        .bucket-restoraunt__current{
+          @include FontStyle('Acrom', bold, #000000, 18px, 22px);
+        }
+      }
+      .bucket-restoraunt__title{
+        @include FontStyle('Acrom', normal, #000000, 20px, 24px);
+      }
+      .bucket-restoraunt__body{
+        height: 394px;
       }
     }
   }

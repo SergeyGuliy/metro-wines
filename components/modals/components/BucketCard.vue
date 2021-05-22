@@ -90,5 +90,20 @@ export default {
         }
       }
     }
+    @media (max-width: 767px) {
+      height: unset;
+      flex-wrap: wrap;
+      padding-bottom: 20px;
+      .bucket-card__img-box{
+        margin-right: 15px;
+      }
+      .bucket-card__title-box{
+        max-width: 210px;
+      }
+      .bucket-card__price-box{
+        padding: 0;
+        max-width: 50%;
+      }
+    }
   }
 </style>

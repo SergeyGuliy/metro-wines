@@ -126,7 +126,48 @@ export default {
     }
 
     @media (max-width: 767px) {
+      width: 300px;
+      top: calc(100vh - 366px);
+      filter: unset;
+      position: static;
+      transform: unset;
+      margin-top: calc(100vh - 570px);
+      margin-left: auto;
+      margin-right: auto;
+      height: 450px;
+      .svg-close{
+        display: none;
+      }
 
+      .bucket-user-modal__title{
+        @include FontStyle('Acrom', normal, #000000, 20px, 24px);
+      }
+      .bucket-user-modal__symm{
+        @include FontStyle('Acrom', bold, #000000, 12px, 14px);
+      }
+      .bucket-user-modal__symm-inner{
+        @include FontStyle('Acrom', bold, #000000, 18px, 22px);
+      }
+      .bucket-user-modal__body{
+        height: 370px;
+      }
+      .bucket-user-modal__outset{
+        margin: 0 15px;
+      }
+      .bucket-user-modal__footer{
+        position: fixed;
+        background: #F4F3F1;
+        bottom: 0;
+        left: 0;
+        width: 100vw;
+        height: 122px;
+        flex-direction: column;
+        align-items: baseline;
+        padding: 14px 20px 20px 20px;
+        .bucket-user-modal__actions{
+          display: flex;
+        }
+      }
     }
 
   }
