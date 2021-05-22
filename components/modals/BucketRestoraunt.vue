@@ -218,7 +218,7 @@ export default {
       top: calc(100vh - 366px);
       filter: unset;
       position: static;
-      transform: unset;
+      transform: unset !important;
       margin-top: calc(100vh - 570px);
       margin-left: auto;
       margin-right: auto;
