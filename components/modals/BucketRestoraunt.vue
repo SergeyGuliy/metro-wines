@@ -31,11 +31,17 @@
               <div class="r-card__atricle">
                 Арт. 448800
               </div>
-              <div class="r-card__actions">
+              <div class="r-card__actions big">
                 <AddBox />
                 <div class="r-card__price">
                   12 358,12 ₽
                 </div>
+              </div>
+            </div>
+            <div class="r-card__actions small">
+              <AddBox />
+              <div class="r-card__price">
+                12 358,12 ₽
               </div>
             </div>
           </div>
@@ -111,7 +117,9 @@ export default {
     background-color: #ffffff;
     padding: 20px 0;
     width: 378px;
-    .bucket-restoraunt__filled{}
+    .r-card__actions.small{
+      display: none !important;
+    }
     .bucket-restoraunt__empty{
       .bucket-restoraunt__title{
         margin-bottom: 24px;
@@ -159,54 +167,57 @@ export default {
     .bucket-restoraunt__body{
       max-height: 560px;
       overflow: auto;
-      .bucket-restoraunt__card.r-card{
-        padding: 0 30px;
-        margin: 10px 0 15px 0;
-        display: flex;
-        position: relative;
-        .svg-close{
-          top: 10px;
-          right: 30px;
-          transform: scale(0.7);
-        }
-        .r-card__img{
-          max-width: 30px;
-          max-height: 100px;
-          margin: 0 15px;
-        }
-        .r-card__right{
+    }
+    .bucket-restoraunt__card.r-card{
+      padding: 0 30px;
+      margin: 10px 0 15px 0;
+      display: flex;
+      position: relative;
+      .svg-close{
+        top: 10px;
+        right: 30px;
+        transform: scale(0.7);
+      }
+      .r-card__img{
+        max-width: 30px;
+        max-height: 100px;
+        margin: 0 15px;
+      }
+      .r-card__right{
 
-        }
-        .r-card__title{
-          @include FontStyle('TimesNewRoman', normal, #710000, 20px, 23px);
-          margin-top: 10px;
-          max-width: 90%;
-        }
-        .r-card__atricle{
-          @include FontStyle('Acrom', normal, #000000, 14px, 17px);
-          margin-top: 10px;
-          margin-bottom: 16px;
-        }
-        .r-card__actions{
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          .add-box{
-            height: 41px;
-          }
-        }
-        .r-card__price{
-          @include FontStyle('Acrom', bold, #000000, 18px, 22px);
+      }
+      .r-card__title{
+        @include FontStyle('TimesNewRoman', normal, #710000, 20px, 23px);
+        margin-top: 10px;
+        max-width: 90%;
+      }
+      .r-card__atricle{
+        @include FontStyle('Acrom', normal, #000000, 14px, 17px);
+        margin-top: 10px;
+        margin-bottom: 16px;
+      }
+      .r-card__actions{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        .add-box{
+          height: 41px;
         }
       }
-      .bucket-restoraunt__card-border{
-        width: 100%;
-        background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, #000000 100%);
-        opacity: 0.1;
-        transform: rotate(-180deg);
-        height: 6px;
-        margin-bottom: 5px;
+      .r-card__price{
+        @include FontStyle('Acrom', bold, #000000, 18px, 22px);
       }
+    }
+    .bucket-restoraunt__card-border{
+      width: 100%;
+      background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, #000000 100%);
+      opacity: 0.1;
+      transform: rotate(-180deg);
+      height: 6px;
+      margin-bottom: 5px;
+    }
+    .r-card__actions.small{
+      display: none;
     }
 
     @media (max-width: 1080px) {
@@ -252,6 +263,25 @@ export default {
       }
       .bucket-restoraunt__body{
         height: 394px;
+      }
+      .bucket-restoraunt__card.r-card {
+        flex-wrap: wrap;
+        padding: 0 20px;
+        .r-card__actions.big {
+          display: none;
+        }
+        .r-card__right{
+          max-width: calc(100% - 60px);
+        }
+      }
+      .r-card__actions.small{
+        display: flex !important;
+        justify-content: space-between;
+        width: 100%;
+        .add-box{
+          max-width: 118px;
+          min-width: unset;
+        }
       }
     }
   }

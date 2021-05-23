@@ -57,6 +57,8 @@ export default {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    max-height: calc(100vh - 73px);
+    overflow: auto;
     background-color: #ffffff;
     padding: 30px;
 
@@ -109,6 +111,7 @@ export default {
       border-radius: 0;
       left: 0;
       top: 0;
+      max-height: unset;
       transform: translate(0,0);
       padding: 52px 10px 20px 10px;
       display: flex;

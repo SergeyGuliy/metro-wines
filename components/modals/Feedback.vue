@@ -58,6 +58,8 @@ export default {
     left: 50%;
     transform: translate(-50%, -50%);
     background-color: #ffffff;
+    max-height: calc(100vh - 73px);
+    overflow: auto;
     padding: 30px;
     .feedback-modal__title{
       @include FontStyle('Acrom', normal, #000000, 20px, 140%);
@@ -107,6 +109,7 @@ export default {
       border-radius: 0;
       left: 0;
       top: 0;
+      max-height: unset;
       transform: translate(0,0);
       padding: 52px 10px 20px 10px;
       display: flex;

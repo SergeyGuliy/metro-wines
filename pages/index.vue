@@ -65,13 +65,13 @@ export default {
     //                        BucketRestoraunt
     //                        SelectCity
 
-    // this.$openModal('BucketRestoraunt')
-    //   .then((data) => {
-    //     console.log(data)
-    //   })
-    //   .catch((e) => {
-    //     console.log(e)
-    //   })
+    this.$openModal('BucketRestoraunt')
+      .then((data) => {
+        console.log(data)
+      })
+      .catch((e) => {
+        console.log(e)
+      })
     // api.tradecenters.getAll().then((res) => {
     //   console.log(res)
     // })
