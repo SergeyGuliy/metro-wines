@@ -38,6 +38,14 @@
           </Button>
         </template>
       </InputBox>
+      <div class="footer__checkbox noselect" @click="isCheked = !isCheked">
+        <div class="footer__checkbox-box" :class="{'footer__checkbox-box--active': isCheked}">
+          <Ok />
+        </div>
+        <div class="footer__checkbox-text">
+          Я согласен на обработку персональных данных, а также с условиями подписки
+        </div>
+      </div>
     </div>
     <div class="footer-col footer-col__4">
       <div class="footer__link-box">
@@ -70,12 +78,14 @@ export default {
   components: {
     Phone: () => import('assets/icons/phone.svg'),
     Email: () => import('assets/icons/email.svg'),
+    Ok: () => import('assets/icons/ok.svg'),
     InputBox: () => import('../form/InputBox'),
     Button: () => import('../form/Button')
   },
   data () {
     return {
-      email: ''
+      email: '',
+      isCheked: true
     }
   },
   methods: {
@@ -141,6 +151,33 @@ export default {
       @include FontStyle('Acrom', bold, #000000, 20px, 24px);
       margin-bottom: 20px;
     }
+    .footer__checkbox{
+      display: flex;
+      margin-top: 12px;
+      .footer__checkbox-box{
+        margin-right: 9px;
+        height: 18px;
+        min-width: 18px;
+        border: 1px solid #999999;
+        box-sizing: border-box;
+        border-radius: 3px;
+        svg{
+          display: none;
+        }
+      }
+      .footer__checkbox-box--active{
+        border: 1px solid #710000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        svg{
+          display: block;
+        }
+      }
+      .footer__checkbox-text{
+        @include FontStyle('Acrom', normal, #999999, 12px, 14px);
+      }
+    }
 
     @media (max-width: 1080px) {
       flex-wrap: wrap;
@@ -160,7 +197,7 @@ export default {
         width: 100%;
         margin-right: 0;
         margin-top: 0;
-        max-width: fit-content;
+        max-width: 50%;
       }
       .footer-col__4{
         width: 100%;

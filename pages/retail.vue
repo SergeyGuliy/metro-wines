@@ -72,5 +72,15 @@ export default {
       background-repeat: no-repeat;
       background-size: 100%;
     }
+    @media (max-width: 1080px) {
+      .page-main__container{
+        padding-top: 80px;
+      }
+    }
+    @media (max-width: 767px) {
+      .page-main__container{
+        padding-top: 30px;
+      }
+    }
   }
 </style>

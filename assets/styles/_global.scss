@@ -27,7 +27,10 @@ a{
 .box-title{
   @include FontStyle('TimesNewRoman', normal, #000000, 40px, 46px);
   margin-bottom: 35px;
-
+  @media (max-width: 767px) {
+    @include FontStyle('TimesNewRoman', normal, #000000, 20px, 23px);
+    margin-bottom: 16px;
+  }
 }
 
 input, button, textarea{
@@ -155,7 +158,7 @@ input, button, textarea{
       display: flex;
       align-items: center;
       justify-content: center;
-      left: -8px;
+      right: -8px !important;
     }
     .noUi-handle::before{
       position: static;

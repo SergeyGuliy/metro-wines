@@ -65,13 +65,13 @@ export default {
     //                        BucketRestoraunt
     //                        SelectCity
 
-    this.$openModal('BucketRestoraunt')
-      .then((data) => {
-        console.log(data)
-      })
-      .catch((e) => {
-        console.log(e)
-      })
+    // this.$openModal('BucketRestoraunt')
+    //   .then((data) => {
+    //     console.log(data)
+    //   })
+    //   .catch((e) => {
+    //     console.log(e)
+    //   })
     // api.tradecenters.getAll().then((res) => {
     //   console.log(res)
     // })
@@ -98,6 +98,16 @@ export default {
       background: url("../assets/images/page-main_top.png"), #f4f4f4;
       background-repeat: no-repeat;
       background-size: 100%;
+    }
+    @media (max-width: 1080px) {
+      .page-main__container{
+        padding-top: 80px;
+      }
+    }
+    @media (max-width: 767px) {
+      .page-main__container{
+        padding-top: 30px;
+      }
     }
   }
 </style>
