@@ -23,12 +23,16 @@ export default {
     Catalog: () => import('../components/pages/Catalog')
   },
   async asyncData ({ $axios }) {
-    const a = await $axios.$get('https://api.metro-cc.ru/api/v1/5C63A1CB1E8954499E3BB93939B7B/tradecenters', {
-      headers: {
-        'Access-Control-Allow-Origin': '*'
-      }
-    })
-    console.log(a)
+    try {
+      const a = await $axios.$get('https://api.metro-cc.ru/api/v1/5C63A1CB1E8954499E3BB93939B7B/tradecenters', {
+        headers: {
+          'Access-Control-Allow-Origin': '*'
+        }
+      })
+      console.log(a)
+    } catch (e) {
+
+    }
   },
   data () {
     return {
