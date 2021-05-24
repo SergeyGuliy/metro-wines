@@ -12,6 +12,9 @@
     "heroku-postbuild": "npm run build",
     "heroku_push": "git push heroku master"
   },
+  "engines": {
+    "node": "14.9.0"
+  },
   "lint-staged": {
     "*.{js,vue}": "eslint"
   },
