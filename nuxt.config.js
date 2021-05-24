@@ -3,7 +3,7 @@ import fs from 'fs'
 
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
-  ssr: true,
+  ssr: false,
   server: {
     // host: 'local.mydomain.dk',
     port: 8080,
