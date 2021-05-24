@@ -1,4 +1,6 @@
+// eslint-disable-next-line no-unused-vars
 import path from 'path'
+// eslint-disable-next-line no-unused-vars
 import fs from 'fs'
 
 export default {
@@ -6,11 +8,11 @@ export default {
   ssr: false,
   server: {
     // host: 'local.mydomain.dk',
-    port: 8080,
-    https: {
-      key: fs.readFileSync(path.resolve(__dirname, 'localhost.key')),
-      cert: fs.readFileSync(path.resolve(__dirname, 'localhost.crt'))
-    }
+    // https: {
+    //   key: fs.readFileSync(path.resolve(__dirname, 'localhost.key')),
+    //   cert: fs.readFileSync(path.resolve(__dirname, 'localhost.crt'))
+    // },
+    port: 8080
   },
   head: {
     title: 'wines',
