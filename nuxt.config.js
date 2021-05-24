@@ -1,6 +1,17 @@
+import path from 'path'
+import fs from 'fs'
+
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
-  ssr: false,
+  ssr: true,
+  server: {
+    host: 'local.mydomain.dk',
+    port: 8080,
+    https: {
+      key: fs.readFileSync(path.resolve(__dirname, 'localhost.key')),
+      cert: fs.readFileSync(path.resolve(__dirname, 'localhost.crt'))
+    }
+  },
   head: {
     title: 'wines',
     meta: [
@@ -18,7 +29,9 @@ export default {
     '@/node_modules/nouislider/distribute/nouislider.css',
     '@/assets/styles/index.scss'
   ],
-
+  http: {
+    proxy: true // Can be also an object with default options
+  },
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
     '~/plugins/vuePrototype.js',

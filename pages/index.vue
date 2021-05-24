@@ -12,7 +12,8 @@
 </template>
 
 <script>
-// import { api } from '../assets/api'
+// eslint-disable-next-line no-unused-vars
+import { api } from '../assets/api'
 
 export default {
   components: {
@@ -21,10 +22,14 @@ export default {
     FilterBox: () => import('../components/pages/FilterBox'),
     Catalog: () => import('../components/pages/Catalog')
   },
-  // async asyncData ({ $axios }) {
-  //   const a = await $axios.$get('https://api.metro-cc.ru/api/v1/5C63A1CB1E8954499E3BB93939B7B/tradecenters')
-  //   console.log(a)
-  // },
+  async asyncData ({ $axios }) {
+    const a = await $axios.$get('https://api.metro-cc.ru/api/v1/5C63A1CB1E8954499E3BB93939B7B/tradecenters', {
+      headers: {
+        'Access-Control-Allow-Origin': '*'
+      }
+    })
+    console.log(a)
+  },
   data () {
     return {
       subHeroItems: [
@@ -44,10 +49,10 @@ export default {
       ]
     }
   },
-  mounted () {
+  async mounted () {
     try {
-      // const a = await this.$axios.$get('https://api.metro-cc.ru/api/v1/5C63A1CB1E8954499E3BB93939B7B/tradecenters')
-      // console.log(a)
+      const a = await this.$axios.$get('https://api.metro-cc.ru/api/v1/5C63A1CB1E8954499E3BB93939B7B/tradecenters')
+      console.log(a)
     } catch (e) {
       console.error(e)
     }
