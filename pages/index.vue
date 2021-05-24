@@ -2,6 +2,7 @@
   <div class="page-main">
     <Hero />
     <SubHero :sub-hero-items="subHeroItems" />
+    <pre>{{ $tradeCenters }}</pre>
     <div class="page-main__container">
       <div class="container">
         <FilterBox />
@@ -13,7 +14,8 @@
 
 <script>
 // eslint-disable-next-line no-unused-vars
-import { api } from '../assets/api'
+import { api } from '../assets/js/api'
+import { initGeolocation } from '../assets/js/initGeolocation'
 
 export default {
   components: {
@@ -22,18 +24,16 @@ export default {
     FilterBox: () => import('../components/pages/FilterBox'),
     Catalog: () => import('../components/pages/Catalog')
   },
-  async asyncData ({ $axios }) {
-    try {
-      const a = await $axios.$get('https://api.metro-cc.ru/api/v1/5C63A1CB1E8954499E3BB93939B7B/tradecenters', {
-        headers: {
-          'Access-Control-Allow-Origin': '*'
-        }
-      })
-      console.log(a)
-    } catch (e) {
-
-    }
-  },
+  // async asyncData ({ $axios }) {
+  //   try {
+  //     const a = await api.tradecenters.getAll().then((res) => {
+  //       console.log(res.data[0].site_key)
+  //     })
+  //     console.log(a)
+  //   } catch (e) {
+  //
+  //   }
+  // },
   data () {
     return {
       subHeroItems: [
@@ -54,12 +54,41 @@ export default {
     }
   },
   async mounted () {
-    try {
-      const a = await this.$axios.$get('https://api.metro-cc.ru/api/v1/5C63A1CB1E8954499E3BB93939B7B/tradecenters')
-      console.log(a)
-    } catch (e) {
-      console.error(e)
-    }
+    await initGeolocation(this.$userTradeCenter).then((data) => {
+      const points = this.$tradeCenters
+      function diagonal (point) {
+        return Math.pow(point.longitude, 2) + Math.pow(point.latitude, 2)
+      }
+      let closestTradeCenter = null
+      points.forEach((currentCenter) => {
+        const currentDelta = Math.abs(diagonal(data) - diagonal(currentCenter.coordinates))
+        if (!currentCenter.coordinates) { return }
+        if (!closestTradeCenter) {
+          closestTradeCenter = currentCenter
+          closestTradeCenter.coordinates.delta = currentDelta
+        } else if (currentDelta < closestTradeCenter.coordinates.delta) {
+          closestTradeCenter = currentCenter
+          closestTradeCenter.coordinates.delta = currentDelta
+        }
+      })
+      this.$store.commit('SET_USER_TRADE_CENTER', closestTradeCenter)
+    }).catch((e) => {
+      this.$store.commit('SET_USER_TRADE_CENTER', this.$tradeCenters.find(i => i.city === 'Москва'))
+    })
+    api.bucket.getMyBucket(this.$userTradeCenter?.site_key).then((data) => {
+      console.log(data)
+    }).catch((e) => {
+      console.log(e)
+    })
+    // try {
+    //   // const a = await this.$axios.$get('https://api.metro-cc.ru/api/v1/5C63A1CB1E8954499E3BB93939B7B/tradecenters')
+    //   // console.log(a)
+    //   // api.tradecenters.getAll().then((res) => {
+    //   //   console.log(res)
+    //   // })
+    // } catch (e) {
+    //   console.error(e)
+    // }
     // setTimeout(() => {
     //   this.openInitModals()
     // }, 1000)
@@ -81,9 +110,6 @@ export default {
     //   .catch((e) => {
     //     console.log(e)
     //   })
-    // api.tradecenters.getAll().then((res) => {
-    //   console.log(res)
-    // })
   },
   methods: {
     openInitModals () {

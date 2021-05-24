@@ -1,7 +1,6 @@
 <template>
   <div class="select-city-modal" :style="positionWithActivator">
     <Close class="svg-close" @click="close" />
-
     <div v-if="tab === 1" class="select-city-tab select-city-tab-1">
       <div class="select-city-modal__title">
         Ваш город Москва?
@@ -27,21 +26,21 @@
     </div>
     <div v-if="tab === 2" class="select-city-tab select-city-tab-2">
       <div class="select-city-modal__title">
-        Москва, Ленинградское ш., д.71Г
+        {{ tradeCenterSelected.name }}
       </div>
       <a href="#" class="tab__contact">
-        <span>+7 (495) 502-10-09</span>
+        <span>{{ tradeCenterSelected.contacts.phone }}</span>
       </a>
       <div class="tab__work-time">
-        Будни: с 7 до 22 часов<br>
-        Выходные: с 8 до 22 часов
+        Будни: с {{ tradeCenterSelected.work_mode }}<br>
+        <!--        Выходные: с 8 до 22 часов-->
       </div>
       <a href="mailto://merservise.store10@metro-cc.ru" class="tab__work-time tab__link">
-        merservise.store10@metro-cc.ru
+        {{ tradeCenterSelected.contacts.email }}
       </a>
       <span
         class="tab__select-another noselect"
-        @click="tab = 3"
+        @click="cleanCity"
       >
         Выбрать другой
       </span>
@@ -51,19 +50,29 @@
         Выберите город
       </div>
       <div class="tab__cites">
-        <div class="tab__city pointer noselect" @click="tab = 4">
-          Москва
+        <div
+          v-for="(city, index) in Object.keys(cities)"
+          :key="index"
+          class="tab__city pointer noselect"
+          @click="selectCity(city)"
+        >
+          {{ city }}
         </div>
       </div>
     </div>
     <div v-if="tab === 4" class="select-city-tab select-city-tab-4">
       <div class="select-city-modal__title pointer noselect" @click="tab = 3">
         <Forward />
-        Москва
+        {{ citySelected }}
       </div>
       <div class="tab__cites">
-        <div class="tab__city pointer noselect" @click="tab = 2">
-          Москва
+        <div
+          v-for="(tradecenter, index) in cities[citySelected]"
+          :key="index"
+          class="tab__city pointer noselect"
+          @click="selectTradecenter(tradecenter)"
+        >
+          {{ tradecenter.name }}
         </div>
       </div>
     </div>
@@ -83,7 +92,47 @@ export default {
   mixins: [modalMixin],
   data () {
     return {
+      citySelected: null,
       tab: 1
+    }
+  },
+  computed: {
+    cities () {
+      const cities = {}
+      this.$tradeCenters.forEach((tradecenter) => {
+        if (cities[tradecenter.city]) {
+          cities[tradecenter.city].push(tradecenter)
+        } else {
+          cities[tradecenter.city] = [tradecenter]
+        }
+      })
+      return cities
+    },
+    tradeCenterSelected: {
+      get () {
+        return this.$userTradeCenter
+      },
+      set (val) {
+        this.$store.commit('SET_USER_TRADE_CENTER', val)
+      }
+    }
+  },
+  mounted () {
+    if (this.tradeCenterSelected) {
+      this.tab = 2
+    }
+  },
+  methods: {
+    selectCity (city) {
+      this.citySelected = city
+      this.tab = 4
+    },
+    selectTradecenter (tradecenter) {
+      this.tradeCenterSelected = tradecenter
+      this.tab = 2
+    },
+    cleanCity () {
+      this.tab = 3
     }
   }
 }

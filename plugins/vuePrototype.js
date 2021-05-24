@@ -6,9 +6,12 @@ Vue.mixin({
     return {}
   },
   computed: {
-    // $user () {
-    //   return this.$store.state.user?.user
-    // }
+    $tradeCenters () {
+      return this.$store?.state?.tradeCenters
+    },
+    $userTradeCenter () {
+      return this.$store?.state?.userTradeCenter
+    }
   },
   methods: {
     ...mapActions('modals', ['setModal']),

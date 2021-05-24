@@ -1,12 +1,12 @@
 <template>
-  <div class="geolocation" @click="openSelectCity" id="geolocation-activator">
+  <div id="geolocation-activator" class="geolocation" @click="openSelectCity">
     <geolocation class="svg-geolocation" />
     <div class="dropdown-box">
       <div class="dropdown-box__top">
         Торговый центр
       </div>
       <div class="dropdown-box__bottom">
-        Москва, Ленинградское ш., д.71Г
+        {{ getTradeCenterName }}
         <arrow class="svg-arrow" />
       </div>
     </div>
@@ -22,6 +22,11 @@ export default {
   },
   data () {
     return {}
+  },
+  computed: {
+    getTradeCenterName () {
+      return this.$userTradeCenter ? `${this.$userTradeCenter?.city}, ${this.$userTradeCenter?.name}` : ''
+    }
   },
   methods: {
     openSelectCity () {
