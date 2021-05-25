@@ -23,7 +23,7 @@ export const actions = {
     }).catch((e) => {
       console.log(e)
     })
-    await api.bucket.getMyBucket('328255c1-b64a-49c3-9cb1-2edeff088967').then((res) => {
+    await api.bucket.getMyBucket('10').then((res) => {
       console.log(res.data)
     }).catch((e) => {
       console.log(e)

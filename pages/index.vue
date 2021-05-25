@@ -75,7 +75,7 @@ export default {
     }).catch((e) => {
       this.$store.commit('SET_USER_TRADE_CENTER', this.$tradeCenters.find(i => i.city === 'Москва'))
     })
-    api.bucket.getMyBucket(this.$userTradeCenter?.site_key).then((data) => {
+    api.bucket.getMyBucket(this.$userTradeCenter?.store_id).then((data) => {
       console.log(data)
     }).catch((e) => {
       console.log(e)

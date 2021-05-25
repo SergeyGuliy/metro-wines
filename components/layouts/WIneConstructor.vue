@@ -4,22 +4,35 @@
       <div
         v-for="(shablone) in shablones"
         :key="shablone"
-        @click="activeShablone = shablone"
         class="wine-constructor__shablone-select-box"
         :class="{'wine-constructor__shablone-select-box--active': shablone === activeShablone}"
+        @click="activeShablone = shablone"
       >
         <div class="s-circle">
           <Ok />
         </div>
-        <img class="noselect" src="../../assets/images/shablob-item.jpg" alt="">
+        <img class="noselect" :src="require(`assets/images/shablob-item-${shablone}.jpg`)" alt="">
       </div>
     </div>
     <div class="wine-constructor__shablone-wrapper">
       <div class="wine-constructor__text">
         Отредактируйте стоимость вин, в соответствии с вашим ценообразованием, распечатайте готовый файл и вложите в ваше меню
       </div>
-      <div class="shablone">
-        <img src="../../assets/images/chamblon-main.jpg" alt="">
+      <div class="shablone" :class="{'shablone--small': activeShablone > 2}">
+        <div v-if="activeShablone === 1" class="shablone__inner-box shablone__inner-box--1">
+          <div class="shablone__inner-content">
+            <div class="shablone__title">
+              Винная карта
+            </div>
+          </div>
+        </div>
+        <div v-if="activeShablone === 2" class="shablone__inner-box shablone__inner-box--2">
+          <div class="shablone__title">
+            Винная карта
+          </div>
+        </div>
+        <div v-if="activeShablone === 3" class="shablone__inner-box shablone__inner-box--3" />
+        <div v-if="activeShablone === 4" class="shablone__inner-box shablone__inner-box--4" />
       </div>
       <div class="wine-constructor__actions">
         <Button :filled="true" :uppercase="true">
@@ -45,6 +58,29 @@ export default {
       activeShablone: 1,
       shablones: [1, 2, 3, 4]
     }
+  },
+  mounted () {
+    const $wrapper = document.querySelector('.shablone__inner-content')
+    const starterData = {
+      clientWidth: 1382,
+      clientHeight: 1957
+    }
+    function doResize (event, ui) {
+      const elHeight = $wrapper.clientHeight
+      const elWidth = $wrapper.clientWidth
+      const scale = Math.min(
+        elWidth / ui.clientWidth,
+        elHeight / ui.clientHeight
+      )
+      console.log(scale)
+      $wrapper.style.transform = `scale(${scale})`
+      $wrapper.style.width = `${1 / scale * starterData.clientWidth}px`
+      $wrapper.style.height = `${1 / scale * starterData.clientHeight}px`
+    }
+    doResize(null, starterData)
+    window.addEventListener('resize', () => {
+      doResize(null, starterData)
+    })
   }
 }
 </script>
@@ -55,9 +91,52 @@ export default {
   .wine-constructor {
     .shablone{
       width: 100%;
-      img{
-        width: 100%;
+      padding-top: 141.6%;
+      position: relative;
+      .shablone__title{
+        @include FontStyle('Acrom', normal, #FFFFFF, 90px, 180px);
+        text-transform: uppercase;
       }
+      .shablone__inner-box{
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+      }
+      .shablone__inner-content{
+        padding: 169px 80px 80px 80px;
+        position: absolute;
+        min-height: 100%;
+        min-width: 100%;
+      }
+      .shablone__inner-box--1{
+        background-image: url("../../assets/images/chamblon-main-1.jpg");
+        background-size: contain;
+        background-repeat: no-repeat;
+      }
+      .shablone__inner-box--2{
+        background-image: url("../../assets/images/chamblon-main-2.jpg");
+        background-size: contain;
+        background-repeat: no-repeat;
+      }
+      .shablone__inner-box--3{
+        /*max-width: 679px;*/
+        /*margin: 0 auto;*/
+        background-image: url("../../assets/images/chamblon-main-3.jpg");
+        background-size: contain;
+        background-repeat: no-repeat;
+      }
+      .shablone__inner-box--4{
+        /*max-width: 679px;*/
+        /*margin: 0 auto;*/
+        background-image: url("../../assets/images/chamblon-main-4.jpg");
+        background-size: contain;
+        background-repeat: no-repeat;
+      }
+    }
+    .shablone--small {
+      padding-top: 282.4%;
     }
     .wine-constructor__shablones{
       display: flex;

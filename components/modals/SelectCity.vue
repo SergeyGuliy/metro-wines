@@ -118,9 +118,9 @@ export default {
     }
   },
   mounted () {
-    if (this.tradeCenterSelected) {
-      this.tab = 2
-    }
+    // if (this.tradeCenterSelected) {
+    //   this.tab = 2
+    // }
   },
   methods: {
     selectCity (city) {
@@ -216,12 +216,55 @@ export default {
       }
     }
 
-    @media (max-width: 1080px) {
-
+    @media (max-width: 1150px) {
+      top: 115px !important;
+      left: 50% !important;
+      transform: translate(-50%, 0) !important;
     }
 
     @media (max-width: 767px) {
+      top: 50% !important;
+      transform: translate(-50%, -50%) !important;
+      max-width: 300px;
+      min-width: 300px;
+      padding: 19px 10px 15px 10px;
+      max-height: calc(100vh - 30px);
+      overflow: auto;
+      .select-city-modal__title{
+        padding: 0 10px;
+        @include FontStyle('Acrom', normal, #000000, 20px, 24px);
+      }
+      .select-city-tab .tab__cites{
+        padding: 0 10px;
+        display: block;
+        width: 100%;
+        .tab__city{
+          margin-bottom: 8px;
+        }
+      }
+      .select-city-tab-2{
+        .select-city-modal__title{
+          margin-top: 10px;
+          padding: 0;
+        }
+        .tab__contact{
+          margin-top: 13px;
+          margin-bottom: 15px;
+          span{
+            @include FontStyle('Acrom', bold, #710000, 14px, 17px);
+          }
+        }
+        .tab__work-time{
+          @include FontStyle('Acrom', normal, #000000, 14px, 17px);
+        }
+        .tab__work-time.tab__link{
+          margin-top: 25px;
 
+        }
+        .tab__work-time.tab__link{
+
+        }
+      }
     }
   }
 </style>
