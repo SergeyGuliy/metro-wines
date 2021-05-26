@@ -2,7 +2,6 @@
   <div class="page-main">
     <Hero />
     <SubHero :sub-hero-items="subHeroItems" />
-    <pre>{{ $tradeCenters }}</pre>
     <div class="page-main__container">
       <div class="container">
         <FilterBox />
@@ -75,7 +74,27 @@ export default {
     }).catch((e) => {
       this.$store.commit('SET_USER_TRADE_CENTER', this.$tradeCenters.find(i => i.city === 'Москва'))
     })
-    api.bucket.getMyBucket(this.$userTradeCenter?.store_id).then((data) => {
+    api.bucket.createMyBucket(this.$userTradeCenter?.store_id).then((data) => {
+      console.log(data)
+    }).catch((e) => {
+      console.log(e)
+    })
+    api.bucket.createMyBucket2(this.$userTradeCenter?.store_id).then((data) => {
+      console.log(data)
+    }).catch((e) => {
+      console.log(e)
+    })
+    api.products.getProduct1(this.$userTradeCenter?.store_id).then((data) => {
+      console.log(data)
+    }).catch((e) => {
+      console.log(e)
+    })
+    api.products.getProduct2(this.$userTradeCenter?.store_id).then((data) => {
+      console.log(data)
+    }).catch((e) => {
+      console.log(e)
+    })
+    api.products.categories(this.$userTradeCenter?.store_id).then((data) => {
       console.log(data)
     }).catch((e) => {
       console.log(e)

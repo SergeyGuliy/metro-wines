@@ -5,14 +5,14 @@ import fs from 'fs'
 
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
-  ssr: false,
+  ssr: true,
   server: {
-    // port: 3000,
-    // host: 'local.mydomain.dk',
-    // https: {
-    //   key: fs.readFileSync(path.resolve(__dirname, 'localhost.key')),
-    //   cert: fs.readFileSync(path.resolve(__dirname, 'localhost.crt'))
-    // }
+    port: 3000,
+    host: 'local.mydomain.dk',
+    https: {
+      key: fs.readFileSync(path.resolve(__dirname, 'localhost.key')),
+      cert: fs.readFileSync(path.resolve(__dirname, 'localhost.crt'))
+    }
   },
   head: {
     title: 'wines',
