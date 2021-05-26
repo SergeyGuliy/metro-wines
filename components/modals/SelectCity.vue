@@ -113,14 +113,15 @@ export default {
         return this.$userTradeCenter
       },
       set (val) {
+        this.$cookies.set('userTradeCenterId', val.store_id)
         this.$store.commit('SET_USER_TRADE_CENTER', val)
       }
     }
   },
   mounted () {
-    // if (this.tradeCenterSelected) {
-    //   this.tab = 2
-    // }
+    if (this.tradeCenterSelected) {
+      this.tab = 2
+    }
   },
   methods: {
     selectCity (city) {

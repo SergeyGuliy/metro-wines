@@ -2,6 +2,7 @@
   <div class="page-main">
     <Hero />
     <SubHero :sub-hero-items="subHeroItems" />
+    <pre>{{ $tradeCenters }}</pre>
     <div class="page-main__container">
       <div class="container">
         <FilterBox />
@@ -14,7 +15,6 @@
 <script>
 // eslint-disable-next-line no-unused-vars
 import { api } from '../assets/js/api'
-import { initGeolocation } from '../assets/js/initGeolocation'
 
 export default {
   components: {
@@ -53,73 +53,8 @@ export default {
     }
   },
   async mounted () {
-    await initGeolocation(this.$userTradeCenter).then((data) => {
-      const points = this.$tradeCenters
-      function diagonal (point) {
-        return Math.pow(point.longitude, 2) + Math.pow(point.latitude, 2)
-      }
-      let closestTradeCenter = null
-      points.forEach((currentCenter) => {
-        const currentDelta = Math.abs(diagonal(data) - diagonal(currentCenter.coordinates))
-        if (!currentCenter.coordinates) { return }
-        if (!closestTradeCenter) {
-          closestTradeCenter = currentCenter
-          closestTradeCenter.coordinates.delta = currentDelta
-        } else if (currentDelta < closestTradeCenter.coordinates.delta) {
-          closestTradeCenter = currentCenter
-          closestTradeCenter.coordinates.delta = currentDelta
-        }
-      })
-      this.$store.commit('SET_USER_TRADE_CENTER', closestTradeCenter)
-    }).catch((e) => {
-      this.$store.commit('SET_USER_TRADE_CENTER', this.$tradeCenters.find(i => i.city === 'Москва'))
-    })
-    api.bucket.createMyBucket(this.$userTradeCenter?.store_id).then((data) => {
-      console.log(data)
-    }).catch((e) => {
-      console.log(e)
-    })
-    api.bucket.createMyBucket2(this.$userTradeCenter?.store_id).then((data) => {
-      console.log(data)
-    }).catch((e) => {
-      console.log(e)
-    })
-    api.products.getProduct1(this.$userTradeCenter?.store_id).then((data) => {
-      console.log(data)
-    }).catch((e) => {
-      console.log(e)
-    })
-    api.products.getProduct2(this.$userTradeCenter?.store_id).then((data) => {
-      console.log(data)
-    }).catch((e) => {
-      console.log(e)
-    })
-    api.products.categories(this.$userTradeCenter?.store_id).then((data) => {
-      console.log(data)
-    }).catch((e) => {
-      console.log(e)
-    })
-    api.feedback.send(this.$userTradeCenter?.store_id, {
-      email: 'qweqwe@gmail.com',
-      phone: '0502808165',
-      text: 'dfsfsdfsdf'
-    }).then((data) => {
-      console.log(data)
-    }).catch((e) => {
-      console.log(e)
-    })
-    // try {
-    //   // const a = await this.$axios.$get('https://api.metro-cc.ru/api/v1/5C63A1CB1E8954499E3BB93939B7B/tradecenters')
-    //   // console.log(a)
-    //   // api.tradecenters.getAll().then((res) => {
-    //   //   console.log(res)
-    //   // })
-    // } catch (e) {
-    //   console.error(e)
-    // }
-    // setTimeout(() => {
-    //   this.openInitModals()
-    // }, 1000)
+    await this.$loadGeoData()
+    await this.$fetchBucket()
 
     //                        Feedback
     //                        FeedbackManadger

@@ -17,9 +17,14 @@ export const api = {
     getAll: async () => (await _axios.get('tradecenters')).data
   },
   bucket: {
-    createMyBucket: async storeId => (await _axios.post(`${storeId}/eshop/basket/receive`)).data,
-    createMyBucket2: async storeId => (await _axios.get(`${storeId}/eshop/basket`)).data,
-    getBucketById: async storeId => (await _axios.get(`${storeId}/eshop/basket`)).data
+    // createMyBucket: async storeId => (await _axios.post(`${storeId}/eshop/basket/receive`)).data,
+    getMyBasket: async (storeId, userHash) => {
+      return (await _axios.get(`${storeId}/eshop/basket`, {
+        params: {
+          user_hash: userHash
+        }
+      })).data
+    }
   },
   products: {
     getProduct1: async storeId => (await _axios.get(`${storeId}/shoppinglists`)).data,

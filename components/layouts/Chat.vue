@@ -110,7 +110,7 @@ export default {
   data () {
     return {
       helperVisible: true,
-      chatVisible: true,
+      chatVisible: false,
       activatorTitle: 'Если у вас возникли вопросы,  обратитесь к кависту Metro'
     }
   },
