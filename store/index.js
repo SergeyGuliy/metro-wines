@@ -23,11 +23,11 @@ export const actions = {
     }).catch((e) => {
       console.log(e)
     })
-    await api.bucket.getMyBucket('10').then((res) => {
-      console.log(res.data)
-    }).catch((e) => {
-      console.log(e)
-    })
+    // await api.bucket.getMyBucket('10').then((res) => {
+    //   console.log(res.data)
+    // }).catch((e) => {
+    //   console.log(e)
+    // })
   }
 }
 

@@ -26,5 +26,8 @@ export const api = {
     getProduct2: async storeId => (await _axios.get(`${storeId}/products`)).data,
     categories: async storeId => (await _axios.get(`${storeId}/categories`)).data,
     wineProducts: async (storeId, categoryId) => (await _axios.get(`${storeId}/categories/${categoryId}`)).data
+  },
+  feedback: {
+    send: async (storeId, feedbackData) => (await _axios.post(`${storeId}/feedbacks`, feedbackData)).data
   }
 }

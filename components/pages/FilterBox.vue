@@ -10,23 +10,34 @@
       </Button>
     </div>
 
-    <div
-      class="filter-box__filters-activator noselect"
-      :class="{'filter-box__filters-activator--disactivated': isMobileVisibleFilters}"
-      @click="isMobileVisibleFilters = !isMobileVisibleFilters"
-    >
-      <div class="filter-box__filters-activator-left">
-        <Settings />
-        <span>Фильтры</span>
+    <div class="filter-box__tablet-box">
+      <div
+        class="filter-box__filters-activator noselect filter-box__filters-activator--search"
+        :class="{'filter-box__filters-activator--disactivated': isMobileVisibleSearch}"
+        @click="isMobileVisibleSearch = !isMobileVisibleSearch"
+      >
+        <div class="filter-box__filters-activator-left">
+          <Search />
+        </div>
       </div>
-      <Arrow class="svg-arrow" />
+      <div
+        class="filter-box__filters-activator noselect"
+        :class="{'filter-box__filters-activator--disactivated': isMobileVisibleFilters}"
+        @click="isMobileVisibleFilters = !isMobileVisibleFilters"
+      >
+        <div class="filter-box__filters-activator-left">
+          <Settings />
+          <span>Фильтры</span>
+        </div>
+        <Arrow class="svg-arrow" />
+      </div>
     </div>
     <div
       class="filter-box_inner-filters"
       :class="{'filter-box_inner-filters--active':isMobileVisibleFilters}"
     >
       <div class="svg-close-filter">
-        <Close  @click="isMobileVisibleFilters = false" />
+        <Close @click="isMobileVisibleFilters = false" />
       </div>
       <div class="filter-box__filters">
         <SelectBox
@@ -106,6 +117,23 @@
         </Button>
       </div>
     </div>
+
+    <div
+      class="filter-box_inner-filters"
+      :class="{'filter-box_inner-filters--active':isMobileVisibleSearch}"
+    >
+      <div class="svg-close-filter">
+        <Close @click="isMobileVisibleSearch = false" />
+      </div>
+      <div class="filter-box__filters">
+        <div class="mobile-search-box">
+          <input type="text" class="mobile-search-box__input" placeholder="Поиск по названию">
+          <button class="mobile-search-box__btn">
+            <Search3 />
+          </button>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -121,11 +149,14 @@ export default {
     DiapazoneBox: () => import('../form/DiapazoneBox'),
     Arrow: () => import('assets/icons/arrow-2.svg'),
     Close: () => import('assets/icons/close.svg'),
+    Search: () => import('assets/icons/Search.svg'),
+    Search3: () => import('assets/icons/search-3.svg'),
     Settings: () => import('assets/icons/settings.svg')
   },
   data () {
     return {
       isMobileVisibleFilters: false,
+      isMobileVisibleSearch: false,
       searchField: '',
       isPremium: false,
       winesTypes: [
@@ -170,6 +201,13 @@ export default {
   },
   watch: {
     isMobileVisibleFilters (val) {
+      if (val && window.innerWidth < 767) {
+        document.querySelector('body').style.overflow = 'hidden'
+      } else {
+        document.querySelector('body').style.overflow = 'auto'
+      }
+    },
+    isMobileVisibleSearch (val) {
       if (val && window.innerWidth < 767) {
         document.querySelector('body').style.overflow = 'hidden'
       } else {
@@ -223,6 +261,14 @@ export default {
     @media (max-width: 1300px) {
       /*display: none;*/
       margin-bottom: 50px;
+
+      .filter-box__tablet-box{
+        display: flex;
+        align-items: center;
+        .filter-box__filters-activator:first-child{
+          margin-right: 20px;
+        }
+      }
       .filter-box__row{
         margin-bottom: 44px;
       }
@@ -252,6 +298,10 @@ export default {
           }
         }
       }
+
+      .filter-box__filters-activator--search{
+        display: none;
+      }
       .filter-box__filters-activator--disactivated{
         max-height: 1px;
         transform: scale(1,0);
@@ -280,6 +330,48 @@ export default {
 
     @media (max-width: 767px) {
       margin-bottom: 30px;
+      .mobile-search-box{
+        background: #FFFFFF;
+        /* def_2 */
+
+        box-shadow: 0px 16px 32px rgba(48, 49, 51, 0.24);
+        border-radius: 5px;
+        height: 38px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        margin: 0 7px;
+        .mobile-search-box__btn{
+          margin-left: 5px;
+          background: #710000;
+          box-shadow: 0px 16px 32px rgba(48, 49, 51, 0.24);
+          border-radius: 5px;
+          height: 100%;
+          width: 38px;
+          border: none;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+        .mobile-search-box__input{
+          height: 100%;
+          flex: 1 1 auto;
+          background-color: transparent;
+          padding: 0 8px;
+          border: none;
+          @include FontStyle('Acrom', normal, #000000, 16px, 19px);
+        }
+        .mobile-search-box__input::placeholder{
+          @include FontStyle('Acrom', normal, #999999, 16px, 19px);
+        }
+      }
+      .filter-box__filters-activator--search{
+        display: flex;
+      }
+      .filter-box__row{
+        display: none;
+      }
       .box-title{
         margin-bottom: 9px;
       }
@@ -294,6 +386,7 @@ export default {
         width: unset;
         display: inline-flex;
         margin: 0;
+        min-width: 70px;
 
         .filter-box__filters-activator-left{
           span{
@@ -326,6 +419,7 @@ export default {
           margin: 0;
           height: calc(100vh - 132px);
           overflow: auto;
+          flex-direction: column;
         }
       }
       .custom-input-box__inner-box{

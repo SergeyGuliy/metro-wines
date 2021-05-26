@@ -99,6 +99,15 @@ export default {
     }).catch((e) => {
       console.log(e)
     })
+    api.feedback.send(this.$userTradeCenter?.store_id, {
+      email: 'qweqwe@gmail.com',
+      phone: '0502808165',
+      text: 'dfsfsdfsdf'
+    }).then((data) => {
+      console.log(data)
+    }).catch((e) => {
+      console.log(e)
+    })
     // try {
     //   // const a = await this.$axios.$get('https://api.metro-cc.ru/api/v1/5C63A1CB1E8954499E3BB93939B7B/tradecenters')
     //   // console.log(a)
