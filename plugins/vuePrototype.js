@@ -48,6 +48,9 @@ Vue.mixin({
         window.addEventListener('modalClose', callback)
       })
     },
+    $calculateDiscount (oldPrice, newPrice) {
+      return ((1 - (+newPrice / +oldPrice)) * 100).toFixed()
+    },
     async $fetchBucket () {
       await api.bucket.getMyBasket(this.$userTradeCenter?.store_id, this.$userHash).then((data) => {
         this.$userHash = data.data.user_hash

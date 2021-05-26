@@ -10,10 +10,13 @@
         <nuxt-link to="">
           Моя винная карта
         </nuxt-link>
-        <div class="bucket">
+        <div
+          class="bucket"
+          :class="{'bucket--active': isNotEmpty}"
+        >
           <Bucket />
           <div class="bucket__chip">
-            12
+            {{ isNotEmpty }}
           </div>
         </div>
       </div>
@@ -32,8 +35,10 @@ export default {
     Geolocation: () => import('./components/Geolocation')
 
   },
-  data () {
-    return {}
+  computed: {
+    isNotEmpty () {
+      return this.$userBucket?.articles?.length
+    }
   },
   methods: {
     openBucket () {
@@ -91,9 +96,14 @@ export default {
       display: flex;
       align-items: center;
       justify-content: center;
-      background: rgba(0, 0, 0, 0.3);
       border: 2px solid #FFFFFF;
       position: relative;
+      .bucket__chip{
+        display: none;
+      }
+    }
+    .bucket--active{
+      background: rgba(0, 0, 0, 0.3);
       .bucket__chip{
         position: absolute;
         top: -11px;
@@ -109,6 +119,7 @@ export default {
         box-sizing: border-box;
         @include FontStyle('Acrom', bold, #710000, 16px, 19px);
       }
+
     }
 
     @media (max-width: 1080px) {

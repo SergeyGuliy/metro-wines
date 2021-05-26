@@ -17,19 +17,26 @@ export const api = {
     getAll: async () => (await _axios.get('tradecenters')).data
   },
   bucket: {
-    // createMyBucket: async storeId => (await _axios.post(`${storeId}/eshop/basket/receive`)).data,
     getMyBasket: async (storeId, userHash) => {
       return (await _axios.get(`${storeId}/eshop/basket`, {
         params: {
           user_hash: userHash
         }
       })).data
-    }
+    },
+    changeItemCount: async storeId => (await _axios.put(`${storeId}/eshop/basket`)).data,
+    addItem: async storeId => (await _axios.post(`${storeId}/eshop/basket`)).data,
+    deleteItem: async storeId => (await _axios.delete(`${storeId}/eshop/basket`)).data
   },
   products: {
     getProduct1: async storeId => (await _axios.get(`${storeId}/shoppinglists`)).data,
-    getProduct2: async storeId => (await _axios.get(`${storeId}/products`)).data,
-    categories: async storeId => (await _axios.get(`${storeId}/categories/tree`)).data,
+    getProduct2: async storeId => (await _axios.get(`${storeId}/products`, {
+      params: {
+        category_id: [412338],
+        paginate: 12
+      }
+    })).data,
+    categories: async storeId => (await _axios.get(`${storeId}/categories/412338`)).data,
     wineProducts: async (storeId, categoryId) => (await _axios.get(`${storeId}/categories/${categoryId}`)).data
   },
   feedback: {

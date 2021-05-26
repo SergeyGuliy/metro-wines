@@ -2,11 +2,11 @@
   <div class="page-main">
     <Hero />
     <SubHero :sub-hero-items="subHeroItems" />
-    <!--    <pre>{{ $tradeCenters }}</pre>-->
+<!--    <pre>{{ $userBucket }}</pre>-->
     <div class="page-main__container">
       <div class="container">
         <FilterBox />
-        <Catalog />
+        <Catalog v-if="$userTradeCenter" />
       </div>
     </div>
   </div>
@@ -23,16 +23,6 @@ export default {
     FilterBox: () => import('../components/pages/FilterBox'),
     Catalog: () => import('../components/pages/Catalog')
   },
-  // async asyncData ({ $axios }) {
-  //   try {
-  //     const a = await api.tradecenters.getAll().then((res) => {
-  //       console.log(res.data[0].site_key)
-  //     })
-  //     console.log(a)
-  //   } catch (e) {
-  //
-  //   }
-  // },
   data () {
     return {
       subHeroItems: [
@@ -55,11 +45,11 @@ export default {
   async mounted () {
     await this.$loadGeoData()
     await this.$fetchBucket()
-    await api.products.categories(this.$userTradeCenter?.store_id).then((data) => {
-      console.log(data)
-    }).catch((e) => {
-      console.log(e)
-    })
+    // await api.products.categories(this.$userTradeCenter?.store_id).then((data) => {
+    //   console.log(data)
+    // }).catch((e) => {
+    //   console.log(e)
+    // })
 
     //                        Feedback
     //                        FeedbackManadger
@@ -71,7 +61,7 @@ export default {
     //                        BucketRestoraunt
     //                        SelectCity
 
-    // this.$openModal('BucketRestoraunt')
+    // this.$openModal('Feedback')
     //   .then((data) => {
     //     console.log(data)
     //   })

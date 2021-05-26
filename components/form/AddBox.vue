@@ -1,8 +1,12 @@
 <template>
   <div class="add-box">
-    <button class="add-box__minus">-</button>
-    <span class="add-box__count">2 шт</span>
-    <button class="add-box__plus">+</button>
+    <button class="add-box__minus" @click="decrement">
+      -
+    </button>
+    <span class="add-box__count">{{ count }} шт</span>
+    <button class="add-box__plus" @click="increment">
+      +
+    </button>
   </div>
 </template>
 
@@ -11,7 +15,19 @@ export default {
   name: 'AddBox',
   components: {},
   data () {
-    return {}
+    return {
+      count: 0
+    }
+  },
+  methods: {
+    increment () {
+      this.count = this.count + 1
+    },
+    decrement () {
+      if (this.count > 0) {
+        this.count = this.count - 1
+      }
+    }
   }
 }
 </script>

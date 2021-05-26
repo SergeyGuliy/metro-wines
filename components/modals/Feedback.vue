@@ -9,12 +9,12 @@
     </div>
     <div class="feedback-modal__form">
       <InputBox v-model="form.name" placeholder="Имя" />
-      <InputBox v-model="form.name" placeholder="Электронная почта" />
-      <InputBox v-model="form.name" placeholder="Телефон" />
-      <TextareaBox v-model="form.name" placeholder="Сообщение" />
+      <InputBox v-model="form.email" placeholder="Электронная почта" />
+      <InputBox v-model="form.phone" placeholder="Телефон" />
+      <TextareaBox v-model="form.text" placeholder="Сообщение" />
     </div>
     <div class="feedback-modal__action">
-      <Button :filled="true" :bold="true" @click="close(true)">
+      <Button :filled="true" :bold="true" @click="sendFeedback">
         ОТПРАВИТЬ
       </Button>
     </div>
@@ -22,6 +22,7 @@
 </template>
 
 <script>
+import { api } from '../../assets/js/api'
 import modalMixin from './modalMixin'
 
 export default {
@@ -39,8 +40,18 @@ export default {
         name: '',
         email: '',
         phone: '',
-        message: ''
+        text: ''
       }
+    }
+  },
+  methods: {
+    sendFeedback () {
+      api.feedback.send(this.$userTradeCenter?.store_id, this.form).then((data) => {
+        console.log(data)
+        // this.close(true)
+      }).catch(({ response }) => {
+        console.error(response.data.errors)
+      })
     }
   }
 }

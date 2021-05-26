@@ -1,17 +1,25 @@
 <template>
-  <div class="catalog">
+  <div v-if="cards.length" class="catalog">
     <div class="box-title">
       ВИННАЯ КАРТА
     </div>
     <div class="catalog__cards-box">
-      <Card v-for="(card, index) in cards" :key="index" :card="card" />
+      <Card v-for="(card, index) in cards" :key="index" :card-data="card" />
     </div>
-    <PaginatorBox />
-    <div class="catalog__warning">ЧРЕЗМЕРНОЕ ПОТРЕБЛЕНИЕ АЛКОГОЛЯ ВРЕДИТ ВАШЕМУ ЗДОРОВЬЮ</div>
+    <PaginatorBox
+      v-if="lastPage && lastPage > 0"
+      :current-page="currentPage"
+      :last-page="lastPage"
+    />
+    <div class="catalog__warning">
+      ЧРЕЗМЕРНОЕ ПОТРЕБЛЕНИЕ АЛКОГОЛЯ ВРЕДИТ ВАШЕМУ ЗДОРОВЬЮ
+    </div>
   </div>
 </template>
 
 <script>
+import { api } from '../../assets/js/api'
+
 export default {
   name: 'Catalog',
   components: {
@@ -20,7 +28,48 @@ export default {
   },
   data () {
     return {
-      cards: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+      cards: [],
+      currentPage: null,
+      lastPage: null
+    }
+  },
+  watch: {
+    $userTradeCenter: {
+      deep: true,
+      handler (val) {
+        console.log('val')
+        console.log(val)
+        // this.fetchCatalog()
+      }
+    }
+  },
+  mounted () {
+    // api.products.categories(this.$userTradeCenter?.store_id)
+    //   .then((data) => {
+    //     console.log(data)
+    //   })
+    //   .catch((e) => {
+    //     console.log(e)
+    //   })
+    this.fetchCatalog()
+  },
+  methods: {
+    async fetchCatalog () {
+      if (this.$userTradeCenter?.store_id) {
+        await api.products.getProduct2(this.$userTradeCenter?.store_id)
+          .then((res) => {
+            // eslint-disable-next-line camelcase,no-unused-vars
+            const { last_page, current_page, data } = res.data
+            this.cards = data
+            // eslint-disable-next-line camelcase
+            this.currentPage = current_page
+            // eslint-disable-next-line camelcase
+            this.lastPage = last_page
+          })
+          .catch((e) => {
+            console.log(e)
+          })
+      }
     }
   }
 }

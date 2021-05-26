@@ -172,3 +172,10 @@ input, button, textarea{
     }
   }
 }
+
+.truncate-overflow::before {
+  content: "...";
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}

@@ -7,7 +7,7 @@
       Загрузить еще
     </Button>
     <div class="paginator">
-      <button class="paginator__item paginator__prev">
+      <button class="paginator__item paginator__prev" @click="clickPrev">
         <ArrowBack />
       </button>
       <button class="paginator__item paginator__item--active">
@@ -19,7 +19,7 @@
       <button class="paginator__item">
         3
       </button>
-      <button class="paginator__item">
+      <button class="paginator__item" disabled>
         ...
       </button>
       <button class="paginator__item">
@@ -31,7 +31,7 @@
       <button class="paginator__item">
         10
       </button>
-      <button class="paginator__item paginator__next">
+      <button class="paginator__item paginator__next" @click="clickNext">
         <ArrowForward />
       </button>
     </div>
@@ -46,8 +46,26 @@ export default {
     ArrowBack: () => import('assets/icons/arrow-back.svg'),
     ArrowForward: () => import('assets/icons/arrow-forward.svg')
   },
+  props: {
+    currentPage: {
+      required: true
+    },
+    lastPage: {
+      required: true
+    }
+  },
   data () {
     return {}
+  },
+  methods: {
+    clickPrev () {
+      if (this.currentPage) {
+        console.log('d')
+      }
+    },
+    clickNext () {
+
+    }
   }
 }
 </script>

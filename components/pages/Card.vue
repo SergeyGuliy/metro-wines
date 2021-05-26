@@ -1,18 +1,18 @@
 <template>
   <div class="card">
-    <img src="../../assets/images/mock-wine.png" alt="" class="card__img">
+    <img :src="cardData.images[0]" alt="" class="card__img">
     <h5 class="card__title">
-      LOREM IPSUM DOLOR
+      {{ cardData.name }}
     </h5>
-    <div class="card__description">
-      Lorem ipsum dolor sit amet, adipiscing elit
-    </div>
+    <!--    <div class="card__description truncate-overflow">-->
+    <!--      {{ cardData.description }}-->
+    <!--    </div>-->
     <div class="card__price-discounted">
-      <span class="card__old-price">1235,99 ₽</span>
-      <span class="card__discount">-15%</span>
+      <span class="card__old-price">{{ cardData.prices.old_price }} ₽</span>
+      <span class="card__discount">-{{ $calculateDiscount (cardData.prices.old_price, cardData.prices.price) }}%</span>
     </div>
     <div class="card__new-price">
-      1235,99 ₽/шт
+      {{ cardData.prices.price }} ₽/шт
     </div>
     <div class="card__add-box">
       <AddBox />
@@ -36,12 +36,23 @@ export default {
     AddBox: () => import('../form/AddBox'),
     Button: () => import('../form/Button')
   },
-  data () {
-    return {}
+  props: {
+    cardData: {
+      required: true,
+      type: Object
+    }
+  },
+  mounted () {
+    console.log(this.cardData.attributes.map((i) => {
+      return {
+        name: i.name,
+        text: i.text
+      }
+    }))
   },
   methods: {
     openWineCard () {
-      this.$openModal('WineCard', {})
+      this.$openModal('WineCard', this.cardData)
         .then((data) => {
           console.log(data)
         })
@@ -113,12 +124,19 @@ export default {
       text-align: center;
       margin-bottom: 40px;
       @include FontStyle('Acrom', normal, #000000, 18px, 22px);
+      --lh: 22px;
+      line-height: var(--lh);
+      --max-lines: 2;
+      max-height: calc(var(--lh) * var(--max-lines));
+      overflow: hidden;
+      position: relative;
     }
     .card__price-discounted{
       display: flex;
       justify-content: center;
-      align-items: center;
+      align-items: flex-end;
       margin-bottom: 10px;
+      flex: 1 1 auto;
     }
     .card__old-price{
       text-decoration: line-through;

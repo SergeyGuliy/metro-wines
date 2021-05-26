@@ -3,56 +3,36 @@
     <Close class="svg-close" @click="close" />
     <div class="card-modal__left">
       <SearchPlus class="svg-SearchPlus" />
-      <img src="../../assets/images/mock-wine-2.png" alt="">
+      <img :src="data.images[0]" alt="">
     </div>
     <div class="card-modal__right">
       <div class="card-modal__title">
-        ВИНО MAKEDONSKO CRVENO STOBI WINERY
+        {{ data.name }}
       </div>
       <div class="card-modal__attr">
-        Арт. 448800
+        Арт. {{ data.article }}
       </div>
       <div class="card-modal__parrams-box">
-        <div class="card-modal__parram parram">
-          <span class="parram__key">Тип: </span>
-          <span class="parram__value">красное</span>
-        </div>
-        <div class="card-modal__parram parram">
-          <span class="parram__key">Тип: </span>
-          <span class="parram__value">красное</span>
-        </div>
-        <div class="card-modal__parram parram">
-          <span class="parram__key">Тип: </span>
-          <span class="parram__value">красное</span>
-        </div>
-        <div class="card-modal__parram parram">
-          <span class="parram__key">Тип: </span>
-          <span class="parram__value">красное</span>
-        </div>
-        <div class="card-modal__parram parram">
-          <span class="parram__key">Тип: </span>
-          <span class="parram__value">красное</span>
-        </div>
-        <div class="card-modal__parram parram">
-          <span class="parram__key">Тип: </span>
-          <span class="parram__value">красное</span>
-        </div>
-        <div class="card-modal__parram parram">
-          <span class="parram__key">Тип: </span>
-          <span class="parram__value">красное</span>
-        </div>
-        <div class="card-modal__parram parram">
-          <span class="parram__key">Тип: </span>
-          <span class="parram__value">красное</span>
-        </div>
+        <template v-for="(art, index) in data.attributes">
+          <div
+            v-if="index < 7"
+            :key="index"
+            class="card-modal__parram parram"
+          >
+            <span class="parram__key">{{ art.name }}: </span>
+            <span class="parram__value">{{ art.text }}</span>
+          </div>
+        </template>
       </div>
       <div class="card-modal__devider" />
       <div class="card-modal__price-discounted">
-        <span class="card-modal__old-price">1235,99 ₽</span>
-        <span class="card-modal__discount">-15%</span>
+        <span class="card-modal__old-price">{{ data.prices.old_price }} ₽</span>
+        <span class="card-modal__discount">
+          -{{ $calculateDiscount (data.prices.old_price, data.prices.price) }}%
+        </span>
       </div>
       <div class="card-modal__new-price">
-        1235,99 ₽/шт
+        {{ data.prices.price }} ₽/шт
       </div>
       <div class="card-modal__add-box">
         <AddBox />
@@ -78,6 +58,9 @@ export default {
   mixins: [modalMixin],
   data () {
     return {}
+  },
+  mounted () {
+    console.log(this.data)
   }
 }
 </script>
@@ -116,6 +99,8 @@ export default {
     .card-modal__right{
       flex: 1 1 auto;
       margin-right: 72px;
+      max-height: 100%;
+      overflow: auto;
     }
     .card-modal__title{
       @include FontStyle('TimesNewRoman', normal, #710000, 36px, 41px);
@@ -133,6 +118,8 @@ export default {
       width: calc(50% - 36px);
       margin-right: 18px;
       .parram__key{
+        display: inline-block;
+        min-width: 50px;
         @include FontStyle('Acrom', normal, #828282, 16px, 30px);
       }
       .parram__value{

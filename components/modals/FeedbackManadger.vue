@@ -8,14 +8,14 @@
       Наш специалист свяжется с вами для уточнениния деталей.
     </div>
     <div class="feedback-modal__form">
-      <InputBox v-model="form.name" placeholder="Имя" />
-      <InputBox v-model="form.name" placeholder="Фамилия" />
-      <InputBox v-model="form.name" placeholder="Город" />
-      <InputBox v-model="form.name" placeholder="Электронная почта" />
-      <InputBox v-model="form.name" placeholder="Телефон" />
+      <InputBox v-model="form.firstName" placeholder="Имя" />
+      <InputBox v-model="form.secondName" placeholder="Фамилия" />
+      <InputBox v-model="form.city" placeholder="Город" />
+      <InputBox v-model="form.email" placeholder="Электронная почта" />
+      <InputBox v-model="form.phone" placeholder="Телефон" />
     </div>
     <div class="feedback-modal__action">
-      <Button :bold="true" :filled="true" @click="close(true)">
+      <Button :bold="true" :filled="true" @click="sendFeedback">
         ОТПРАВИТЬ
       </Button>
     </div>
@@ -23,6 +23,7 @@
 </template>
 
 <script>
+import { api } from '../../assets/js/api'
 import modalMixin from './modalMixin'
 
 export default {
@@ -36,11 +37,22 @@ export default {
   data () {
     return {
       form: {
-        name: '',
+        firstName: '',
+        secondName: '',
+        city: '',
         email: '',
-        phone: '',
-        message: ''
+        phone: ''
       }
+    }
+  },
+  methods: {
+    sendFeedback () {
+      api.feedback.send(this.$userTradeCenter?.store_id, this.form).then((data) => {
+        console.log(data)
+        // this.close(true)
+      }).catch(({ response }) => {
+        console.error(response.data)
+      })
     }
   }
 }

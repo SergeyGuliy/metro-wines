@@ -226,6 +226,9 @@ export default {
     .svg-close-filter, .filter-box__reset{
       display: none;
     }
+    .mobile-search-box{
+      display: none;
+    }
     .filter-box__row{
       background: #FFFFFF;
       border-radius: 5px;
@@ -340,7 +343,6 @@ export default {
         display: flex;
         align-items: center;
         justify-content: space-between;
-        width: 100%;
         margin: 0 7px;
         .mobile-search-box__btn{
           margin-left: 5px;
@@ -410,7 +412,7 @@ export default {
         background-color: #f4f4f4;
         display: flex;
         flex-direction: column;
-        z-index: 1;
+        z-index: 5;
         .custom-input-box{
           width: calc(100% - 20px);
           margin-bottom: 4px;
