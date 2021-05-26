@@ -10,27 +10,106 @@
       <button class="paginator__item paginator__prev" @click="clickPrev">
         <ArrowBack />
       </button>
-      <button class="paginator__item paginator__item--active">
-        1
-      </button>
-      <button class="paginator__item">
-        2
-      </button>
-      <button class="paginator__item">
-        3
-      </button>
-      <button class="paginator__item" disabled>
-        ...
-      </button>
-      <button class="paginator__item">
-        8
-      </button>
-      <button class="paginator__item">
-        9
-      </button>
-      <button class="paginator__item">
-        10
-      </button>
+      <template v-for="(page) in Array.from({length:lastPage},(v,k)=>k+1)">
+        <template v-if="page < 3">
+          <button
+            :key="page"
+            class="paginator__item"
+            :class="{'paginator__item--active': page === value}"
+            @click="$emit('input', page)"
+          >
+            {{ page }}
+          </button>
+        </template>
+        <template v-else-if="page > lastPage - 2">
+          <button
+            :key="page"
+            class="paginator__item"
+            :class="{'paginator__item--active': page === value}"
+            @click="$emit('input', page)"
+          >
+            {{ page }}
+          </button>
+        </template>
+        <template v-else-if="page === value">
+          <button
+            :key="page"
+            class="paginator__item"
+            :class="{'paginator__item--active': page === value}"
+            @click="$emit('input', page)"
+          >
+            {{ page }}
+          </button>
+        </template>
+        <!--        <template v-else-if="page > 2 && page === value + 1">-->
+        <!--          <button :key="page" class="paginator__item" disabled>-->
+        <!--            ...-->
+        <!--          </button>-->
+        <!--        </template>-->
+        <!--        <template v-else-if="page > 2 && page === value - 1">-->
+        <!--          <button :key="page" class="paginator__item" disabled>-->
+        <!--            ...-->
+        <!--          </button>-->
+        <!--        </template>-->
+        <template v-else-if="(page > 2 && page < lastPage - 1) && (page === value + 1 || page === value - 1)">
+          <button :key="page" class="paginator__item" disabled>
+            ...
+          </button>
+        </template>
+        <!--        <template v-else-if="(value < 2 || value > lastPage - 2)">-->
+        <template v-else-if="(value < 3 && page === 2)">
+          <button :key="page" class="paginator__item" disabled>
+            ...
+          </button>
+        </template>
+        <template v-else-if="(value < 3 && page === 3)">
+          <button :key="page" class="paginator__item" disabled>
+            ...
+          </button>
+        </template>
+        <template v-else-if="(value < 3 && page === 4)">
+          <button :key="page" class="paginator__item" disabled>
+            ...
+          </button>
+        </template>
+        <template v-else-if="(value < 3 && page === 5)">
+          <button :key="page" class="paginator__item" disabled>
+            ...
+          </button>
+        </template>
+        <template v-else-if="(value > lastPage - 3 && page === lastPage - 2)">
+          <button :key="page" class="paginator__item" disabled>
+            ...
+          </button>
+        </template>
+        <template v-else-if="(value > lastPage - 3 && page === lastPage - 3)">
+          <button :key="page" class="paginator__item" disabled>
+            ...
+          </button>
+        </template>
+        <template v-else-if="(value > lastPage - 3 && page === lastPage - 4)">
+          <button :key="page" class="paginator__item" disabled>
+            ...
+          </button>
+        </template>
+      </template>
+
+      <!--      <button class="paginator__item paginator__item--active">-->
+      <!--        2-->
+      <!--      </button>-->
+      <!--      <button class="paginator__item">-->
+      <!--        3-->
+      <!--      </button>-->
+
+      <!--      <button class="paginator__item">-->
+      <!--        8-->
+      <!--      </button>-->
+      <!--      <button class="paginator__item">-->
+      <!--        9-->
+      <!--      </button>-->
+      <!--      <button class="paginator__item">-->
+      <!--        10-->
+      <!--      </button>-->
       <button class="paginator__item paginator__next" @click="clickNext">
         <ArrowForward />
       </button>
@@ -47,7 +126,7 @@ export default {
     ArrowForward: () => import('assets/icons/arrow-forward.svg')
   },
   props: {
-    currentPage: {
+    value: {
       required: true
     },
     lastPage: {
@@ -59,12 +138,14 @@ export default {
   },
   methods: {
     clickPrev () {
-      if (this.currentPage) {
-        console.log('d')
+      if (this.value > 1) {
+        this.$emit('input', this.value - 1)
       }
     },
     clickNext () {
-
+      if (this.value < this.lastPage) {
+        this.$emit('input', this.value + 1)
+      }
     }
   }
 }

@@ -8,7 +8,7 @@
     </div>
     <PaginatorBox
       v-if="lastPage && lastPage > 0"
-      :current-page="currentPage"
+      v-model="currentPage"
       :last-page="lastPage"
     />
     <div class="catalog__warning">
