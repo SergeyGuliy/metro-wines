@@ -2,7 +2,7 @@
   <div class="page-main">
     <Hero />
     <SubHero :sub-hero-items="subHeroItems" />
-    <pre>{{ $tradeCenters }}</pre>
+    <!--    <pre>{{ $tradeCenters }}</pre>-->
     <div class="page-main__container">
       <div class="container">
         <FilterBox />
@@ -55,6 +55,11 @@ export default {
   async mounted () {
     await this.$loadGeoData()
     await this.$fetchBucket()
+    await api.products.categories(this.$userTradeCenter?.store_id).then((data) => {
+      console.log(data)
+    }).catch((e) => {
+      console.log(e)
+    })
 
     //                        Feedback
     //                        FeedbackManadger

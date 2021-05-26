@@ -52,7 +52,6 @@ Vue.mixin({
       await api.bucket.getMyBasket(this.$userTradeCenter?.store_id, this.$userHash).then((data) => {
         this.$userHash = data.data.user_hash
         this.$store.commit('bucket/SET_BUCKET', data.data)
-        console.log(this.$userBucket)
       }).catch((e) => {
         console.log(e)
       })

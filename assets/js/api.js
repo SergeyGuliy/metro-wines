@@ -29,7 +29,7 @@ export const api = {
   products: {
     getProduct1: async storeId => (await _axios.get(`${storeId}/shoppinglists`)).data,
     getProduct2: async storeId => (await _axios.get(`${storeId}/products`)).data,
-    categories: async storeId => (await _axios.get(`${storeId}/categories`)).data,
+    categories: async storeId => (await _axios.get(`${storeId}/categories/tree`)).data,
     wineProducts: async (storeId, categoryId) => (await _axios.get(`${storeId}/categories/${categoryId}`)).data
   },
   feedback: {
