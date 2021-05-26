@@ -36,6 +36,7 @@ export default {
   },
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
+    { src: '~plugins/html2canvas.js', ssr: false },
     '~/plugins/vuePrototype.js',
     '~/plugins/bus.js'
     // '~/plugins/slider.js'
