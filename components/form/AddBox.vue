@@ -13,10 +13,27 @@
 <script>
 export default {
   name: 'AddBox',
-  components: {},
-  data () {
-    return {
-      count: 0
+  props: {
+    wineData: {}
+  },
+  computed: {
+    article () {
+      return this.wineData.article
+    },
+    count: {
+      get () {
+        if (this.$userBucket[this.article]) {
+          return this.$userBucket[this.article].count
+        } else {
+          return 0
+        }
+      },
+      set (val) {
+        this.$store.commit('bucket/SET_TO_BUCKET', {
+          wineData: this.wineData,
+          count: val
+        })
+      }
     }
   },
   methods: {

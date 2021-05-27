@@ -1,6 +1,10 @@
 <template>
   <div class="wine-cart-list">
-    <CardItem v-for="(card, index) in cards" :key="index" :card="card" />
+    <CardItem
+      v-for="(item, index) in $userBucket"
+      :key="index"
+      :wine-data="item"
+    />
   </div>
 </template>
 

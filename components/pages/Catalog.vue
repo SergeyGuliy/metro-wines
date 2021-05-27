@@ -8,8 +8,9 @@
     </div>
     <PaginatorBox
       v-if="lastPage && lastPage > 0"
-      v-model="currentPage"
+      :value="currentPage"
       :last-page="lastPage"
+      @input="changePage"
     />
     <div class="catalog__warning">
       ЧРЕЗМЕРНОЕ ПОТРЕБЛЕНИЕ АЛКОГОЛЯ ВРЕДИТ ВАШЕМУ ЗДОРОВЬЮ
@@ -25,6 +26,12 @@ export default {
   components: {
     Card: () => import('./Card'),
     PaginatorBox: () => import('./PaginatorBox')
+  },
+  props: {
+    filters: {
+      required: true,
+      type: Object
+    }
   },
   data () {
     return {
@@ -54,9 +61,16 @@ export default {
     this.fetchCatalog()
   },
   methods: {
+    changePage (page) {
+      this.currentPage = page
+      this.fetchCatalog()
+    },
     async fetchCatalog () {
       if (this.$userTradeCenter?.store_id) {
-        await api.products.getProduct2(this.$userTradeCenter?.store_id)
+        await api.products.getProduct(this.$userTradeCenter?.store_id, {
+          page: this.currentPage,
+          ...this.filters
+        })
           .then((res) => {
             // eslint-disable-next-line camelcase,no-unused-vars
             const { last_page, current_page, data } = res.data

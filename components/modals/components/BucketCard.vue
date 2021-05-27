@@ -1,17 +1,25 @@
 <template>
   <div class="bucket-card">
     <div class="bucket-card__img-box">
-      <img src="../../../assets/images/mock-wine.png" alt="">
+      <img :src="wineData.wineData.images[0]" alt="">
     </div>
     <div class="bucket-card__title-box">
-      <div class="bucket-card__title">MAKEDONSKO CRVENO STOBI WINERY </div>
-      <div class="bucket-card__article">Арт. 448800</div>
+      <div class="bucket-card__title">
+        {{ wineData.wineData.name }}
+      </div>
+      <div class="bucket-card__article">
+        Арт. {{ wineData.wineData.article }}
+      </div>
     </div>
     <div class="bucket-card__price-box">
-      <div class="bucket-card__price-total">12 358,12 ₽</div>
-      <div class="bucket-card__price-item">1235,99 ₽/шт</div>
+      <div class="bucket-card__price-total">
+        {{ wineData.wineData.prices.price * wineData.count }} ₽
+      </div>
+      <div class="bucket-card__price-item">
+        {{ wineData.wineData.prices.price }} ₽/шт
+      </div>
     </div>
-    <AddBox />
+    <AddBox :wine-data="wineData.wineData" />
   </div>
 </template>
 
@@ -21,8 +29,16 @@ export default {
   components: {
     AddBox: () => import('../../form/AddBox')
   },
+  props: {
+    wineData: {
+      type: Object
+    }
+  },
   data () {
     return {}
+  },
+  mounted () {
+    console.log(this.wineData)
   }
 }
 </script>
@@ -49,9 +65,11 @@ export default {
         height: 100%;
         max-width: 100%;
         max-height: 100%;
+        object-fit: cover;
       }
     }
     .bucket-card__title-box{
+      max-width: 340px;
     }
     .bucket-card__title{
       @include FontStyle('TimesNewRoman', normal, #710000, 20px, 23px);
@@ -78,6 +96,11 @@ export default {
     @media (max-width: 1080px) {
       .bucket-card__price-box{
         padding-left: 28px;
+        max-width: 213px;
+        min-width: 213px;
+      }
+      .bucket-card__title-box{
+        max-width: 340px;
       }
       .add-box{
         max-height: 41px;
@@ -103,6 +126,7 @@ export default {
       .bucket-card__price-box{
         padding: 0;
         max-width: 50%;
+        min-width: unset;
       }
     }
   }

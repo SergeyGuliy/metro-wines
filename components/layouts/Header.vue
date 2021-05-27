@@ -37,12 +37,12 @@ export default {
   },
   computed: {
     isNotEmpty () {
-      return this.$userBucket?.articles?.length
+      return Object.keys(this.$userBucket).length
     }
   },
   methods: {
     openBucket () {
-      this.$openModal('BucketRestoraunt', { activator: '#bucket-activator' })
+      this.$openModal(this.$userType === 'self' ? 'BucketUser' : 'BucketRestoraunt', { activator: '#bucket-activator' })
         .then((data) => {
           console.log(data)
         })

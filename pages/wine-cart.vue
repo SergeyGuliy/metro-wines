@@ -4,7 +4,7 @@
     <div class="wine-cart-main__container">
       <div class="container">
         <div class="wine-cart-main__title">
-          В вашей винной карте 111 вин
+          В вашей винной карте {{Object.keys($userBucket).length}} вин
         </div>
         <WineCartList />
         <div class="wine-cart-main__actions">
@@ -38,17 +38,11 @@ export default {
     // FilterBox: () => import('../components/pages/FilterBox'),
     // Catalog: () => import('../components/pages/Catalog')
   },
-  created () {
-    // this.openInitModals()
-
-    // this.$openModal('Bucket')
-    //   .then(() => this.$openModal('WineOwner'))
-    //   .then((data) => {
-    //     console.log(data)
-    //   })
-    //   .catch((e) => {
-    //     console.log(e)
-    //   })
+  async mounted () {
+    await this.$loadGeoData()
+    await this.$fetchBucket()
+    await this.$selectUserAge()
+    await this.$selectUserType()
   },
   methods: {
     openInitModals () {

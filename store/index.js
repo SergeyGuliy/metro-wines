@@ -5,18 +5,22 @@ export const strict = false
 export const state = () => ({
   tradeCenters: {},
   userTradeCenter: null,
-  userHash: null
+  userHash: null,
+  userType: null
 })
 
 export const mutations = {
-  SET_TRADE_CENTERS (state, data) {
-    Vue.set(state, 'tradeCenters', data)
+  SET_TRADE_CENTERS (state, tradeCenters) {
+    Vue.set(state, 'tradeCenters', tradeCenters)
   },
-  SET_USER_HASH (state, data) {
-    Vue.set(state, 'userHash', data)
+  SET_USER_HASH (state, userHash) {
+    Vue.set(state, 'userHash', userHash)
   },
-  SET_USER_TRADE_CENTER (state, data) {
-    Vue.set(state, 'userTradeCenter', data)
+  SET_USER_TYPE (state, userType) {
+    Vue.set(state, 'userType', userType)
+  },
+  SET_USER_TRADE_CENTER (state, userTradeCenter) {
+    Vue.set(state, 'userTradeCenter', userTradeCenter)
   }
 }
 

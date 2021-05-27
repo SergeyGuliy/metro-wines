@@ -20,19 +20,22 @@
         <div class="wcb__price-box">
           <input
             :ref="`cup-${index}`"
+            v-model="wine.price.cup"
             class="wcb__input-cup"
             type="number"
             placeholder="бокал"
-            @input="changeMaxWidth(`cup-${index}`, $event.target.value)"
+            @input="changeMaxWidth(`cup-${index}`, `h-cup-${index}`, $event.target.value)"
           >
+          <!--          <span :ref="`h-cup-${index}`" />-->
           <span>/</span>
           <input
             :ref="`bottle-${index}`"
             class="wcb__input-bottle"
             type="number"
             placeholder="бутылка"
-            @input="changeMaxWidth(`bottle-${index}`, $event.target.value)"
+            @input="changeMaxWidth(`bottle-${index}`, `h-bottle-${index}`, $event.target.value)"
           >
+          <!--          <span :ref="`h-bottle-${index}`">{{ wine.price.bottle }}</span>-->
           <span>₽</span>
         </div>
       </div>
@@ -53,9 +56,19 @@ export default {
     return {}
   },
   methods: {
-    changeMaxWidth (ref, value) {
-      console.dir(this.$refs[ref])
-      this.$refs[ref][0].style.maxWidth = ((value.length + 1) * 11) + 'px'
+    changeMaxWidth (ref, hiddenRef, value) {
+      if (value.length) {
+        const canvas = document.createElement('canvas')
+        const context = canvas.getContext('2d')
+        context.font = '25px Acrom bold'
+        context.fontWeight = 'bold'
+        const width = context.measureText(value).width
+        this.$refs[ref][0].style.maxWidth = width + 'px'
+      } else if (ref.includes('cup')) {
+        this.$refs[ref][0].style.maxWidth = '57px'
+      } else {
+        this.$refs[ref][0].style.maxWidth = '82px'
+      }
     }
   }
 }

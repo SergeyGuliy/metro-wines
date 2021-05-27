@@ -1,6 +1,6 @@
 <template>
-  <div class="bucket-restoraunt" :style="positionWithActivator">
-    <div v-if="!itemsLength" class="bucket-restoraunt__empty">
+  <div class="bucket-restoraunt" :style="positionWithActivator" @click.stop="">
+    <div v-if="!Object.keys($userBucket).length" class="bucket-restoraunt__empty">
       <div class="bucket-restoraunt__title">
         Вы пока не выбрали ни одного вина для своей будущей винной карты
       </div>
@@ -18,48 +18,50 @@
       <div class="bucket-restoraunt__title">
         Корзина
       </div>
+
       <div class="bucket-restoraunt__devider" />
       <div class="bucket-restoraunt__body">
-        <template v-for="item in Array(10)">
-          <div :key="item" class="bucket-restoraunt__card r-card">
+        <!--        <pre>{{ $userBucket }}</pre>-->
+        <template v-for="(item, index) in $userBucket">
+          <div :key="index" class="bucket-restoraunt__card r-card">
             <Close class="svg-close" @click="close" />
-            <img src="../../assets/images/mock-wine.png" alt="" class="r-card__img">
+            <img :src="item.wineData.images[0]" alt="" class="r-card__img">
             <div class="r-card__right">
               <div class="r-card__title">
-                MAKEDONS KO CRVENO STOBI WINERY
+                {{ item.wineData.name }}
               </div>
               <div class="r-card__atricle">
-                Арт. 448800
+                Арт. {{ item.wineData.article }}
               </div>
               <div class="r-card__actions big">
-                <AddBox />
+                <AddBox :wine-data="item.wineData" />
                 <div class="r-card__price">
-                  12 358,12 ₽
+                  {{ item.wineData.prices.price }} ₽
                 </div>
               </div>
             </div>
             <div class="r-card__actions small">
-              <AddBox />
+              <AddBox :wine-data="item.wineData" />
               <div class="r-card__price">
-                12 358,12 ₽
+                {{ item.wineData.prices.price }} ₽
               </div>
             </div>
           </div>
-          <div :key="item" class="bucket-restoraunt__card-border" />
+          <div :key="index + 10000" class="bucket-restoraunt__card-border" />
         </template>
       </div>
       <div class="bucket-restoraunt__devider" />
       <div class="bucket-restoraunt__actions">
         <div class="bucket-restoraunt__top">
           <div class="bucket-restoraunt__total">
-            12 товаров
+            {{ Object.keys($userBucket).length }} товаров
           </div>
           <div class="bucket-restoraunt__right">
             <div class="bucket-restoraunt__old">
-              1235,99 ₽
+              {{ $getTotalDiscount }} ₽
             </div>
             <div class="bucket-restoraunt__current">
-              120 358,12 ₽
+              {{ $getTotalPrice }} ₽
             </div>
           </div>
         </div>
@@ -67,6 +69,7 @@
           :filled="true"
           :bold="true"
           :uppercase="true"
+          @click="goToWineCard"
         >
           Перейти в винную карту
         </Button>
@@ -100,6 +103,12 @@ export default {
   },
   beforeDestroy () {
     this.$bus.off('clickModalWrapper', this.close)
+  },
+  methods: {
+    goToWineCard () {
+      this.$router.push({ name: 'wine-cart' })
+      this.close()
+    }
   }
 }
 </script>
@@ -182,6 +191,7 @@ export default {
         max-width: 30px;
         max-height: 100px;
         margin: 0 15px;
+        object-fit: cover;
       }
       .r-card__right{
 

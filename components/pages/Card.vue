@@ -7,7 +7,7 @@
     <!--    <div class="card__description truncate-overflow">-->
     <!--      {{ cardData.description }}-->
     <!--    </div>-->
-    <div class="card__price-discounted">
+    <div v-if="cardData.prices.old_price" class="card__price-discounted">
       <span class="card__old-price">{{ cardData.prices.old_price }} ₽</span>
       <span class="card__discount">-{{ $calculateDiscount (cardData.prices.old_price, cardData.prices.price) }}%</span>
     </div>
@@ -15,7 +15,7 @@
       {{ cardData.prices.price }} ₽/шт
     </div>
     <div class="card__add-box">
-      <AddBox />
+      <AddBox :wineData="cardData"/>
       <Button :filled="true" :uppercase="true" :bold="true" @click="openWineCard">
         Посмотреть
       </Button>
@@ -42,14 +42,7 @@ export default {
       type: Object
     }
   },
-  mounted () {
-    console.log(this.cardData.attributes.map((i) => {
-      return {
-        name: i.name,
-        text: i.text
-      }
-    }))
-  },
+  mounted () {},
   methods: {
     openWineCard () {
       this.$openModal('WineCard', this.cardData)

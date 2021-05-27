@@ -25,15 +25,16 @@ export const api = {
       })).data
     },
     changeItemCount: async storeId => (await _axios.put(`${storeId}/eshop/basket`)).data,
-    addItem: async storeId => (await _axios.post(`${storeId}/eshop/basket`)).data,
-    deleteItem: async storeId => (await _axios.delete(`${storeId}/eshop/basket`)).data
+    addItem: async (storeId, bucketData) => (await _axios.post(`${storeId}/eshop/basket`, bucketData)).data,
+    deleteItem: async (storeId, bucketData) => (await _axios.delete(`${storeId}/eshop/basket`, bucketData)).data
   },
   products: {
     getProduct1: async storeId => (await _axios.get(`${storeId}/shoppinglists`)).data,
-    getProduct2: async storeId => (await _axios.get(`${storeId}/products`, {
+    getProduct: async (storeId, query) => (await _axios.get(`${storeId}/products`, {
       params: {
         category_id: [412338],
-        paginate: 12
+        paginate: 12,
+        ...query
       }
     })).data,
     categories: async storeId => (await _axios.get(`${storeId}/categories/412338`)).data,

@@ -3,9 +3,9 @@
     <div class="paginator-box__total">
       Показано с 1 по 16 из 256 результатов поиска
     </div>
-    <Button :filled="true" class="paginator-box__button">
-      Загрузить еще
-    </Button>
+<!--    <Button :filled="true" class="paginator-box__button">-->
+<!--      Загрузить еще-->
+<!--    </Button>-->
     <div class="paginator">
       <button class="paginator__item paginator__prev" @click="clickPrev">
         <ArrowBack />
@@ -41,16 +41,6 @@
             {{ page }}
           </button>
         </template>
-        <!--        <template v-else-if="page > 2 && page === value + 1">-->
-        <!--          <button :key="page" class="paginator__item" disabled>-->
-        <!--            ...-->
-        <!--          </button>-->
-        <!--        </template>-->
-        <!--        <template v-else-if="page > 2 && page === value - 1">-->
-        <!--          <button :key="page" class="paginator__item" disabled>-->
-        <!--            ...-->
-        <!--          </button>-->
-        <!--        </template>-->
         <template v-else-if="(page > 2 && page < lastPage - 1) && (page === value + 1 || page === value - 1)">
           <button :key="page" class="paginator__item" disabled>
             ...
@@ -93,23 +83,6 @@
           </button>
         </template>
       </template>
-
-      <!--      <button class="paginator__item paginator__item--active">-->
-      <!--        2-->
-      <!--      </button>-->
-      <!--      <button class="paginator__item">-->
-      <!--        3-->
-      <!--      </button>-->
-
-      <!--      <button class="paginator__item">-->
-      <!--        8-->
-      <!--      </button>-->
-      <!--      <button class="paginator__item">-->
-      <!--        9-->
-      <!--      </button>-->
-      <!--      <button class="paginator__item">-->
-      <!--        10-->
-      <!--      </button>-->
       <button class="paginator__item paginator__next" @click="clickNext">
         <ArrowForward />
       </button>
@@ -121,7 +94,7 @@
 export default {
   name: 'PaginatorBox',
   components: {
-    Button: () => import('../form/Button'),
+    // Button: () => import('../form/Button'),
     ArrowBack: () => import('assets/icons/arrow-back.svg'),
     ArrowForward: () => import('assets/icons/arrow-forward.svg')
   },

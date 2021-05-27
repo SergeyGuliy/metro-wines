@@ -37,17 +37,11 @@ export default {
       ]
     }
   },
-  created () {
-    // this.openInitModals()
-
-    // this.$openModal('Bucket')
-    //   .then(() => this.$openModal('WineOwner'))
-    //   .then((data) => {
-    //     console.log(data)
-    //   })
-    //   .catch((e) => {
-    //     console.log(e)
-    //   })
+  async mounted () {
+    await this.$loadGeoData()
+    await this.$fetchBucket()
+    await this.$selectUserAge()
+    await this.$selectUserType()
   },
   methods: {
     openInitModals () {

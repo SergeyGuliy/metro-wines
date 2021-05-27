@@ -1,18 +1,22 @@
 <template>
   <div class="wine-constructor">
-    <div class="wine-constructor__shablones">
-      <div
-        v-for="(shablone) in shablones"
-        :key="shablone"
-        class="wine-constructor__shablone-select-box"
-        :class="{'wine-constructor__shablone-select-box--active': shablone === activeShablone}"
-        @click="activeShablone = shablone"
-      >
-        <div class="s-circle">
-          <Ok />
+    <div class="wine-constructor__shablones--wr">
+      <div class="wine-constructor__shablones">
+        <div
+          v-for="(shablone) in shablones"
+          :key="shablone"
+          class="wine-constructor__shablone-select-box"
+          :class="{'wine-constructor__shablone-select-box--active': shablone === activeShablone}"
+          @click="activeShablone = shablone"
+        >
+          <div class="s-circle">
+            <Ok />
+          </div>
+          <img class="noselect" :src="require(`assets/images/shablob-item-${shablone}.jpg`)" alt="">
+          <div class="wine-constructor__shablones-shadow" />
         </div>
-        <img class="noselect" :src="require(`assets/images/shablob-item-${shablone}.jpg`)" alt="">
       </div>
+      <div class="wine-constructor__shablones-shadow" />
     </div>
     <div class="wine-constructor__shablone-wrapper">
       <div class="wine-constructor__text">
@@ -107,9 +111,9 @@
         <Button :filled="true" :uppercase="true" @click="downloadPDF">
           Скачать pdf
         </Button>
-        <Button :filled="true" :uppercase="true">
-          Скачать для редактирования (eps)
-        </Button>
+        <!--        <Button :filled="true" :uppercase="true">-->
+        <!--          Скачать для редактирования (eps)-->
+        <!--        </Button>-->
       </div>
     </div>
   </div>
@@ -137,140 +141,155 @@ export default {
       pageSizeSmall: {
         clientWidth: 693,
         clientHeight: 1957
-      },
-      items: [
-        {
-          name: 'Игристые вина',
-          items: [
-            {
-              name: 'Le Rime, Castello Banfi',
-              description: '2019, Италия, Тоскана',
-              price: {
-                bottle: '',
-                cup: ''
-              }
-            },
-            {
-              name: 'Le Rime, Castello Banfi',
-              description: '2019, Италия, Тоскана',
-              price: {
-                bottle: '',
-                cup: ''
-              }
-            },
-            {
-              name: 'Le Rime, Castello Banfi',
-              description: '2019, Италия, Тоскана',
-              price: {
-                bottle: '',
-                cup: ''
-              }
-            },
-            {
-              name: 'Le Rime, Castello Banfi',
-              description: '2019, Италия, Тоскана',
-              price: {
-                bottle: '',
-                cup: ''
-              }
-            },
-            {
-              name: 'Le Rime, Castello Banfi',
-              description: '2019, Италия, Тоскана',
-              price: {
-                bottle: '',
-                cup: ''
-              }
-            }
-          ]
-        },
-        {
-          name: 'Белые вина',
-          items: [
-            {
-              name: 'Le Rime, Castello Banfi',
-              description: '2019, Италия, Тоскана',
-              price: {
-                bottle: '',
-                cup: ''
-              }
-            },
-            {
-              name: 'Le Rime, Castello Banfi',
-              description: '2019, Италия, Тоскана',
-              price: {
-                bottle: '',
-                cup: ''
-              }
-            },
-            {
-              name: 'Le Rime, Castello Banfi',
-              description: '2019, Италия, Тоскана',
-              price: {
-                bottle: '',
-                cup: ''
-              }
-            },
-            {
-              name: 'Le Rime, Castello Banfi',
-              description: '2019, Италия, Тоскана',
-              price: {
-                bottle: '',
-                cup: ''
-              }
-            }
-          ]
-        },
-        {
-          name: 'Красные винА',
-          items: [
-            {
-              name: 'Le Rime, Castello Banfi',
-              description: '2019, Италия, Тоскана',
-              price: {
-                bottle: '',
-                cup: ''
-              }
-            }
-          ]
-        },
-        {
-          name: 'Красные винА',
-          items: [
-            {
-              name: 'Le Rime, Castello Banfi',
-              description: '2019, Италия, Тоскана',
-              price: {
-                bottle: '',
-                cup: ''
-              }
-            }
-          ]
-        },
-        {
-          name: 'Розовые вина',
-          items: [
-            {
-              name: 'Le Rime, Castello Banfi',
-              description: '2019, Италия, Тоскана',
-              price: {
-                bottle: '',
-                cup: ''
-              }
-            }
-          ]
-        }
-      ]
+      }
+      // items: [
+      //   {
+      //     name: 'Игристые вина',
+      //     items: [
+      //       {
+      //         name: 'Le Rime, Castello Banfi',
+      //         description: '2019, Италия, Тоскана',
+      //         price: {
+      //           bottle: '',
+      //           cup: ''
+      //         }
+      //       },
+      //       {
+      //         name: 'Le Rime, Castello Banfi',
+      //         description: '2019, Италия, Тоскана',
+      //         price: {
+      //           bottle: '',
+      //           cup: ''
+      //         }
+      //       },
+      //       {
+      //         name: 'Le Rime, Castello Banfi',
+      //         description: '2019, Италия, Тоскана',
+      //         price: {
+      //           bottle: '',
+      //           cup: ''
+      //         }
+      //       },
+      //       {
+      //         name: 'Le Rime, Castello Banfi',
+      //         description: '2019, Италия, Тоскана',
+      //         price: {
+      //           bottle: '',
+      //           cup: ''
+      //         }
+      //       },
+      //       {
+      //         name: 'Le Rime, Castello Banfi',
+      //         description: '2019, Италия, Тоскана',
+      //         price: {
+      //           bottle: '',
+      //           cup: ''
+      //         }
+      //       }
+      //     ]
+      //   },
+      //   {
+      //     name: 'Белые вина',
+      //     items: [
+      //       {
+      //         name: 'Le Rime, Castello Banfi',
+      //         description: '2019, Италия, Тоскана',
+      //         price: {
+      //           bottle: '',
+      //           cup: ''
+      //         }
+      //       },
+      //       {
+      //         name: 'Le Rime, Castello Banfi',
+      //         description: '2019, Италия, Тоскана',
+      //         price: {
+      //           bottle: '',
+      //           cup: ''
+      //         }
+      //       },
+      //       {
+      //         name: 'Le Rime, Castello Banfi',
+      //         description: '2019, Италия, Тоскана',
+      //         price: {
+      //           bottle: '',
+      //           cup: ''
+      //         }
+      //       },
+      //       {
+      //         name: 'Le Rime, Castello Banfi',
+      //         description: '2019, Италия, Тоскана',
+      //         price: {
+      //           bottle: '',
+      //           cup: ''
+      //         }
+      //       }
+      //     ]
+      //   },
+      //   {
+      //     name: 'Красные винА',
+      //     items: [
+      //       {
+      //         name: 'Le Rime, Castello Banfi',
+      //         description: '2019, Италия, Тоскана',
+      //         price: {
+      //           bottle: '',
+      //           cup: ''
+      //         }
+      //       }
+      //     ]
+      //   },
+      //   {
+      //     name: 'Красные винА',
+      //     items: [
+      //       {
+      //         name: 'Le Rime, Castello Banfi',
+      //         description: '2019, Италия, Тоскана',
+      //         price: {
+      //           bottle: '',
+      //           cup: ''
+      //         }
+      //       }
+      //     ]
+      //   },
+      //   {
+      //     name: 'Розовые вина',
+      //     items: [
+      //       {
+      //         name: 'Le Rime, Castello Banfi',
+      //         description: '2019, Италия, Тоскана',
+      //         price: {
+      //           bottle: '',
+      //           cup: ''
+      //         }
+      //       }
+      //     ]
+      //   }
+      // ]
     }
   },
   computed: {
     currentPageSize () {
       return this.activeShablone > 2 ? this.pageSizeSmall : this.pageSizeBig
+    },
+    items () {
+      const allWInes = Object.values(this.$userBucket).map(i => ({
+        name: i.wineData.name,
+        description: i.wineData.description,
+        price: {
+          bottle: '',
+          cup: ''
+        }
+      }))
+      return [
+        {
+          name: 'Белые вина',
+          items: allWInes
+        }
+      ]
     }
   },
   watch: {
     activeShablone (val) {
-      console.log(val)
       this.$nextTick(() => {
         this.doResize(null, this.currentPageSize)
       })
@@ -282,6 +301,7 @@ export default {
       this.doResize(null, this.currentPageSize)
     })
     console.clear()
+    console.log(this.items)
   },
   beforeDestroy () {
     window.removeEventListener('resize', () => {})
@@ -482,11 +502,13 @@ export default {
       align-items: flex-end;
       min-height: 345px;
       overflow-x: auto;
+      position: relative;
       .wine-constructor__shablone-select-box{
         margin: 0 10px;
         width: calc(25% - 20px);
         position: relative;
         cursor: pointer;
+        z-index: 1;
         display: flex;
         align-items: flex-end;
         min-width: 336px;
@@ -523,6 +545,37 @@ export default {
           display: none;
         }
       }
+    }
+    .wine-constructor__shablones--wr{
+      position: relative;
+    }
+    .wine-constructor__shablones-shadow{
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 119px;
+      background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, #000000 100%);
+      opacity: 0.2;
+    }
+    ::-webkit-scrollbar {
+      width: 10px;
+      height: 5px;
+    }
+
+    /* Track */
+    ::-webkit-scrollbar-track {
+      background: #f1f1f1;
+    }
+
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+      background: #888;
+    }
+
+    /* Handle on hover */
+    ::-webkit-scrollbar-thumb:hover {
+      background: #555;
     }
     .wine-constructor__shablone-wrapper{
       background-color: #ffffff;

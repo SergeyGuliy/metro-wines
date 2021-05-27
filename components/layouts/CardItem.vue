@@ -1,24 +1,24 @@
 <template>
   <div class="card-item">
-    <img src="../../assets/images/mock-wine.png" alt="" class="card-item__img">
+    <img :src="wineData.wineData.images[0]" alt="" class="card-item__img">
     <div class="card-item__box">
       <h5 class="card-item__title">
-        LOREM IPSUM DOLOR
+        {{ wineData.wineData.name }}
       </h5>
       <div class="card-item__description">
-        Lorem ipsum dolor sit amet, adipiscing elit
+        {{ wineData.wineData.description }}
       </div>
     </div>
     <div class="card-item__add-box">
       <div class="card-item__price-box">
         <div class="card-item__price-item">
-          1235,99 ₽/шт
+          {{ wineData.wineData.prices.price }} ₽/шт
         </div>
         <div class="card-item__price-total">
-          12 358,12 ₽
+          {{ wineData.wineData.prices.price * wineData.count }} ₽
         </div>
       </div>
-      <AddBox />
+      <AddBox :wine-data="wineData.wineData" />
     </div>
   </div>
 </template>
@@ -29,8 +29,10 @@ export default {
   components: {
     AddBox: () => import('../form/AddBox')
   },
-  data () {
-    return {}
+  props: {
+    wineData: {
+      type: Object
+    }
   }
 }
 </script>

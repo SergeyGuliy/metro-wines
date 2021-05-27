@@ -25,7 +25,7 @@
         </template>
       </div>
       <div class="card-modal__devider" />
-      <div class="card-modal__price-discounted">
+      <div v-if="data.prices.old_price" class="card-modal__price-discounted">
         <span class="card-modal__old-price">{{ data.prices.old_price }} ₽</span>
         <span class="card-modal__discount">
           -{{ $calculateDiscount (data.prices.old_price, data.prices.price) }}%
@@ -35,7 +35,7 @@
         {{ data.prices.price }} ₽/шт
       </div>
       <div class="card-modal__add-box">
-        <AddBox />
+        <AddBox :wine-data="data" />
         <Button :filled="true">
           Добавить в корзину
         </Button>
@@ -86,7 +86,7 @@ export default {
       padding: 0 82px 0 66px;
       position: relative;
       img{
-        max-height: 100%;
+        max-height: 442px;
         max-width: 196px;
       }
       .svg-SearchPlus{
