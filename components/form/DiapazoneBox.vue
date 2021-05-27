@@ -15,7 +15,7 @@
           <div class="diapazone-box__input-box-prepend">
             от
           </div>
-          <input type="text" class="diapazone-box__input">
+          <input v-model.number="min" type="text" class="diapazone-box__input">
           <div class="diapazone-box__input-box-append">
             ₽
           </div>
@@ -24,16 +24,17 @@
           <div class="diapazone-box__input-box-prepend">
             до
           </div>
-          <input type="text" class="diapazone-box__input">
+          <input v-model.number="max" type="text" class="diapazone-box__input">
           <div class="diapazone-box__input-box-append">
             ₽
           </div>
         </div>
       </div>
       <veeno
+        :set="localValue"
         connect
-        :handles="handles"
         :range="range"
+        @input="input"
       />
     </div>
   </div>
@@ -61,9 +62,6 @@ export default {
     value: {
       required: true
     },
-    items: {
-      required: true
-    },
     data: {
       required: true
     }
@@ -73,12 +71,32 @@ export default {
       handles: [35, 55],
       range: {
         min: 0,
-        max: 100
+        max: 10000
       },
       isOpen: false
     }
   },
   computed: {
+    min: {
+      get () {
+        return this.localValue[0]
+      },
+      set (val) {
+        console.log(typeof val)
+        console.log(val)
+        this.$set(this.localValue, 0, val)
+      }
+    },
+    max: {
+      get () {
+        return this.localValue[1]
+      },
+      set (val) {
+        console.log(typeof val)
+        console.log(val)
+        this.$set(this.localValue, 1, val)
+      }
+    },
     localValue: {
       get () {
         return this.value
@@ -91,6 +109,19 @@ export default {
   methods: {
     hide () {
       this.isOpen = false
+    },
+    input (val) {
+      if (!this.localValue.includes(+val)) {
+        // console.log(+((+val).toFixed()))
+        const center = (+this.localValue[0] + +this.localValue[1]) / 2
+        // console.error(center)
+        // console.warn(val)
+        if (+val < center) {
+          this.localValue = [+((+val).toFixed()), this.localValue[1]]
+        } else {
+          this.localValue = [this.localValue[0], +((+val).toFixed())]
+        }
+      }
     }
   }
 }

@@ -41,56 +41,61 @@
       </div>
       <div class="filter-box__filters">
         <SelectBox
-          v-model="isPremium"
-          :items="winesTypes"
+          v-if="filters.wineCategory && filtersData.wineCategory"
+          v-model="filtersData.wineSugar"
+          :items="filters.wineCategory.values"
           :data="{
             title: 'Категория вина',
             icon: 'Bucket',
           }"
         />
         <SearchSelectBox
-          v-model="isPremium"
-          :items="winesTypes"
+          v-if="filters.wineCountry && filtersData.wineCountry"
+          v-model="filtersData.wineCountry"
+          :items="filters.wineCountry.values"
           :data="{
             title: 'Страна',
             icon: 'Country',
           }"
         />
         <SelectBox
-          v-model="isPremium"
-          :items="winesTypes"
+          v-if="filters.wineType && filtersData.wineType"
+          v-model="filtersData.wineType"
+          :items="filters.wineType.values"
           :data="{
             title: 'Цвет',
             icon: 'Color',
           }"
         />
         <SelectBox
-          v-model="isPremium"
-          :items="winesTypes"
+          v-if="filters.wineSort && filtersData.wineSort"
+          v-model="filtersData.wineSort"
+          :items="filters.wineSort.values"
           :data="{
             title: 'Сорт винограда',
             icon: 'Sort',
           }"
         />
         <SelectBox
-          v-model="isPremium"
-          :items="winesTypes"
+          v-if="filters.wineRegion && filtersData.wineRegion"
+          v-model="filtersData.wineRegion"
+          :items="filters.wineRegion.values"
           :data="{
             title: 'Регион',
             icon: 'Map',
           }"
         />
         <SelectBox
-          v-model="isPremium"
-          :items="winesTypes"
+          v-if="filters.wineSugar && filtersData.wineSugar"
+          v-model="filtersData.wineSugar"
+          :items="filters.wineSugar.values"
           :data="{
             title: 'Сахар',
             icon: 'Sugar',
           }"
         />
         <DiapazoneBox
-          v-model="isPremium"
-          :items="winesTypes"
+          v-model="filtersPriceDiapazone"
           :data="{
             title: 'Стоимость',
             icon: '',
@@ -103,14 +108,14 @@
         <Button
           :filled="true"
           class="filter-box__show"
-          @click="isMobileVisibleFilters = !isMobileVisibleFilters"
+          @click="searchFilters"
         >
           ПОКАЗАТЬ
         </Button>
         <Button
           :outlined="true"
           class="filter-box__reset"
-          @click="isMobileVisibleFilters = !isMobileVisibleFilters"
+          @click="resetFilters"
         >
           <Close class="svg-close-reset" />
           Сбросить фильтры
@@ -138,6 +143,8 @@
 </template>
 
 <script>
+import { api } from '../../assets/js/api'
+
 export default {
   name: 'FilterBox',
   components: {
@@ -159,44 +166,18 @@ export default {
       isMobileVisibleSearch: false,
       searchField: '',
       isPremium: false,
-      winesTypes: [
-        {
-          title: 'Белое',
-          count: 12
-        },
-        {
-          title: 'Красное',
-          count: 12
-        },
-        {
-          title: 'Розовое',
-          count: 12
-        },
-        {
-          title: 'Розовое',
-          count: 12
-        },
-        {
-          title: 'Розовое',
-          count: 12
-        },
-        {
-          title: 'Розовое',
-          count: 12
-        },
-        {
-          title: 'Розовое',
-          count: 12
-        },
-        {
-          title: 'Розовое',
-          count: 12
-        },
-        {
-          title: 'Розовое',
-          count: 12
-        }
-      ]
+      filtersData: {},
+      filters: {},
+      filtersPriceDiapazone: [1, 10000],
+      usedIds: {
+        4975: 'wineCategory',
+        309: 'wineCountry',
+        310: 'wineSort',
+        4973: 'wineRegion',
+        311: 'wineSugar',
+        308: 'wineType'
+      },
+      serversFilters: []
     }
   },
   watch: {
@@ -213,6 +194,46 @@ export default {
       } else {
         document.querySelector('body').style.overflow = 'auto'
       }
+    }
+  },
+  mounted () {
+    api.products.wineProducts(this.$userTradeCenter?.store_id, 412338)
+      .then((data) => {
+        data.data.attributes.forEach((i) => {
+          if (Object.keys(this.usedIds).includes(i.id.toString())) {
+            const key = this.usedIds[i.id]
+            this.$set(this.filtersData, key, [])
+            this.$set(this.filters, key, i)
+            this.serversFilters.push(i)
+          }
+        })
+      })
+      .catch((e) => {
+        console.log(e)
+      })
+  },
+  methods: {
+    resetFilters () {
+      this.isMobileVisibleFilters = false
+    },
+    searchFilters () {
+      const filters = {
+        attributes: [],
+        price_min: Math.min(...this.filtersPriceDiapazone),
+        price_max: Math.max(...this.filtersPriceDiapazone)
+      }
+      Object.values(this.filtersData).forEach((i) => {
+        i.forEach((j) => {
+          if (j) {
+            filters.attributes.push({
+              attribute_id: j.attribute_id,
+              value_id: j.value_id
+            })
+          }
+        })
+      })
+      this.$bus.$emit('searchActivation', filters)
+      this.isMobileVisibleFilters = false
     }
   }
 }

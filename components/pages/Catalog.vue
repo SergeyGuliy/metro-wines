@@ -27,12 +27,6 @@ export default {
     Card: () => import('./Card'),
     PaginatorBox: () => import('./PaginatorBox')
   },
-  props: {
-    filters: {
-      required: true,
-      type: Object
-    }
-  },
   data () {
     return {
       cards: [],
@@ -44,8 +38,6 @@ export default {
     $userTradeCenter: {
       deep: true,
       handler (val) {
-        console.log('val')
-        console.log(val)
         // this.fetchCatalog()
       }
     }
@@ -59,17 +51,22 @@ export default {
     //     console.log(e)
     //   })
     this.fetchCatalog()
+    this.$bus.$on('searchActivation', this.searchActivation)
   },
   methods: {
+    async searchActivation (data) {
+      // console.error('searchActivation')
+      await this.fetchCatalog(data)
+    },
     changePage (page) {
       this.currentPage = page
       this.fetchCatalog()
     },
-    async fetchCatalog () {
+    async fetchCatalog (filters = {}) {
       if (this.$userTradeCenter?.store_id) {
         await api.products.getProduct(this.$userTradeCenter?.store_id, {
           page: this.currentPage,
-          ...this.filters
+          ...filters
         })
           .then((res) => {
             // eslint-disable-next-line camelcase,no-unused-vars

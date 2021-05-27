@@ -109,6 +109,9 @@ input, button, textarea{
     box-shadow: 0px 16px 32px rgba(48, 49, 51, 0.24);
     border-radius: 5px;
     padding: 30px 20px 11px 20px;
+    max-height: 300px;
+    overflow-y: auto;
+    overflow-x: hidden;
     @include FontStyle('Acrom', normal, #000000, 20px, 24px);
   }
   .custom-input-box__outer{
@@ -124,6 +127,26 @@ input, button, textarea{
     margin-right: auto;
   }
   .custom-input-box__arrow{
+  }
+
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 5px;
+  }
+
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #888;
+  }
+
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555;
   }
 }
 

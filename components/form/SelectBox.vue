@@ -14,10 +14,12 @@
         v-for="(item, index) in items"
         :key="index"
         class="select-box__item"
-        :class="{' select-box__item--active active': index === 0}"
+        :class="{' select-box__item--active active': localValue.includes(item)}"
+        @click="toggleItem(item)"
       >
-        <span class="select-box__item-title">{{ item.title }}</span>
-        <span v-if="index !== 0" class="select-box__item-count">{{ item.count }}</span>
+        <span class="select-box__item-title">{{ item.value.toLocaleLowerCase() }}</span>
+        <span v-if="index !== 0" class="select-box__item-count" />
+        <!--        <span v-if="index !== 0" class="select-box__item-count">{{ item.count }}</span>-->
         <Close v-else />
       </div>
     </div>
@@ -47,7 +49,6 @@ export default {
       required: true
     },
     items: {
-      required: true
     },
     data: {
       required: true
@@ -71,6 +72,14 @@ export default {
   methods: {
     hide () {
       this.isOpen = false
+    },
+    toggleItem (item) {
+      if (this.localValue.includes(item)) {
+        const index = this.localValue.findIndex(i => i.value === item.value)
+        this.localValue.splice(index, 1)
+      } else {
+        this.localValue.push(item)
+      }
     }
   }
 }
@@ -86,9 +95,8 @@ export default {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      height: 38px;
       margin-bottom: 9px;
-      padding: 0 10px;
+      padding: 10px;
     }
     .select-box__item:hover{
       background: rgba(229, 229, 229, 0.5);
@@ -102,6 +110,7 @@ export default {
       }
     }
     .select-box__item-title{
+      text-transform: capitalize !important;
       @include FontStyle('Acrom', normal, #000000, 16px, 19px);
     }
     .select-box__item-count{

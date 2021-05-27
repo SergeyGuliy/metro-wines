@@ -36,7 +36,7 @@
       </div>
       <div class="card-modal__add-box">
         <AddBox :wine-data="data" />
-        <Button :filled="true">
+        <Button :filled="true" @click="addToBucket">
           Добавить в корзину
         </Button>
       </div>
@@ -56,11 +56,20 @@ export default {
     Close: () => import('assets/icons/close.svg')
   },
   mixins: [modalMixin],
-  data () {
-    return {}
-  },
-  mounted () {
-    console.log(this.data)
+  methods: {
+    addToBucket () {
+      if (this.$userBucket[this.data.article]) {
+        this.$store.commit('bucket/SET_TO_BUCKET', {
+          wineData: this.data,
+          count: +(this.$userBucket[this.data.article].count + 1)
+        })
+      } else {
+        this.$store.commit('bucket/SET_TO_BUCKET', {
+          wineData: this.data,
+          count: 1
+        })
+      }
+    }
   }
 }
 </script>

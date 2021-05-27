@@ -17,16 +17,17 @@
         :search="true"
       />
       <div
-        v-for="(item, index) in items"
+        v-for="(item, index) in searchedItems"
         :key="index"
         class="search-select-box__item"
-        :class="{' search-select-box__item--active active': index === 0}"
+        :class="{' search-select-box__item--active active': localValue.includes(item)}"
+        @click="toggleItem(item)"
       >
-        <div class="checkbox" :class="{'checkbox--active':index === 0}">
+        <div class="checkbox" :class="{'checkbox--active':localValue.includes(item)}">
           <Ok class="svg-ok" />
         </div>
-        <span class="search-select-box__item-title">{{ item.title }}</span>
-        <span class="search-select-box__item-count">{{ item.count }}</span>
+        <span class="search-select-box__item-title">{{ item.value.toLocaleLowerCase() }}</span>
+        <!--        <span class="search-select-box__item-count">{{ item.count }}</span>-->
       </div>
     </div>
   </div>
@@ -67,6 +68,13 @@ export default {
     }
   },
   computed: {
+    searchedItems () {
+      if (this.inputField) {
+        return this.items.filter(i => i.value.toUpperCase().includes(this.inputField.toUpperCase()))
+      } else {
+        return this.items
+      }
+    },
     localValue: {
       get () {
         return this.value
@@ -79,6 +87,14 @@ export default {
   methods: {
     hide () {
       this.isOpen = false
+    },
+    toggleItem (item) {
+      if (this.localValue.includes(item)) {
+        const index = this.localValue.findIndex(i => i.value === item.value)
+        this.localValue.splice(index, 1)
+      } else {
+        this.localValue.push(item)
+      }
     }
   }
 }
@@ -95,9 +111,8 @@ export default {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      height: 38px;
       margin-bottom: 9px;
-      padding: 0 10px;
+      padding: 10px;
     }
     .input-box{
       height: 38px;
@@ -127,6 +142,7 @@ export default {
       }
     }
     .search-select-box__item-title{
+      text-transform: capitalize;
       margin-right: auto;
       margin-left: 7px;
       @include FontStyle('Acrom', normal, #000000, 16px, 19px);
