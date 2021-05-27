@@ -3,6 +3,7 @@
     <div class="wcb__title">
       {{ blockData.name }}
     </div>
+    <span ref="input" class="wcb-input-sizer">{{ inputVal }}</span>
     <div class="wcb__body">
       <div
         v-for="(wine, index) in blockData.items"
@@ -13,29 +14,26 @@
           <div class="wcb__name">
             {{ wine.name }}
           </div>
-          <div class="wcb__description">
-            {{ wine.description }}
-          </div>
+          <!--          <div class="wcb__description">-->
+          <!--            {{ wine.description }}-->
+          <!--          </div>-->
         </div>
         <div class="wcb__price-box">
           <input
             :ref="`cup-${index}`"
-            v-model="wine.price.cup"
             class="wcb__input-cup"
             type="number"
             placeholder="бокал"
-            @input="changeMaxWidth(`cup-${index}`, `h-cup-${index}`, $event.target.value)"
+            @input="changeMaxWidth(`cup-${index}`, $event.target.value)"
           >
-          <!--          <span :ref="`h-cup-${index}`" />-->
           <span>/</span>
           <input
             :ref="`bottle-${index}`"
             class="wcb__input-bottle"
             type="number"
             placeholder="бутылка"
-            @input="changeMaxWidth(`bottle-${index}`, `h-bottle-${index}`, $event.target.value)"
+            @input="changeMaxWidth(`bottle-${index}`, $event.target.value)"
           >
-          <!--          <span :ref="`h-bottle-${index}`">{{ wine.price.bottle }}</span>-->
           <span>₽</span>
         </div>
       </div>
@@ -53,17 +51,18 @@ export default {
     }
   },
   data () {
-    return {}
+    return {
+      inputVal: null
+    }
   },
   methods: {
-    changeMaxWidth (ref, hiddenRef, value) {
+    changeMaxWidth (ref, value) {
       if (value.length) {
-        const canvas = document.createElement('canvas')
-        const context = canvas.getContext('2d')
-        context.font = '25px Acrom bold'
-        context.fontWeight = 'bold'
-        const width = context.measureText(value).width
-        this.$refs[ref][0].style.maxWidth = width + 'px'
+        this.inputVal = value
+        this.$nextTick(() => {
+          const width = this.$refs.input.clientWidth
+          this.$refs[ref][0].style.maxWidth = (width + 4) + 'px'
+        })
       } else if (ref.includes('cup')) {
         this.$refs[ref][0].style.maxWidth = '57px'
       } else {
@@ -79,6 +78,12 @@ export default {
 
   .wcb {
     margin-bottom: 70px;
+    .wcb-input-sizer{
+      display: inline-block;
+      position: fixed;
+      left: - 300vw;
+      @include FontStyle('Acrom', bold, #FFFFFF, 25px, 30px);
+    }
     .wcb__title{
       @include FontStyle('Acrom', bold, #FFFFFF, 30px, 36px);
       text-transform: uppercase;
