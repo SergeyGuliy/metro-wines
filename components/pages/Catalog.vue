@@ -1,6 +1,6 @@
 <template>
   <div v-if="cards.length" class="catalog">
-    <div class="box-title">
+    <div id="wineCard" class="box-title">
       ВИННАЯ КАРТА
     </div>
     <div class="catalog__cards-box">
@@ -57,8 +57,14 @@ export default {
     },
     search (data) {
       api.products.search(this.$userTradeCenter?.store_id, data)
-        .then((data) => {
-          console.log(data)
+        .then((res) => {
+          // eslint-disable-next-line camelcase,no-unused-vars
+          const { last_page, current_page, data } = res.data
+          this.cards = data
+          // eslint-disable-next-line camelcase
+          this.currentPage = current_page
+          // eslint-disable-next-line camelcase
+          this.lastPage = last_page
         })
         .catch((e) => {
           console.log(e)

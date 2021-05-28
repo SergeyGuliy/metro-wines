@@ -41,7 +41,7 @@ export const api = {
     },
     search: async (storeId, name) => (await _axios.get(`${storeId}/search`, {
       params: {
-        name,
+        q: name,
         category_id: [412338],
         paginate: 12
       }

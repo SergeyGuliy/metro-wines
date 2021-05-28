@@ -195,9 +195,11 @@ export default {
       }
     }
   },
-  mounted () {
-    api.products.wineProducts(this.$userTradeCenter?.store_id, 412338)
+  async mounted () {
+    console.clear()
+    await api.products.wineProducts(this.$userTradeCenter?.store_id, 412338)
       .then((data) => {
+        console.log(data.data)
         data.data.attributes.forEach((i) => {
           if (Object.keys(this.usedIds).includes(i.id.toString())) {
             const key = this.usedIds[i.id]
@@ -209,28 +211,51 @@ export default {
       .catch((e) => {
         console.log(e)
       })
+    await api.products.categories(this.$userTradeCenter?.store_id)
+      .then((data) => {
+        console.log(data.data)
+      })
+      .catch((e) => {
+        console.log(e)
+      })
   },
   methods: {
     resetFilters () {
       this.isMobileVisibleFilters = false
     },
     useFilters () {
+      const attributes = {}
       const filters = {
-        attributes: [],
         price_min: Math.min(...this.filtersPriceDiapazone),
         price_max: Math.max(...this.filtersPriceDiapazone)
       }
       Object.values(this.filtersData).forEach((i) => {
         i.forEach((j) => {
           if (j) {
-            filters.attributes.push({
-              attribute_id: j.attribute_id,
-              value_id: j.value_id
-            })
+            if (attributes[j.attribute_id]) {
+              attributes[j.attribute_id].values_id.push(j.value_id)
+            } else {
+              attributes[j.attribute_id] = {
+                attribute_id: j.attribute_id,
+                values_id: [j.value_id]
+              }
+            }
           }
         })
       })
-      this.$bus.$emit('useFilters', filters)
+      const stringedAtributes = {}
+      let key = 0
+      Object.values(attributes).forEach((i) => {
+        stringedAtributes[`attributes[${key}][attribute_id]`] = i.attribute_id
+        i.values_id.forEach((j, index) => {
+          stringedAtributes[`attributes[${key}][values_id][${index}]`] = j
+        })
+        key = key + 1
+      })
+      this.$bus.$emit('useFilters', {
+        ...filters,
+        ...stringedAtributes
+      })
       this.isMobileVisibleFilters = false
     },
     search () {

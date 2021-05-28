@@ -24,46 +24,46 @@
         <span>Обратная связь</span>
       </a>
     </div>
-    <div class="footer-col footer-col__3">
-      <div class="footer__title mb-0">
-        Подпишитесь
-      </div>
-      <div class="footer__title">
-        на лучшие предложения
-      </div>
-      <InputBox v-model="email" class="footer-col__input" placeholder="E-mail">
-        <template #append>
-          <Button :outlined="true" @click="openFeedBackModal">
-            Подписаться
-          </Button>
-        </template>
-      </InputBox>
-      <div class="footer__checkbox noselect" @click="isCheked = !isCheked">
-        <div class="footer__checkbox-box" :class="{'footer__checkbox-box--active': isCheked}">
-          <Ok />
-        </div>
-        <div class="footer__checkbox-text">
-          Я согласен на обработку персональных данных, а также с условиями подписки
-        </div>
-      </div>
-    </div>
+    <!--    <div class="footer-col footer-col__3">-->
+    <!--      <div class="footer__title mb-0">-->
+    <!--        Подпишитесь-->
+    <!--      </div>-->
+    <!--      <div class="footer__title">-->
+    <!--        на лучшие предложения-->
+    <!--      </div>-->
+    <!--      <InputBox v-model="email" class="footer-col__input" placeholder="E-mail">-->
+    <!--        <template #append>-->
+    <!--          <Button :outlined="true" @click="openFeedBackModal">-->
+    <!--            Подписаться-->
+    <!--          </Button>-->
+    <!--        </template>-->
+    <!--      </InputBox>-->
+    <!--      <div class="footer__checkbox noselect" @click="isCheked = !isCheked">-->
+    <!--        <div class="footer__checkbox-box" :class="{'footer__checkbox-box&#45;&#45;active': isCheked}">-->
+    <!--          <Ok />-->
+    <!--        </div>-->
+    <!--        <div class="footer__checkbox-text">-->
+    <!--          Я согласен на обработку персональных данных, а также с условиями подписки-->
+    <!--        </div>-->
+    <!--      </div>-->
+    <!--    </div>-->
     <div class="footer-col footer-col__4">
       <div class="footer__link-box">
-        <nuxt-link to="" class="footer__link">
+        <a href="https://www.metro-cc.ru/documents/konfidencialnost?_ga=2.153131006.771454823.1622114669-1655047550.1621870423" class="footer__link">
           Конфиденциальность
-        </nuxt-link>
-        <nuxt-link to="" class="footer__link">
+        </a>
+        <a href="https://www.metro-cc.ru/documents/pravovaya-informaciya?_ga=2.186112623.771454823.1622114669-1655047550.1621870423" class="footer__link">
           Правовая информация
-        </nuxt-link>
-        <nuxt-link to="" class="footer__link">
+        </a>
+        <a href="https://www.metro-cc.ru/documents/usloviya-soglasheniya?_ga=2.186112623.771454823.1622114669-1655047550.1621870423" class="footer__link">
           Условия соглашения
-        </nuxt-link>
-        <nuxt-link to="" class="footer__link">
+        </a>
+        <a href="https://msk.metro-cc.ru/delivery" class="footer__link">
           Условия доставки
-        </nuxt-link>
-        <nuxt-link to="" class="footer__link">
+        </a>
+        <a href="https://www.metro-cc.ru/sitemap?_ga=2.152098431.771454823.1622114669-1655047550.1621870423" class="footer__link">
           Карта сайта
-        </nuxt-link>
+        </a>
       </div>
       <div class="footer__copyrights">
         © METRO Cash and Carry Russia, 2021
@@ -77,10 +77,10 @@ export default {
   name: 'Footer',
   components: {
     Phone: () => import('assets/icons/phone.svg'),
-    Email: () => import('assets/icons/email.svg'),
-    Ok: () => import('assets/icons/ok.svg'),
-    InputBox: () => import('../form/InputBox'),
-    Button: () => import('../form/Button')
+    Email: () => import('assets/icons/email.svg')
+    // Ok: () => import('assets/icons/ok.svg'),
+    // InputBox: () => import('../form/InputBox'),
+    // Button: () => import('../form/Button')
   },
   data () {
     return {

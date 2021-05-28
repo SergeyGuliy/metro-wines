@@ -9,6 +9,7 @@
           :filled="true"
           :bold="true"
           :uppercase="true"
+          @click="scrollToCard"
         >
           перейтик выбору
         </Button>
@@ -108,6 +109,15 @@ export default {
     goToWineCard () {
       this.$router.push({ name: 'wine-cart' })
       this.close()
+    },
+    scrollToCard () {
+      this.close()
+      try {
+        document.getElementById('wineCard').scrollIntoView({
+          block: 'start',
+          behavior: 'smooth'
+        })
+      } catch (e) {}
     }
   }
 }

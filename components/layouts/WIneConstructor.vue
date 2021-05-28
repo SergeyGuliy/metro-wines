@@ -132,7 +132,7 @@ export default {
   },
   data () {
     return {
-      activeShablone: 3,
+      activeShablone: 1,
       shablones: [1, 2, 3, 4],
       pageSizeBig: {
         clientWidth: 1382,
@@ -272,20 +272,59 @@ export default {
       return this.activeShablone > 2 ? this.pageSizeSmall : this.pageSizeBig
     },
     items () {
-      const allWInes = Object.values(this.$userBucket).map(i => ({
-        name: i.wineData.name,
-        description: i.wineData.description,
-        price: {
-          bottle: '',
-          cup: ''
+      const winesAttributes = Object.values(this.$userBucket).map(i => i.wineData.attributes.map(i => i.id === 308 ? i : false).filter(i => !!i))
+      // winesAttributes.map((i) => {
+      //   console.log(i)
+      // })
+      // eslint-disable-next-line no-unused-vars
+      const winesTypes = {}
+      winesAttributes.forEach((i) => {
+        if (i.length) {
+          if (!winesTypes[i[0].value_id]) {
+            winesTypes[i[0].value_id] = {
+              name: `${i[0].text} вино`,
+              items: []
+            }
+          }
         }
-      }))
-      return [
-        {
-          name: 'Белые вина',
-          items: allWInes
+      })
+
+      // 308
+      Object.values(this.$userBucket).forEach((i) => {
+        const type = i.wineData.attributes.find(i => i.id === 308)
+        if (type) {
+          winesTypes[type.value_id].items.push({
+            name: i.wineData.name,
+            description: i.wineData.description,
+            price: {
+              bottle: '',
+              cup: ''
+            }
+          })
+        } else if (winesTypes.other) {
+          winesTypes.other = {
+            name: 'Другие вина',
+            items: [{
+              name: i.wineData.name,
+              description: i.wineData.description,
+              price: {
+                bottle: '',
+                cup: ''
+              }
+            }]
+          }
+        } else {
+          winesTypes.other.items.push({
+            name: i.wineData.name,
+            description: i.wineData.description,
+            price: {
+              bottle: '',
+              cup: ''
+            }
+          })
         }
-      ]
+      })
+      return Object.values(winesTypes)
     }
   },
   watch: {
@@ -300,7 +339,6 @@ export default {
     window.addEventListener('resize', () => {
       this.doResize(null, this.currentPageSize)
     })
-    console.clear()
     console.log(this.items)
   },
   beforeDestroy () {
