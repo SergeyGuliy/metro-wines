@@ -196,10 +196,8 @@ export default {
     }
   },
   async mounted () {
-    console.clear()
     await api.products.wineProducts(this.$userTradeCenter?.store_id, 412338)
       .then((data) => {
-        console.log(data.data)
         data.data.attributes.forEach((i) => {
           if (Object.keys(this.usedIds).includes(i.id.toString())) {
             const key = this.usedIds[i.id]
@@ -207,13 +205,6 @@ export default {
             this.$set(this.filters, key, i)
           }
         })
-      })
-      .catch((e) => {
-        console.log(e)
-      })
-    await api.products.categories(this.$userTradeCenter?.store_id)
-      .then((data) => {
-        console.log(data.data)
       })
       .catch((e) => {
         console.log(e)

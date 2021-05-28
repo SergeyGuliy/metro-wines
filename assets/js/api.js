@@ -29,7 +29,6 @@ export const api = {
     deleteItem: async (storeId, bucketData) => (await _axios.delete(`${storeId}/eshop/basket`, bucketData)).data
   },
   products: {
-    getProduct1: async storeId => (await _axios.get(`${storeId}/shoppinglists`)).data,
     getProduct: async (storeId, query) => {
       return (await _axios.get(`${storeId}/products`, {
         params: {
@@ -39,10 +38,25 @@ export const api = {
         }
       })).data
     },
+    getProductById: async (storeId, productId) => {
+      return (await _axios.get(`${storeId}/products/${productId}`, {
+        params: {
+          category_id: [412338],
+          paginate: 12
+        }
+      })).data
+    },
     search: async (storeId, name) => (await _axios.get(`${storeId}/search`, {
       params: {
         q: name,
-        category_id: [412338],
+        category_id: 412338,
+        paginate: 12
+      }
+    })).data,
+    search2: async (storeId, name) => (await _axios.get(`${storeId}/suggestions`, {
+      params: {
+        query: name,
+        category_id: 412338,
         paginate: 12
       }
     })).data,

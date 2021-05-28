@@ -55,20 +55,42 @@ export default {
     async useFilters (data) {
       await this.fetchCatalog(data)
     },
-    search (data) {
-      api.products.search(this.$userTradeCenter?.store_id, data)
+    async search (data) {
+      await api.products.search(this.$userTradeCenter?.store_id, data)
         .then((res) => {
+          console.log(res.data.products.map(i => i.id))
           // eslint-disable-next-line camelcase,no-unused-vars
-          const { last_page, current_page, data } = res.data
-          this.cards = data
-          // eslint-disable-next-line camelcase
-          this.currentPage = current_page
-          // eslint-disable-next-line camelcase
-          this.lastPage = last_page
+          // const { page, products, total_pages } = res.data
+          // this.cards = []
+          // // eslint-disable-next-line camelcase
+          // this.currentPage = page
+          // // eslint-disable-next-line camelcase
+          // this.lastPage = +total_pages
+          const promices = []
+          res.data.products.map(i => i.id).forEach((i) => {
+            console.log(i)
+            promices.push(
+              api.products.getProductById(this.$userTradeCenter?.store_id, i)
+            )
+          })
+          Promise.all(promices)
+            .then((data) => {
+              console.log(data)
+            })
+            .catch((e) => {
+              console.log(e)
+            })
         })
         .catch((e) => {
           console.log(e)
         })
+      // await api.products.search2(this.$userTradeCenter?.store_id, data)
+      //   .then((res) => {
+      //     console.log(res.data)
+      //   })
+      //   .catch((e) => {
+      //     console.log(e)
+      //   })
     },
     changePage (page) {
       this.currentPage = page
