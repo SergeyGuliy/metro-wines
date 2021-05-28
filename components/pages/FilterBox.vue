@@ -5,7 +5,7 @@
     </div>
     <div class="filter-box__row">
       <InputBox v-model="searchField" :depresed="true" placeholder="Поиск по названию" class="filter-box__cubic" :search="true" />
-      <Button :bold="true" class="filter-box__cubic" :depresed="true">
+      <Button :bold="true" class="filter-box__cubic" :depresed="true" @click="search">
         ИСКАТЬ
       </Button>
     </div>
@@ -108,7 +108,7 @@
         <Button
           :filled="true"
           class="filter-box__show"
-          @click="searchFilters"
+          @click="useFilters"
         >
           ПОКАЗАТЬ
         </Button>
@@ -133,7 +133,7 @@
       <div class="filter-box__filters">
         <div class="mobile-search-box">
           <input type="text" class="mobile-search-box__input" placeholder="Поиск по названию">
-          <button class="mobile-search-box__btn">
+          <button class="mobile-search-box__btn" @click="search">
             <Search3 />
           </button>
         </div>
@@ -176,8 +176,7 @@ export default {
         4973: 'wineRegion',
         311: 'wineSugar',
         308: 'wineType'
-      },
-      serversFilters: []
+      }
     }
   },
   watch: {
@@ -204,7 +203,6 @@ export default {
             const key = this.usedIds[i.id]
             this.$set(this.filtersData, key, [])
             this.$set(this.filters, key, i)
-            this.serversFilters.push(i)
           }
         })
       })
@@ -216,7 +214,7 @@ export default {
     resetFilters () {
       this.isMobileVisibleFilters = false
     },
-    searchFilters () {
+    useFilters () {
       const filters = {
         attributes: [],
         price_min: Math.min(...this.filtersPriceDiapazone),
@@ -232,8 +230,13 @@ export default {
           }
         })
       })
-      this.$bus.$emit('searchActivation', filters)
+      this.$bus.$emit('useFilters', filters)
       this.isMobileVisibleFilters = false
+    },
+    search () {
+      this.$bus.$emit('search', this.searchField)
+      this.isMobileVisibleSearch = false
+      this.searchField = ''
     }
   }
 }
@@ -259,6 +262,9 @@ export default {
       filter: drop-shadow(0px 16px 32px rgba(48, 49, 51, 0.24));
       .button__text{
         font-weight: bold;
+      }
+      input:focus{
+        border: none;
       }
     }
     .filter-box__cubic{

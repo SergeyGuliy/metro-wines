@@ -3,7 +3,7 @@
     <Hero :retail="true" />
     <SubHero :sub-hero-items="subHeroItems" />
     <div class="page-main__container">
-      <div class="container">
+      <div v-if="$userTradeCenter" class="container">
         <FilterBox />
         <Catalog />
       </div>
@@ -38,22 +38,12 @@ export default {
     }
   },
   async mounted () {
+    console.clear()
     await this.$loadGeoData()
     await this.$fetchBucket()
     await this.$selectUserAge()
     await this.$selectUserType()
-  },
-  methods: {
-    openInitModals () {
-      this.$openModal('Is18YearsOld')
-        .then(() => this.$openModal('WineOwner'))
-        .then((data) => {
-          console.log(data)
-        })
-        .catch((e) => {
-          console.log(e)
-        })
-    }
+    this.$routeMiddleWare()
   }
 }
 </script>

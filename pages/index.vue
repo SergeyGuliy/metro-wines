@@ -2,11 +2,10 @@
   <div class="page-main">
     <Hero />
     <SubHero :sub-hero-items="subHeroItems" />
-    <!--    <pre>{{ $tradeCenters }}</pre>-->
-    <div class="page-main__container">
+    <div v-if="$userTradeCenter" class="page-main__container">
       <div class="container">
-        <FilterBox v-if="$userTradeCenter" />
-        <Catalog v-if="$userTradeCenter" />
+        <FilterBox />
+        <Catalog />
       </div>
     </div>
   </div>
@@ -43,22 +42,12 @@ export default {
     }
   },
   async mounted () {
+    console.clear()
     await this.$loadGeoData()
     await this.$fetchBucket()
     await this.$selectUserAge()
     await this.$selectUserType()
-  },
-  methods: {
-    openInitModals () {
-      this.$openModal('Is18YearsOld')
-        .then(() => this.$openModal('WineOwner'))
-        .then((data) => {
-          console.log(data)
-        })
-        .catch((e) => {
-          console.log(e)
-        })
-    }
+    this.$routeMiddleWare()
   }
 }
 </script>

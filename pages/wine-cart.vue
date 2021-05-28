@@ -4,7 +4,7 @@
     <div class="wine-cart-main__container">
       <div class="container">
         <div class="wine-cart-main__title">
-          В вашей винной карте {{Object.keys($userBucket).length}} вин
+          В вашей винной карте {{ Object.keys($userBucket).length }} вин
         </div>
         <WineCartList />
         <div class="wine-cart-main__actions">
@@ -35,26 +35,14 @@ export default {
     WineCartList: () => import('../components/layouts/WineCartList'),
     WIneConstructor: () => import('../components/layouts/WIneConstructor'),
     Button: () => import('../components/form/Button')
-    // FilterBox: () => import('../components/pages/FilterBox'),
-    // Catalog: () => import('../components/pages/Catalog')
   },
   async mounted () {
+    console.clear()
     await this.$loadGeoData()
     await this.$fetchBucket()
     await this.$selectUserAge()
     await this.$selectUserType()
-  },
-  methods: {
-    openInitModals () {
-      this.$openModal('Is18YearsOld')
-        .then(() => this.$openModal('WineOwner'))
-        .then((data) => {
-          console.log(data)
-        })
-        .catch((e) => {
-          console.log(e)
-        })
-    }
+    this.$routeMiddleWare()
   }
 }
 </script>

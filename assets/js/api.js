@@ -39,6 +39,13 @@ export const api = {
         }
       })).data
     },
+    search: async (storeId, name) => (await _axios.get(`${storeId}/search`, {
+      params: {
+        name,
+        category_id: [412338],
+        paginate: 12
+      }
+    })).data,
     categories: async storeId => (await _axios.get(`${storeId}/categories/tree`)).data,
     wineProducts: async (storeId, categoryId) => (await _axios.get(`${storeId}/categories/${categoryId}`)).data
   },

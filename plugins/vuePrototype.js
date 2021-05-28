@@ -79,6 +79,17 @@ Vue.mixin({
         window.addEventListener('modalClose', callback)
       })
     },
+    $routeMiddleWare () {
+      if (this.$userType === 'restoraunt') {
+        if (!['retail', 'wine-cart'].includes(this.$route.name)) {
+          this.$router.push({ name: 'retail' })
+        }
+      } else if (this.$userType === 'self') {
+        if (['retail', 'wine-cart'].includes(this.$route.name)) {
+          this.$router.push({ name: 'index' })
+        }
+      }
+    },
     async $selectUserAge () {
       const is18 = localStorage.getItem('is18')
       if (!is18) {

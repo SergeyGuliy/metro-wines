@@ -43,20 +43,26 @@ export default {
     }
   },
   mounted () {
-    // api.products.categories(this.$userTradeCenter?.store_id)
-    //   .then((data) => {
-    //     console.log(data)
-    //   })
-    //   .catch((e) => {
-    //     console.log(e)
-    //   })
     this.fetchCatalog()
-    this.$bus.$on('searchActivation', this.searchActivation)
+    this.$bus.$on('useFilters', this.useFilters)
+    this.$bus.$on('search', this.search)
+  },
+  beforeDestroy () {
+    this.$bus.$off('useFilters', this.useFilters)
+    this.$bus.$off('search', this.search)
   },
   methods: {
-    async searchActivation (data) {
-      // console.error('searchActivation')
+    async useFilters (data) {
       await this.fetchCatalog(data)
+    },
+    search (data) {
+      api.products.search(this.$userTradeCenter?.store_id, data)
+        .then((data) => {
+          console.log(data)
+        })
+        .catch((e) => {
+          console.log(e)
+        })
     },
     changePage (page) {
       this.currentPage = page
