@@ -7,7 +7,7 @@ const originProd = 'https://api.metro-cc.ru/api/v1/'
 const appKey = '5C63A1CB1E8954499E3BB93939B7B/'
 
 const config = {
-  baseURL: `${originProd}${appKey}`
+  baseURL: `${originDev}${appKey}`
 }
 
 const _axios = axios.create(config)
