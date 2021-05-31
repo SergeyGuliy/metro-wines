@@ -57,6 +57,7 @@ export default {
   },
   async mounted () {
     console.clear()
+    await this.$fetchTradecenters()
     await this.$loadGeoData()
     await this.$fetchBucket()
     await this.$selectUserAge()

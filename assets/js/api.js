@@ -16,18 +16,18 @@ export const api = {
   tradecenters: {
     getAll: async () => (await _axios.get('tradecenters')).data
   },
-  bucket: {
-    getMyBasket: async (storeId, userHash) => {
-      return (await _axios.get(`${storeId}/eshop/basket`, {
-        params: {
-          user_hash: userHash
-        }
-      })).data
-    },
-    changeItemCount: async storeId => (await _axios.put(`${storeId}/eshop/basket`)).data,
-    addItem: async (storeId, bucketData) => (await _axios.post(`${storeId}/eshop/basket`, bucketData)).data,
-    deleteItem: async (storeId, bucketData) => (await _axios.delete(`${storeId}/eshop/basket`, bucketData)).data
-  },
+  // bucket: {
+  //   getMyBasket: async (storeId, userHash) => {
+  //     return (await _axios.get(`${storeId}/eshop/basket`, {
+  //       params: {
+  //         user_hash: userHash
+  //       }
+  //     })).data
+  //   },
+  //   changeItemCount: async storeId => (await _axios.put(`${storeId}/eshop/basket`)).data,
+  //   addItem: async (storeId, bucketData) => (await _axios.post(`${storeId}/eshop/basket`, bucketData)).data,
+  //   deleteItem: async (storeId, bucketData) => (await _axios.delete(`${storeId}/eshop/basket`, bucketData)).data
+  // },
   products: {
     getProduct: async (storeId, query) => {
       return (await _axios.get(`${storeId}/products`, {

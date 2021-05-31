@@ -61,6 +61,23 @@ Vue.mixin({
   },
   methods: {
     ...mapActions('modals', ['setModal']),
+    async $fetchTradecenters () {
+      await api.tradecenters.getAll().then((res) => {
+        this.$store.commit('SET_TRADE_CENTERS', res.data)
+      }).catch((e) => {
+        console.log(e)
+      })
+      // eslint-disable-next-line no-empty
+      if (this.$cookies.get('userTradeCenterId')) {
+        try {
+          this.$store.commit('SET_USER_TRADE_CENTER', this.$store.state.tradeCenters.find((center) => {
+            return +center.store_id === +this.$cookies.get('userTradeCenterId')
+          }))
+        } catch (e) {
+          this.$cookies.remove('userTradeCenterId')
+        }
+      }
+    },
     $openProductModal (item) {
       console.log(item)
       this.$openModal('WineCard', item)
