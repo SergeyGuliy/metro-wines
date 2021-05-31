@@ -29,7 +29,7 @@
             @input="changeMaxWidth(`cup-${index}`, $event.target.value)"
           >
           <span style="display: none" class="print-text">
-            <span style="white-space: nowrap" v-if="wine.price.cup">{{ wine.price.cup.replace(/\B(?=(\d{3})+(?!\d))/g, " ") }}</span>
+            <span v-if="wine.price.cup" style="white-space: nowrap">{{ wine.price.cup.replace(/\B(?=(\d{3})+(?!\d))/g, " ") }}</span>
             <span v-else class="place">бокал</span>
           </span>
           <span>/</span>
@@ -42,7 +42,7 @@
             @input="changeMaxWidth(`bottle-${index}`, $event.target.value)"
           >
           <span style="display: none" class="print-text">
-            <span style="white-space: nowrap" v-if="wine.price.bottle">{{ wine.price.bottle.replace(/\B(?=(\d{3})+(?!\d))/g, " ") }}</span>
+            <span v-if="wine.price.bottle" style="white-space: nowrap">{{ wine.price.bottle.replace(/\B(?=(\d{3})+(?!\d))/g, " ") }}</span>
             <span v-else class="place">бутылка</span>
           </span>
           <span>₽</span>
