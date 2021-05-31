@@ -3,6 +3,7 @@ import { mapActions } from 'vuex'
 // eslint-disable-next-line no-unused-vars
 import { api } from '../assets/js/api'
 import { initGeolocation } from '../assets/js/initGeolocation'
+import { defender } from '../components/layouts/components/defender'
 
 Vue.mixin({
   data () {
@@ -111,6 +112,7 @@ Vue.mixin({
           this.$router.push({ name: 'index' })
         }
       }
+      defender()
     },
     async $selectUserAge () {
       const is18 = localStorage.getItem('is18')

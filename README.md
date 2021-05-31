@@ -1,20 +1,13 @@
-# wines1
-
-## Build Setup
-
-```bash
-# install dependencies
-$ npm install
-
-# serve with hot reload at localhost:3000
-$ npm run dev
-
-# build for production and launch server
-$ npm run build
-$ npm run start
-
-# generate static project
-$ npm run generate
+### Deploying commands:
 ```
+sudo docker build -t sergeyguliy/wine-metro:v2 .
+```
+```
+sudo docker push sergeyguliy/wine-metro:v2
+```
+```
+```
+```
+sudo docker run -d -p 10.207.238.170:80:3000 sergeyguliy/wine-metro:v2
 
-For detailed explanation on how things work, check out [Nuxt.js docs](https://nuxtjs.org).
+sudo docker build -t sergeyguliy/wine-metro:v3 . && sudo docker push sergeyguliy/wine-metro:v3
