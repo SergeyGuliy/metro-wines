@@ -15,7 +15,7 @@ export default {
     // }
   },
   head: {
-    title: 'wines',
+    title: 'METRO wines',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -31,9 +31,9 @@ export default {
     '@/node_modules/nouislider/distribute/nouislider.css',
     '@/assets/styles/index.scss'
   ],
-  http: {
-    proxy: true // Can be also an object with default options
-  },
+  // http: {
+  //   proxy: true // Can be also an object with default options
+  // },
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
     { src: '~plugins/html2canvas.js', ssr: false },
@@ -63,10 +63,10 @@ export default {
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
-  axios: {
-    proxy: true,
-    proxyHeaders: false
-  },
+  // axios: {
+  //   proxy: true,
+  //   proxyHeaders: false
+  // },
 
   // PWA module configuration: https://go.nuxtjs.dev/pwa
   pwa: {
@@ -74,9 +74,9 @@ export default {
       lang: 'en'
     }
   },
-  proxy: {
-    '/api/': { target: 'https://api.metro-cc.ru', pathRewrite: { '^/api/': '' }, changeOrigin: true }
-  },
+  // proxy: {
+  //   '/api/': { target: 'https://api.metro-cc.ru', pathRewrite: { '^/api/': '' }, changeOrigin: true }
+  // },
   // ''
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
