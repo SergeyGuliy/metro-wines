@@ -21,9 +21,9 @@
         <Button :filled="true" :uppercase="true" :bold="true" @click="close(true)">
           Мне исполнилось 18 лет
         </Button>
-        <Button :filled="true" :uppercase="true" :bold="true" @click="close()">
-          Мне меньше 18 лет
-        </Button>
+<!--        <Button :filled="true" :uppercase="true" :bold="true" @click="close()">-->
+<!--          Мне меньше 18 лет-->
+<!--        </Button>-->
       </div>
     </div>
   </div>

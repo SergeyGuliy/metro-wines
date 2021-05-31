@@ -101,7 +101,7 @@
             icon: '',
           }"
         />
-        <RadioBox v-model="isPremium" />
+<!--        <RadioBox v-model="isPremium" />-->
       </div>
 
       <div class="filter-box__filters-actions">
@@ -150,7 +150,7 @@ export default {
   components: {
     InputBox: () => import('../form/InputBox'),
     Button: () => import('../form/Button'),
-    RadioBox: () => import('../form/RadioBox'),
+    // RadioBox: () => import('../form/RadioBox'),
     SelectBox: () => import('../form/SelectBox'),
     SearchSelectBox: () => import('../form/SearchSelectBox'),
     DiapazoneBox: () => import('../form/DiapazoneBox'),

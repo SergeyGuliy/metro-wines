@@ -130,7 +130,7 @@ export default {
     },
     selectTradecenter (tradecenter) {
       this.tradeCenterSelected = tradecenter
-      this.tab = 2
+      this.close()
     },
     cleanCity () {
       this.tab = 3

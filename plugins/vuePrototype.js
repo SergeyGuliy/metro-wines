@@ -60,6 +60,28 @@ Vue.mixin({
   },
   methods: {
     ...mapActions('modals', ['setModal']),
+    $openProductModal (item) {
+      console.log(item)
+      this.$openModal('WineCard', item)
+        .then((data) => {
+          console.log(data)
+        })
+        .catch((e) => {
+          console.log(e)
+        })
+    },
+    $scrollToCard () {
+      try {
+        this.close()
+      } catch (e) {}
+      try {
+        document.getElementById('wineCard').scrollIntoView({
+          block: 'start',
+          behavior: 'smooth'
+        })
+      } catch (e) {}
+    },
+
     $openModal (modalName, data = {}) {
       this.$store.dispatch('modals/setModal', {
         component: modalName,

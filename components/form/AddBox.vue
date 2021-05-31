@@ -1,10 +1,10 @@
 <template>
   <div class="add-box">
-    <button class="add-box__minus" @click="decrement">
+    <button class="add-box__minus" @click.stop="decrement">
       -
     </button>
     <span class="add-box__count">{{ count }} шт</span>
-    <button class="add-box__plus" @click="increment">
+    <button class="add-box__plus" @click.stop="increment">
       +
     </button>
   </div>

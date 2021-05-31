@@ -2,7 +2,7 @@
   <div class="header">
     <div class="container header__container">
       <div class="header__info-box">
-        <LogoMetro class="svg-logo-metro" />
+        <LogoMetro class="svg-logo-metro" @click="routerGo" />
         <LogoMetroSmall class="svg-logo-metro-small" />
         <Geolocation class="geo-big" />
       </div>
@@ -41,6 +41,13 @@ export default {
     }
   },
   methods: {
+    routerGo () {
+      if (this.$userType === 'restoraunt') {
+        this.$router.push({ name: 'retail' })
+      } else {
+        this.$router.push({ name: 'retail' })
+      }
+    },
     openBucket () {
       this.$openModal(this.$userType === 'self' ? 'BucketUser' : 'BucketRestoraunt', { activator: '#bucket-activator' })
         .then((data) => {
@@ -76,6 +83,7 @@ export default {
       display: flex;
       align-items: center;
       .svg-logo-metro{
+        cursor: pointer;
         margin-right: 60px;
       }
     }

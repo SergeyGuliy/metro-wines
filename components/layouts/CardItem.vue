@@ -5,9 +5,9 @@
       <h5 class="card-item__title">
         {{ wineData.wineData.name }}
       </h5>
-      <div class="card-item__description">
-        {{ wineData.wineData.description }}
-      </div>
+<!--      <div class="card-item__description">-->
+<!--        {{ wineData.wineData.description }}-->
+<!--      </div>-->
     </div>
     <div class="card-item__add-box">
       <div class="card-item__price-box">
@@ -82,6 +82,7 @@ export default {
     .card-item__title{
       margin-bottom: 14px;
       align-self: flex-start;
+      text-align: center;
       @include FontStyle('TimesNewRoman', normal, #710000, 25px, 29px);
     }
     .card-item__description{

@@ -1,7 +1,7 @@
 <template>
   <div class="layout-default" :class="{'overflow-hidden': component}">
     <Header />
-    <Chat />
+    <!--    <Chat />-->
     <div class="layout__inner">
       <Nuxt />
     </div>
@@ -20,7 +20,7 @@ export default {
   components: {
     Header: () => import('../components/layouts/Header'),
     Footer: () => import('../components/layouts/Footer'),
-    Chat: () => import('../components/layouts/Chat'),
+    // Chat: () => import('../components/layouts/Chat'),
     ModalController: () => import('../components/layouts/ModalController')
   },
   computed: {

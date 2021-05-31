@@ -23,5 +23,11 @@ export const mutations = {
       })
     }
     localStorage.setItem('bucket', JSON.stringify(state.bucket))
+  },
+  DELETE_FROM_BUCKET (state, articleId) {
+    if (state.bucket[articleId]) {
+      Vue.delete(state.bucket, articleId)
+    }
+    localStorage.setItem('bucket', JSON.stringify(state.bucket))
   }
 }

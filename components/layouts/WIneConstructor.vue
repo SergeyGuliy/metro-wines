@@ -142,129 +142,6 @@ export default {
         clientWidth: 693,
         clientHeight: 1957
       }
-      // items: [
-      //   {
-      //     name: 'Игристые вина',
-      //     items: [
-      //       {
-      //         name: 'Le Rime, Castello Banfi',
-      //         description: '2019, Италия, Тоскана',
-      //         price: {
-      //           bottle: '',
-      //           cup: ''
-      //         }
-      //       },
-      //       {
-      //         name: 'Le Rime, Castello Banfi',
-      //         description: '2019, Италия, Тоскана',
-      //         price: {
-      //           bottle: '',
-      //           cup: ''
-      //         }
-      //       },
-      //       {
-      //         name: 'Le Rime, Castello Banfi',
-      //         description: '2019, Италия, Тоскана',
-      //         price: {
-      //           bottle: '',
-      //           cup: ''
-      //         }
-      //       },
-      //       {
-      //         name: 'Le Rime, Castello Banfi',
-      //         description: '2019, Италия, Тоскана',
-      //         price: {
-      //           bottle: '',
-      //           cup: ''
-      //         }
-      //       },
-      //       {
-      //         name: 'Le Rime, Castello Banfi',
-      //         description: '2019, Италия, Тоскана',
-      //         price: {
-      //           bottle: '',
-      //           cup: ''
-      //         }
-      //       }
-      //     ]
-      //   },
-      //   {
-      //     name: 'Белые вина',
-      //     items: [
-      //       {
-      //         name: 'Le Rime, Castello Banfi',
-      //         description: '2019, Италия, Тоскана',
-      //         price: {
-      //           bottle: '',
-      //           cup: ''
-      //         }
-      //       },
-      //       {
-      //         name: 'Le Rime, Castello Banfi',
-      //         description: '2019, Италия, Тоскана',
-      //         price: {
-      //           bottle: '',
-      //           cup: ''
-      //         }
-      //       },
-      //       {
-      //         name: 'Le Rime, Castello Banfi',
-      //         description: '2019, Италия, Тоскана',
-      //         price: {
-      //           bottle: '',
-      //           cup: ''
-      //         }
-      //       },
-      //       {
-      //         name: 'Le Rime, Castello Banfi',
-      //         description: '2019, Италия, Тоскана',
-      //         price: {
-      //           bottle: '',
-      //           cup: ''
-      //         }
-      //       }
-      //     ]
-      //   },
-      //   {
-      //     name: 'Красные винА',
-      //     items: [
-      //       {
-      //         name: 'Le Rime, Castello Banfi',
-      //         description: '2019, Италия, Тоскана',
-      //         price: {
-      //           bottle: '',
-      //           cup: ''
-      //         }
-      //       }
-      //     ]
-      //   },
-      //   {
-      //     name: 'Красные винА',
-      //     items: [
-      //       {
-      //         name: 'Le Rime, Castello Banfi',
-      //         description: '2019, Италия, Тоскана',
-      //         price: {
-      //           bottle: '',
-      //           cup: ''
-      //         }
-      //       }
-      //     ]
-      //   },
-      //   {
-      //     name: 'Розовые вина',
-      //     items: [
-      //       {
-      //         name: 'Le Rime, Castello Banfi',
-      //         description: '2019, Италия, Тоскана',
-      //         price: {
-      //           bottle: '',
-      //           cup: ''
-      //         }
-      //       }
-      //     ]
-      //   }
-      // ]
     }
   },
   computed: {
@@ -298,10 +175,12 @@ export default {
             description: i.wineData.description,
             price: {
               bottle: '',
-              cup: ''
+              cup: '',
+              isBottleActive: false,
+              isCupActive: false
             }
           })
-        } else if (winesTypes.other) {
+        } else if (!winesTypes.other) {
           winesTypes.other = {
             name: 'Другие вина',
             items: [{
@@ -309,7 +188,9 @@ export default {
               description: i.wineData.description,
               price: {
                 bottle: '',
-                cup: ''
+                cup: '',
+                isBottleActive: false,
+                isCupActive: false
               }
             }]
           }
@@ -319,7 +200,9 @@ export default {
             description: i.wineData.description,
             price: {
               bottle: '',
-              cup: ''
+              cup: '',
+              isBottleActive: false,
+              isCupActive: false
             }
           })
         }
@@ -339,7 +222,6 @@ export default {
     window.addEventListener('resize', () => {
       this.doResize(null, this.currentPageSize)
     })
-    console.log(this.items)
   },
   beforeDestroy () {
     window.removeEventListener('resize', () => {})
@@ -348,6 +230,14 @@ export default {
     downloadPDF () {
       const newDiv = document.querySelector('.shablone').cloneNode(true) // клонируем элемент с его потомками
       document.querySelector('.shablone__printer').appendChild(newDiv)
+
+      document.querySelectorAll('.shablone__printer input').forEach((i) => {
+        i.style.display = 'none'
+      })
+
+      document.querySelectorAll('.shablone__printer .print-text').forEach((i) => {
+        i.style.display = 'inline-block'
+      })
 
       domtoimage.toJpeg(document.querySelector('.shablone__printer .shablone'), {
         quality: 2

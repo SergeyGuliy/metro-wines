@@ -1,5 +1,5 @@
 <template>
-  <div class="bucket-card">
+  <div class="bucket-card" @click.stop="$openProductModal(wineData.wineData)">
     <div class="bucket-card__img-box">
       <img :src="wineData.wineData.images[0]" alt="">
     </div>

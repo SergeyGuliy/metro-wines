@@ -9,7 +9,7 @@
           :filled="true"
           :bold="true"
           :uppercase="true"
-          @click="scrollToCard"
+          @click="$scrollToCard"
         >
           перейтик выбору
         </Button>
@@ -24,8 +24,8 @@
       <div class="bucket-restoraunt__body">
         <!--        <pre>{{ $userBucket }}</pre>-->
         <template v-for="(item, index) in $userBucket">
-          <div :key="index" class="bucket-restoraunt__card r-card">
-            <Close class="svg-close" @click="close" />
+          <div :key="index" class="bucket-restoraunt__card r-card" @click="$openProductModal(item.wineData)">
+            <Close class="svg-close" @click.stop="deleteFromBucket(item)" />
             <img :src="item.wineData.images[0]" alt="" class="r-card__img">
             <div class="r-card__right">
               <div class="r-card__title">
@@ -58,7 +58,7 @@
             {{ Object.keys($userBucket).length }} товаров
           </div>
           <div class="bucket-restoraunt__right">
-            <div class="bucket-restoraunt__old">
+            <div v-if="$getTotalDiscount" class="bucket-restoraunt__old">
               {{ $getTotalDiscount }} ₽
             </div>
             <div class="bucket-restoraunt__current">
@@ -110,14 +110,8 @@ export default {
       this.$router.push({ name: 'wine-cart' })
       this.close()
     },
-    scrollToCard () {
-      this.close()
-      try {
-        document.getElementById('wineCard').scrollIntoView({
-          block: 'start',
-          behavior: 'smooth'
-        })
-      } catch (e) {}
+    deleteFromBucket (wine) {
+      this.$store.commit('bucket/DELETE_FROM_BUCKET', wine.wineData.article)
     }
   }
 }
@@ -136,6 +130,12 @@ export default {
     background-color: #ffffff;
     padding: 20px 0;
     width: 378px;
+    max-height: calc(100vh - 110px);
+    .bucket-restoraunt__filled{
+      max-height: calc(100vh - 115px);
+      display: flex;
+      flex-direction: column;
+    }
     .r-card__actions.small{
       display: none !important;
     }
@@ -184,7 +184,7 @@ export default {
       }
     }
     .bucket-restoraunt__body{
-      max-height: 560px;
+      max-height: calc(100vh - 360px);
       overflow: auto;
     }
     .bucket-restoraunt__card.r-card{
@@ -283,6 +283,7 @@ export default {
       }
       .bucket-restoraunt__body{
         height: 394px;
+        max-height: unset;
       }
       .bucket-restoraunt__card.r-card {
         flex-wrap: wrap;

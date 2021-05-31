@@ -61,9 +61,9 @@
         <a href="https://msk.metro-cc.ru/delivery" class="footer__link">
           Условия доставки
         </a>
-        <a href="https://www.metro-cc.ru/sitemap?_ga=2.152098431.771454823.1622114669-1655047550.1621870423" class="footer__link">
-          Карта сайта
-        </a>
+<!--        <a href="https://www.metro-cc.ru/sitemap?_ga=2.152098431.771454823.1622114669-1655047550.1621870423" class="footer__link">-->
+<!--          Карта сайта-->
+<!--        </a>-->
       </div>
       <div class="footer__copyrights">
         © METRO Cash and Carry Russia, 2021

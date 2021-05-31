@@ -21,8 +21,8 @@
       </Button>
     </div>
     <div class="card__actions">
-      <Discount class="card__icon-discount" />
-      <Favourite class="card__icon-favorite" />
+<!--      <Discount class="card__icon-discount" />-->
+<!--      <Favourite class="card__icon-favorite" />-->
     </div>
   </div>
 </template>
@@ -31,8 +31,8 @@
 export default {
   name: 'Card',
   components: {
-    Discount: () => import('assets/icons/icon-discount.svg'),
-    Favourite: () => import('assets/icons/icon-favourite.svg'),
+    // Discount: () => import('assets/icons/icon-discount.svg'),
+    // Favourite: () => import('assets/icons/icon-favourite.svg'),
     AddBox: () => import('../form/AddBox'),
     Button: () => import('../form/Button')
   },
@@ -110,6 +110,7 @@ export default {
       object-fit: contain;
     }
     .card__title{
+      text-align: center;
       margin-bottom: 14px;
       @include FontStyle('TimesNewRoman', normal, #710000, 25px, 29px);
     }

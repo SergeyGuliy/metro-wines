@@ -18,22 +18,33 @@
           <!--            {{ wine.description }}-->
           <!--          </div>-->
         </div>
+        <!--        <pre>{{wine.price.isCupActive}}</pre>-->
         <div class="wcb__price-box">
           <input
             :ref="`cup-${index}`"
+            v-model="wine.price.cup"
             class="wcb__input-cup"
             type="number"
             placeholder="бокал"
             @input="changeMaxWidth(`cup-${index}`, $event.target.value)"
           >
+          <span style="display: none" class="print-text">
+            <span style="white-space: nowrap" v-if="wine.price.cup">{{ wine.price.cup.replace(/\B(?=(\d{3})+(?!\d))/g, " ") }}</span>
+            <span v-else class="place">бокал</span>
+          </span>
           <span>/</span>
           <input
             :ref="`bottle-${index}`"
+            v-model="wine.price.bottle"
             class="wcb__input-bottle"
             type="number"
             placeholder="бутылка"
             @input="changeMaxWidth(`bottle-${index}`, $event.target.value)"
           >
+          <span style="display: none" class="print-text">
+            <span style="white-space: nowrap" v-if="wine.price.bottle">{{ wine.price.bottle.replace(/\B(?=(\d{3})+(?!\d))/g, " ") }}</span>
+            <span v-else class="place">бутылка</span>
+          </span>
           <span>₽</span>
         </div>
       </div>
@@ -137,6 +148,9 @@ export default {
       }
       input::-webkit-inner-spin-button{
         display: none !important;
+      }
+      span .place {
+        @include FontStyle('Acrom', bold, rgba(255, 255, 255, 0.5), 18px, 24px);
       }
     }
   }

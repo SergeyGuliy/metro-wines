@@ -93,6 +93,7 @@ export default {
       //   })
     },
     changePage (page) {
+      this.$scrollToCard()
       this.currentPage = page
       this.fetchCatalog()
     },

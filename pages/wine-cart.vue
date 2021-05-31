@@ -4,7 +4,7 @@
     <div class="wine-cart-main__container">
       <div class="container">
         <div class="wine-cart-main__title">
-          В вашей винной карте {{ Object.keys($userBucket).length }} вин
+          В вашей винной карте {{ basketLength }} {{ basketLengthWinesNames[basketLength] || 'вин' }}
         </div>
         <WineCartList />
         <div class="wine-cart-main__actions">
@@ -35,6 +35,20 @@ export default {
     WineCartList: () => import('../components/layouts/WineCartList'),
     WIneConstructor: () => import('../components/layouts/WIneConstructor'),
     Button: () => import('../components/form/Button')
+  },
+  computed: {
+    basketLength () {
+      return Object.keys(this.$userBucket).length
+    },
+    basketLengthWinesNames () {
+      return {
+        0: 'вин',
+        1: 'вино',
+        2: 'винa',
+        3: 'винa',
+        4: 'винa'
+      }
+    }
   },
   async mounted () {
     console.clear()
