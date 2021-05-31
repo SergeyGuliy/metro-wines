@@ -36,9 +36,13 @@ export const actions = {
     })
     // eslint-disable-next-line no-empty
     if ($cookies.get('userTradeCenterId')) {
-      commit('SET_USER_TRADE_CENTER', state.tradeCenters.find((center) => {
-        return +center.store_id === +$cookies.get('userTradeCenterId')
-      }))
+      try {
+        commit('SET_USER_TRADE_CENTER', state.tradeCenters.find((center) => {
+          return +center.store_id === +$cookies.get('userTradeCenterId')
+        }))
+      } catch (e) {
+        $cookies.remove('userTradeCenterId')
+      }
     }
   }
 }
