@@ -6,6 +6,11 @@ import { initGeolocation } from '../assets/js/initGeolocation'
 import { defender } from '../components/layouts/components/defender'
 
 Vue.mixin({
+  filters: {
+    number (value) {
+      return (+value).toFixed(2)
+    }
+  },
   data () {
     return {}
   },

@@ -109,8 +109,8 @@ export default {
       border-bottom: 4px solid #FFFFFF;
     }
     .wcb__left{
-      max-width: 380px;
-      min-width: 380px;
+      max-width: 325px;
+      min-width: 325px;
     }
     .wcb__name{
       @include FontStyle('Acrom', normal, #FFFFFF, 25px, 30px);

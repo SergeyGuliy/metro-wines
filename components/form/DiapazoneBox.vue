@@ -153,7 +153,7 @@ export default {
       @include FontStyle('Acrom', normal, #000000, 16px, 19px);
     }
     .diapazone-box__input-box-append{
-      right: 20%;
+      right: 8%;
       @include FontStyle('Acrom', normal, #828282, 16px, 19px);
     }
     .diapazone-box__input{
@@ -162,7 +162,7 @@ export default {
       border: 1px solid rgba(0, 0, 0, 0.5);
       box-sizing: border-box;
       border-radius: 5px;
-      padding: 0 50px 0 30px;
+      padding: 0 27px 0 30px;
     }
   }
 </style>

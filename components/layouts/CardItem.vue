@@ -12,10 +12,10 @@
     <div class="card-item__add-box">
       <div class="card-item__price-box">
         <div class="card-item__price-item">
-          {{ wineData.wineData.prices.price }} ₽/шт
+          {{ wineData.wineData.prices.price | number }} ₽/шт
         </div>
         <div class="card-item__price-total">
-          {{ wineData.wineData.prices.price * wineData.count }} ₽
+          {{ (wineData.wineData.prices.price * wineData.count) | number }} ₽
         </div>
       </div>
       <AddBox :wine-data="wineData.wineData" />

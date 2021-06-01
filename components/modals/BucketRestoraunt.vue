@@ -37,14 +37,14 @@
               <div class="r-card__actions big">
                 <AddBox :wine-data="item.wineData" />
                 <div class="r-card__price">
-                  {{ item.wineData.prices.price }} ₽
+                  {{ item.wineData.prices.price | number }} ₽
                 </div>
               </div>
             </div>
             <div class="r-card__actions small">
               <AddBox :wine-data="item.wineData" />
               <div class="r-card__price">
-                {{ item.wineData.prices.price }} ₽
+                {{ item.wineData.prices.price | number }} ₽
               </div>
             </div>
           </div>
@@ -59,10 +59,10 @@
           </div>
           <div class="bucket-restoraunt__right">
             <div v-if="$getTotalDiscount" class="bucket-restoraunt__old">
-              {{ $getTotalDiscount }} ₽
+              {{ $getTotalDiscount | number }} ₽
             </div>
             <div class="bucket-restoraunt__current">
-              {{ $getTotalPrice }} ₽
+              {{ $getTotalPrice | number }} ₽
             </div>
           </div>
         </div>

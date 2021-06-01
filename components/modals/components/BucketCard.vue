@@ -13,10 +13,10 @@
     </div>
     <div class="bucket-card__price-box">
       <div class="bucket-card__price-total">
-        {{ wineData.wineData.prices.price * wineData.count }} ₽
+        {{ (wineData.wineData.prices.price * wineData.count) | number }} ₽
       </div>
       <div class="bucket-card__price-item">
-        {{ wineData.wineData.prices.price }} ₽/шт
+        {{ wineData.wineData.prices.price | number }} ₽/шт
       </div>
     </div>
     <AddBox :wine-data="wineData.wineData" />

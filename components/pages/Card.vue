@@ -8,11 +8,11 @@
     <!--      {{ cardData.description }}-->
     <!--    </div>-->
     <div v-if="cardData.prices.old_price" class="card__price-discounted">
-      <span class="card__old-price">{{ cardData.prices.old_price }} ₽</span>
+      <span class="card__old-price">{{ cardData.prices.old_price | number }} ₽</span>
       <span class="card__discount">-{{ $calculateDiscount (cardData.prices.old_price, cardData.prices.price) }}%</span>
     </div>
     <div class="card__new-price">
-      {{ cardData.prices.price }} ₽/шт
+      {{ cardData.prices.price | number }} ₽/шт
     </div>
     <div class="card__add-box">
       <AddBox :wineData="cardData"/>

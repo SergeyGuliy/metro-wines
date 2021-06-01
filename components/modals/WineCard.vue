@@ -26,13 +26,13 @@
       </div>
       <div class="card-modal__devider" />
       <div v-if="data.prices.old_price" class="card-modal__price-discounted">
-        <span class="card-modal__old-price">{{ data.prices.old_price }} ₽</span>
+        <span class="card-modal__old-price">{{ data.prices.old_price | number }} ₽</span>
         <span class="card-modal__discount">
           -{{ $calculateDiscount (data.prices.old_price, data.prices.price) }}%
         </span>
       </div>
       <div class="card-modal__new-price">
-        {{ data.prices.price }} ₽/шт
+        {{ data.prices.price | number  }} ₽/шт
       </div>
       <div class="card-modal__add-box">
         <AddBox :wine-data="data" />
@@ -121,7 +121,9 @@ export default {
     }
     .card-modal__parrams-box{
       display: flex;
+      flex-direction: column;
       flex-wrap: wrap;
+      max-height: 175px;
     }
     .card-modal__parram{
       width: calc(50% - 36px);

@@ -22,7 +22,7 @@ export default {
   data () {
     return {
       restorauntText: 'Винная карта<br>для вашего<br>ресторана',
-      retailText: 'Ваша карта<br> любимых вин'
+      retailText: 'Ваша карта  любимых вин'
     }
   }
 }
@@ -45,6 +45,7 @@ export default {
       justify-content: center;
     }
     .hero__text{
+      max-width: 690px;
       text-transform: uppercase;
       @include FontStyle('TimesNewRoman', normal, #ffffff, 86px, 99px);
     }
