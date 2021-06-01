@@ -45,7 +45,7 @@ export default {
       if (this.$userType === 'restoraunt') {
         this.$router.push({ name: 'retail' })
       } else {
-        this.$router.push({ name: 'retail' })
+        this.$router.push({ name: 'index' })
       }
     },
     openBucket () {
