@@ -27,7 +27,7 @@ export const mutations = {
 export const actions = {
   async nuxtServerInit ({ dispatch, commit, state }, { $cookies }) {
     await api.tradecenters.getAll().then((res) => {
-      console.log('SUCCESS BACKEND REQUEST')
+      console.log('-------SUCCESS BACKEND REQUEST-------')
     }).catch((e) => {
       console.log(e)
     })
