@@ -11,6 +11,19 @@
     max-width: 1460px;
   }
 }
+#__layout{
+  height: 100vh;
+}
+
+.sizer{
+  @media (min-width: 1500px) {
+    width: 125%;
+    transform: scale(0.8);
+    transform-origin: 0 0;
+    max-width: unset;
+    max-height: unset;
+  }
+}
 
 a{
   text-decoration: none;
