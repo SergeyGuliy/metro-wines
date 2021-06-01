@@ -43,6 +43,12 @@ export default {
     z-index: 5;
     background: rgba(000, 000, 000, 0.5);
     /*visibility: hidden;*/
+
+    /*@media (min-width: 1500px) {*/
+    /*  height: 126vh;*/
+    /*  width: 126vw;*/
+    /*  top: 150vh;*/
+    /*}*/
   }
   .modal-wrapper--active{
     /*visibility: visible;*/

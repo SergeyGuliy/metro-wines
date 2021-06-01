@@ -15,14 +15,33 @@
   height: 100vh;
 }
 
-.sizer{
-  @media (min-width: 1500px) {
-    width: 125%;
-    transform: scale(0.8);
+@media (min-width: 768px){
+  .sizer-outer{
+    width: 100%;
+    position: relative;
+  }
+  .sizer{
+    width: 135.5% !important;
+    transform: scale(0.75);
     transform-origin: 0 0;
     max-width: unset;
     max-height: unset;
+    position: relative;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    //margin-bottom: -30%;
   }
+  //.header.sizer{
+  //  margin-bottom: -20px;
+  //}
+  //.layout__inner.sizer{
+  //  //margin-bottom: -50%;
+  //}
+  //.footer.sizer{
+  //  margin-bottom: -50px;
+  //}
 }
 
 a{

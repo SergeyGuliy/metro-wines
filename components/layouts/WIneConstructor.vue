@@ -371,6 +371,10 @@ export default {
             .wcb__title{
 
             }
+            .wcb__left {
+              max-width: 350px;
+              min-width: 350px;
+            }
           }
         }
       }

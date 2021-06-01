@@ -1,11 +1,11 @@
 <template>
   <div class="layout-default" :class="{'overflow-hidden': component}">
-    <Header />
+    <Header class="sizer" />
     <!--    <Chat />-->
-    <div class="layout__inner">
+    <div class="layout__inner sizer">
       <Nuxt />
     </div>
-    <Footer />
+    <Footer class="sizer" />
     <client-only>
       <transition name="fade">
         <ModalController v-if="component" />
@@ -36,6 +36,57 @@ export default {
         this.enableScrolling()
       }
     }
+  },
+  mounted () {
+    // const layoutInner = document.querySelector('.layout__inner')
+    //
+    // function outputsizeHeader () {
+    //   console.log(`-${layoutInner.offsetHeight / 5} px`)
+    //   console.log(document.querySelector('.layout__inner').style)
+    //   document.querySelector('.layout__inner').style.marginBottom = `-${(layoutInner.offsetHeight / 5).toFixed()}px`
+    // }
+    // outputsizeHeader()
+    //
+    // new ResizeObserver(outputsizeHeader).observe(layoutInner)
+
+    const layoutInner = document.querySelector('.layout__inner')
+    const layoutHeader = document.querySelector('.header')
+    const layoutFooter = document.querySelector('.footer')
+
+    function outputsizeHeader () {
+      if (window.innerWidth > 768) {
+        layoutHeader.style.marginBottom = `-${(layoutHeader.offsetHeight / 4).toFixed()}px`
+      } else {
+        layoutHeader.style.marginBottom = '0px'
+      }
+    }
+    function outputsizeFooter () {
+      if (window.innerWidth > 768) {
+        layoutFooter.style.marginBottom = `-${(layoutFooter.offsetHeight / 4).toFixed()}px`
+      } else {
+        layoutFooter.style.marginBottom = '0px'
+      }
+    }
+    function outputsizeLayout () {
+      if (window.innerWidth > 768) {
+        layoutInner.style.marginBottom = `-${(layoutInner.offsetHeight / 4).toFixed()}px`
+      } else {
+        layoutInner.style.marginBottom = '0px'
+      }
+    }
+    outputsizeHeader()
+    outputsizeFooter()
+    outputsizeLayout()
+
+    new ResizeObserver(outputsizeLayout).observe(layoutInner)
+    new ResizeObserver(outputsizeHeader).observe(layoutHeader)
+    new ResizeObserver(outputsizeFooter).observe(layoutFooter)
+
+    // window.addEventListener('resize', () => {
+    //   outputsizeHeader()
+    //   outputsizeFooter()
+    //   outputsizeLayout()
+    // })
   },
   methods: {
     disableScrolling () {

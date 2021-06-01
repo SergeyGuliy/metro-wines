@@ -1,73 +1,76 @@
 <template>
   <div class="footer container">
-    <div class="footer-col footer-col__1">
-      <img src="../../assets/images/metro.png" alt="" class="img-metro">
-    </div>
-    <div class="footer-col footer-col__2">
-      <div class="footer__title">
-        Горячая линия METRO
+    <div class="container">
+      <div class="footer-col footer-col__1">
+        <img src="../../assets/images/metro.png" alt="" class="img-metro">
       </div>
-      <a href="#" class="footer__contact">
-        <div class="footer__svg-box">
-          <Phone />
+      <div class="footer-col footer-col__2">
+        <div class="footer__title">
+          Горячая линия METRO
         </div>
-        <span>8-800-700-10-77</span>
-      </a>
-      <div class="footer__work-time">
-        Будни: с 7 до 22 часов<br>
-        Выходные: с 8 до 22 часов
-      </div>
-      <a href="#" class="footer__contact">
-        <div class="footer__svg-box">
-          <Email />
+        <a href="#" class="footer__contact">
+          <div class="footer__svg-box">
+            <Phone />
+          </div>
+          <span>8-800-700-10-77</span>
+        </a>
+        <div class="footer__work-time">
+          Будни: с 7 до 22 часов<br>
+          Выходные: с 8 до 22 часов
         </div>
-        <span>Обратная связь</span>
-      </a>
-    </div>
-    <!--    <div class="footer-col footer-col__3">-->
-    <!--      <div class="footer__title mb-0">-->
-    <!--        Подпишитесь-->
-    <!--      </div>-->
-    <!--      <div class="footer__title">-->
-    <!--        на лучшие предложения-->
-    <!--      </div>-->
-    <!--      <InputBox v-model="email" class="footer-col__input" placeholder="E-mail">-->
-    <!--        <template #append>-->
-    <!--          <Button :outlined="true" @click="openFeedBackModal">-->
-    <!--            Подписаться-->
-    <!--          </Button>-->
-    <!--        </template>-->
-    <!--      </InputBox>-->
-    <!--      <div class="footer__checkbox noselect" @click="isCheked = !isCheked">-->
-    <!--        <div class="footer__checkbox-box" :class="{'footer__checkbox-box&#45;&#45;active': isCheked}">-->
-    <!--          <Ok />-->
-    <!--        </div>-->
-    <!--        <div class="footer__checkbox-text">-->
-    <!--          Я согласен на обработку персональных данных, а также с условиями подписки-->
-    <!--        </div>-->
-    <!--      </div>-->
-    <!--    </div>-->
-    <div class="footer-col footer-col__4">
-      <div class="footer__link-box">
-        <a href="https://www.metro-cc.ru/documents/konfidencialnost?_ga=2.153131006.771454823.1622114669-1655047550.1621870423" class="footer__link">
-          Конфиденциальность
+        <a href="#" class="footer__contact">
+          <div class="footer__svg-box">
+            <Email />
+          </div>
+          <span>Обратная связь</span>
         </a>
-        <a href="https://www.metro-cc.ru/documents/pravovaya-informaciya?_ga=2.186112623.771454823.1622114669-1655047550.1621870423" class="footer__link">
-          Правовая информация
-        </a>
-        <a href="https://www.metro-cc.ru/documents/usloviya-soglasheniya?_ga=2.186112623.771454823.1622114669-1655047550.1621870423" class="footer__link">
-          Условия соглашения
-        </a>
-        <a href="https://msk.metro-cc.ru/delivery" class="footer__link">
-          Условия доставки
-        </a>
-<!--        <a href="https://www.metro-cc.ru/sitemap?_ga=2.152098431.771454823.1622114669-1655047550.1621870423" class="footer__link">-->
-<!--          Карта сайта-->
-<!--        </a>-->
       </div>
-      <div class="footer__copyrights">
-        © METRO Cash and Carry Russia, 2021
+      <!--    <div class="footer-col footer-col__3">-->
+      <!--      <div class="footer__title mb-0">-->
+      <!--        Подпишитесь-->
+      <!--      </div>-->
+      <!--      <div class="footer__title">-->
+      <!--        на лучшие предложения-->
+      <!--      </div>-->
+      <!--      <InputBox v-model="email" class="footer-col__input" placeholder="E-mail">-->
+      <!--        <template #append>-->
+      <!--          <Button :outlined="true" @click="openFeedBackModal">-->
+      <!--            Подписаться-->
+      <!--          </Button>-->
+      <!--        </template>-->
+      <!--      </InputBox>-->
+      <!--      <div class="footer__checkbox noselect" @click="isCheked = !isCheked">-->
+      <!--        <div class="footer__checkbox-box" :class="{'footer__checkbox-box&#45;&#45;active': isCheked}">-->
+      <!--          <Ok />-->
+      <!--        </div>-->
+      <!--        <div class="footer__checkbox-text">-->
+      <!--          Я согласен на обработку персональных данных, а также с условиями подписки-->
+      <!--        </div>-->
+      <!--      </div>-->
+      <!--    </div>-->
+      <div class="footer-col footer-col__4">
+        <div class="footer__link-box">
+          <a href="https://www.metro-cc.ru/documents/konfidencialnost?_ga=2.153131006.771454823.1622114669-1655047550.1621870423" class="footer__link">
+            Конфиденциальность
+          </a>
+          <a href="https://www.metro-cc.ru/documents/pravovaya-informaciya?_ga=2.186112623.771454823.1622114669-1655047550.1621870423" class="footer__link">
+            Правовая информация
+          </a>
+          <a href="https://www.metro-cc.ru/documents/usloviya-soglasheniya?_ga=2.186112623.771454823.1622114669-1655047550.1621870423" class="footer__link">
+            Условия соглашения
+          </a>
+          <a href="https://msk.metro-cc.ru/delivery" class="footer__link">
+            Условия доставки
+          </a>
+          <!--        <a href="https://www.metro-cc.ru/sitemap?_ga=2.152098431.771454823.1622114669-1655047550.1621870423" class="footer__link">-->
+          <!--          Карта сайта-->
+          <!--        </a>-->
+        </div>
+        <div class="footer__copyrights">
+          © METRO Cash and Carry Russia, 2021
+        </div>
       </div>
+
     </div>
   </div>
 </template>
@@ -106,7 +109,10 @@ export default {
   @import "@/assets/styles/mixins.scss";
 
   .footer {
-    display: flex;
+    .container{
+      display: flex;
+
+    }
     .footer-col{
       margin: 46px 37px 46px 0;
       flex: 1 1 auto;
@@ -180,7 +186,10 @@ export default {
     }
 
     @media (max-width: 1080px) {
-      flex-wrap: wrap;
+
+      .container{
+        flex-wrap: wrap;
+      }
       .footer-col__1{
         width: 100%;
         max-width: unset;
@@ -214,7 +223,9 @@ export default {
       }
     }
     @media (max-width: 767px) {
-      padding: 0 20px;
+      .container{
+        padding: 0 20px;
+      }
       .footer-col{
         max-width: unset;
         margin-top: 0;

@@ -10,7 +10,11 @@ const config = {
   baseURL: `${originProd}${appKey}`
 }
 
+axios.defaults.headers.get['Content-Type'] = 'application/json'
+
 const _axios = axios.create(config)
+
+_axios.defaults.headers.get['Content-Type'] = 'application/json'
 
 export const api = {
   tradecenters: {
