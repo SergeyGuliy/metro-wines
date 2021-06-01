@@ -28,6 +28,7 @@ export const actions = {
   async nuxtServerInit ({ dispatch, commit, state }, { $cookies }) {
     await api.tradecenters.getAll().then((res) => {
       console.log('-------SUCCESS BACKEND REQUEST-------')
+      commit('SET_TRADE_CENTERS', res.data)
     }).catch((e) => {
       console.log(e)
     })
