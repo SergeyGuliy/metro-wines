@@ -12,6 +12,11 @@
     "heroku-postbuild": "npm run build",
     "heroku_push": "git push heroku master"
   },
+  "proxy": {
+    "/api/": {
+      "target": "https://api.metro-cc.ru"
+    }
+  },
   "config": {
     "nuxt": {
       "host": "0.0.0.0",
