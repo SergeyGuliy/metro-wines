@@ -10,6 +10,7 @@
       v-if="lastPage && lastPage > 0"
       :value="currentPage"
       :last-page="lastPage"
+      :info="info"
       @input="changePage"
     />
     <div class="catalog__warning">
@@ -31,7 +32,12 @@ export default {
     return {
       cards: [],
       currentPage: null,
-      lastPage: null
+      lastPage: null,
+      info: {
+        to: null,
+        from: null,
+        total: null
+      }
     }
   },
   watch: {
@@ -58,39 +64,12 @@ export default {
     async search (data) {
       await api.products.search(this.$userTradeCenter?.store_id, data)
         .then((res) => {
-          console.log(res.data.products.map(i => i.id))
-          // eslint-disable-next-line camelcase,no-unused-vars
-          // const { page, products, total_pages } = res.data
-          // this.cards = []
-          // // eslint-disable-next-line camelcase
-          // this.currentPage = page
-          // // eslint-disable-next-line camelcase
-          // this.lastPage = +total_pages
-          const promices = []
-          res.data.products.map(i => i.id).forEach((i) => {
-            console.log(i)
-            promices.push(
-              api.products.getProductById(this.$userTradeCenter?.store_id, i)
-            )
-          })
-          Promise.all(promices)
-            .then((data) => {
-              console.log(data)
-            })
-            .catch((e) => {
-              console.log(e)
-            })
+          this.cards = res.data.products
+          this.lastPage = null
         })
         .catch((e) => {
           console.log(e)
         })
-      // await api.products.search2(this.$userTradeCenter?.store_id, data)
-      //   .then((res) => {
-      //     console.log(res.data)
-      //   })
-      //   .catch((e) => {
-      //     console.log(e)
-      //   })
     },
     changePage (page) {
       this.$scrollToCard()
@@ -104,13 +83,18 @@ export default {
           ...filters
         })
           .then((res) => {
+            console.log(res.data)
+
             // eslint-disable-next-line camelcase,no-unused-vars
-            const { last_page, current_page, data } = res.data
+            const { last_page, current_page, data, to, from, total } = res.data
             this.cards = data
             // eslint-disable-next-line camelcase
             this.currentPage = current_page
             // eslint-disable-next-line camelcase
             this.lastPage = last_page
+            this.info.to = to
+            this.info.from = from
+            this.info.total = total
           })
           .catch((e) => {
             console.log(e)

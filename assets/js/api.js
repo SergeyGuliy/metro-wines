@@ -55,7 +55,11 @@ export const api = {
       params: {
         q: name,
         category_id: 412338,
-        paginate: 12
+        paginate: 12,
+        limit: 30,
+        content: 1,
+        page: 1,
+        in_stock: 0
       }
     })).data,
     search2: async (storeId, name) => (await _axios.get(`/${storeId}/suggestions`, {

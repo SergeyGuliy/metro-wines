@@ -1,4 +1,5 @@
 import Vue from 'vue'
+// eslint-disable-next-line no-unused-vars
 import { api } from '../assets/js/api'
 export const strict = false
 

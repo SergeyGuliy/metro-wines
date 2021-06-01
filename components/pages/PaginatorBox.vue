@@ -1,11 +1,11 @@
 <template>
   <div class="paginator-box">
     <div class="paginator-box__total">
-      Показано с 1 по 16 из 256 результатов поиска
+      Показано с {{ info.from }} по {{ info.to }} из {{ info.total }} результатов поиска
     </div>
-<!--    <Button :filled="true" class="paginator-box__button">-->
-<!--      Загрузить еще-->
-<!--    </Button>-->
+    <!--    <Button :filled="true" class="paginator-box__button">-->
+    <!--      Загрузить еще-->
+    <!--    </Button>-->
     <div class="paginator">
       <button class="paginator__item paginator__prev" @click="clickPrev">
         <ArrowBack />
@@ -104,7 +104,8 @@ export default {
     },
     lastPage: {
       required: true
-    }
+    },
+    info: {}
   },
   data () {
     return {}

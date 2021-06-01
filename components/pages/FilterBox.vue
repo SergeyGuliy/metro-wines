@@ -132,7 +132,7 @@
       </div>
       <div class="filter-box__filters">
         <div class="mobile-search-box">
-          <input type="text" class="mobile-search-box__input" placeholder="Поиск по названию">
+          <input v-model="searchField" type="text" class="mobile-search-box__input" placeholder="Поиск по названию">
           <button class="mobile-search-box__btn" @click="search">
             <Search3 />
           </button>
@@ -252,7 +252,6 @@ export default {
     search () {
       this.$bus.$emit('search', this.searchField)
       this.isMobileVisibleSearch = false
-      this.searchField = ''
     }
   }
 }
