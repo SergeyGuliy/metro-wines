@@ -74,9 +74,11 @@ export default {
       lang: 'en'
     }
   },
-  // proxy: {
-  //   '/api/': { target: 'https://api.metro-cc.ru', pathRewrite: { '^/api/': '' }, changeOrigin: true }
-  // },
+  proxy: {
+    '/api/v1': { target: 'https://api.metro-cc.ru', pathRewrite: { '^/api/v1': '' } }
+
+    // '/api/': { target: 'https://api.metro-cc.ru', pathRewrite: { '^/api/v1': '' }, changeOrigin: true }
+  },
   // ''
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
