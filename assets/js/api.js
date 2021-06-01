@@ -19,7 +19,7 @@ _axios.defaults.headers.get['Content-Type'] = 'application/json'
 
 export const api = {
   tradecenters: {
-    getAll: async () => (await _axios.get('tradecenters')).data
+    getAll: async () => (await _axios.get('/tradecenters')).data
   },
   // bucket: {
   //   getMyBasket: async (storeId, userHash) => {
@@ -35,7 +35,7 @@ export const api = {
   // },
   products: {
     getProduct: async (storeId, query) => {
-      return (await _axios.get(`${storeId}/products`, {
+      return (await _axios.get(`/${storeId}/products`, {
         params: {
           category_id: [412338],
           paginate: 12,
@@ -44,31 +44,31 @@ export const api = {
       })).data
     },
     getProductById: async (storeId, productId) => {
-      return (await _axios.get(`${storeId}/products/${productId}`, {
+      return (await _axios.get(`/${storeId}/products/${productId}`, {
         params: {
           category_id: [412338],
           paginate: 12
         }
       })).data
     },
-    search: async (storeId, name) => (await _axios.get(`${storeId}/search`, {
+    search: async (storeId, name) => (await _axios.get(`/${storeId}/search`, {
       params: {
         q: name,
         category_id: 412338,
         paginate: 12
       }
     })).data,
-    search2: async (storeId, name) => (await _axios.get(`${storeId}/suggestions`, {
+    search2: async (storeId, name) => (await _axios.get(`/${storeId}/suggestions`, {
       params: {
         query: name,
         category_id: 412338,
         paginate: 12
       }
     })).data,
-    categories: async storeId => (await _axios.get(`${storeId}/categories/tree`)).data,
+    categories: async storeId => (await _axios.get(`/${storeId}/categories/tree`)).data,
     wineProducts: async (storeId, categoryId) => (await _axios.get(`${storeId}/categories/${categoryId}`)).data
   },
   feedback: {
-    send: async (storeId, feedbackData) => (await _axios.post(`${storeId}/feedbacks`, feedbackData)).data
+    send: async (storeId, feedbackData) => (await _axios.post(`/${storeId}/feedbacks`, feedbackData)).data
   }
 }
