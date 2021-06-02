@@ -69,6 +69,7 @@ export default {
       @include FontStyle('Acrom', bold, #000000, 26px, 31px);
     }
     .add-box__count{
+      white-space: nowrap;
       @include FontStyle('Acrom', bold, #000000, 14px, 17px);
     }
   }

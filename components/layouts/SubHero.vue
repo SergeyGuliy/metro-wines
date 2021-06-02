@@ -36,7 +36,7 @@ export default {
   .sub-hero {
     height: 297px;
     background-color: #3C0A0A;
-    .sub-hero__small{
+    .sub-hero__small.sub-hero__text{
       display: none;
     }
     .sub-hero__row{
@@ -59,6 +59,8 @@ export default {
       position: absolute;
       top: 23px;
       left: 111px;
+      display: flex;
+      flex-direction: column;
       @include FontStyle('Acrom', normal, #ffffff, 26px, 31px);
     }
 
@@ -88,7 +90,7 @@ export default {
         display: none;
       }
       .sub-hero__small{
-        display: block;
+        display: block !important;
         max-width: 257px;
       }
       .sub-hero__row{

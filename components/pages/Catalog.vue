@@ -1,8 +1,5 @@
 <template>
   <div v-if="cards.length" class="catalog">
-    <div id="wineCard" class="box-title">
-      ВИННАЯ КАРТА
-    </div>
     <div class="catalog__cards-box">
       <Card v-for="(card, index) in cards" :key="index" :card-data="card" />
     </div>

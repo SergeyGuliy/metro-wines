@@ -3,6 +3,7 @@
     v-click-outside="hide"
     class="custom-input-box noselect"
     @click="isOpen = true"
+    :class="{'custom-input-box--open-mobile':isOpen}"
   >
     <div class="custom-input-box__outer">
       <component :is="data.icon" class="custom-input-box__icon" />

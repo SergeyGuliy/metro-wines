@@ -90,16 +90,18 @@ export default {
   },
   methods: {
     disableScrolling () {
-      const x = window.scrollX
-      const y = window.scrollY
-      window.onscroll = function (e) {
-        e.preventDefault()
-        window.scrollTo(x, y)
-      }
+      // const x = window.scrollX
+      // const y = window.scrollY
+      // window.onscroll = function (e) {
+      //   e.preventDefault()
+      //   window.scrollTo(x, y)
+      // }
+      document.querySelector('body').style.overflow = 'hidden'
     },
 
     enableScrolling () {
-      window.onscroll = function () {}
+      // window.onscroll = function () {}
+      document.querySelector('body').style.overflow = 'auto'
     }
   }
 }

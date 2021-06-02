@@ -11,7 +11,7 @@
           :uppercase="true"
           @click="$scrollToCard"
         >
-          перейтик выбору
+          перейти к выбору
         </Button>
       </div>
     </div>

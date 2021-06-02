@@ -5,6 +5,9 @@
     <div v-if="$userTradeCenter" class="page-main__container">
       <div class="container">
         <FilterBox />
+        <div id="wineCard" class="box-title">
+          ВИННАЯ КАРТА
+        </div>
         <Catalog />
       </div>
     </div>
@@ -26,15 +29,15 @@ export default {
     return {
       subHeroItems: [
         {
-          big: 'ВЫБЕРИТЕ<br> вина из предложенного<br>ассортимента',
+          big: '<span>ВЫБЕРИТЕ</span><span>вина из предложенного</span><span>ассортимента</span>',
           small: 'ВЫБЕРИТЕ  вина из предложенного ассортимента'
         },
         {
-          big: 'СФОРМИРУЙТЕ<br> список вин<br> в Excel файл',
+          big: '<span>СФОРМИРУЙТЕ</span><span> список вин</span><span> в Excel файл</span>',
           small: 'СФОРМИРУЙТЕ  список вин  в Excel файл'
         },
         {
-          big: 'СОБЕРИТЕ <br>выбранный ассортимент<br> в ТЦ или оформите<br>самовывоз',
+          big: '<span>СОБЕРИТЕ</span><span>выбранный ассортимент</span><span>в ТЦ или оформите</span><span>самовывоз</span>',
           small: 'СОБЕРИТЕ  выбранный ассортимент  в ТЦ или оформите самовывоз'
         }
       ]

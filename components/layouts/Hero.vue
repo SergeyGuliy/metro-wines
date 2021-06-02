@@ -21,7 +21,7 @@ export default {
   },
   data () {
     return {
-      restorauntText: 'Винная карта<br>для вашего<br>ресторана',
+      restorauntText: 'Винная карта для вашего ресторана',
       retailText: 'Ваша карта  любимых вин'
     }
   }
@@ -61,6 +61,9 @@ export default {
       .hero__text{
         margin-top: 63px;
         @include FontStyle('TimesNewRoman', normal, #ffffff, 60px, 69px);
+      }
+      .hero__subtext{
+        display: none;
       }
     }
     @media (max-width: 767px) {

@@ -9,7 +9,7 @@
       <span class="custom-input-box__outer-text">{{ data.title }}</span>
       <Arrow class="custom-input-box__arrow" />
     </div>
-    <div v-if="isOpen" class="custom-input-box__inner-box diapazone-box">
+    <div v-show="isOpen" class="custom-input-box__inner-box diapazone-box">
       <div class="diapazone-box__inputs">
         <div class="diapazone-box__input-box">
           <div class="diapazone-box__input-box-prepend">
@@ -82,8 +82,6 @@ export default {
         return this.localValue[0]
       },
       set (val) {
-        console.log(typeof val)
-        console.log(val)
         this.$set(this.localValue, 0, val)
       }
     },
@@ -92,8 +90,6 @@ export default {
         return this.localValue[1]
       },
       set (val) {
-        console.log(typeof val)
-        console.log(val)
         this.$set(this.localValue, 1, val)
       }
     },

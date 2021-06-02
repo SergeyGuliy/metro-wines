@@ -94,6 +94,7 @@
             icon: 'Sugar',
           }"
         />
+        {{ filtersPriceDiapazone }}
         <DiapazoneBox
           v-model="filtersPriceDiapazone"
           :data="{
@@ -101,7 +102,7 @@
             icon: '',
           }"
         />
-<!--        <RadioBox v-model="isPremium" />-->
+        <!--        <RadioBox v-model="isPremium" />-->
       </div>
 
       <div class="filter-box__filters-actions">
@@ -375,6 +376,23 @@ export default {
 
     @media (max-width: 767px) {
       margin-bottom: 30px;
+
+      .custom-input-box--open-mobile{
+        padding: 0;
+        height: unset;
+        .custom-input-box__outer{
+          display: none;
+        }
+        .custom-input-box__inner-box{
+          position: static;
+          padding-left: 0;
+          padding-right: 0;
+        }
+        .select-box__item{
+          margin-left: 19px;
+          margin-right: 19px;
+        }
+      }
       .mobile-search-box{
         background: #FFFFFF;
         /* def_2 */

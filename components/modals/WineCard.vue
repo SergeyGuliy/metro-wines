@@ -227,6 +227,9 @@ export default {
           left: -14px;
         }
       }
+      .card-modal__parrams-box{
+        max-height: unset;
+      }
 
       .card-modal__right{
         margin: 0;
