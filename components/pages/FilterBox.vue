@@ -94,7 +94,6 @@
             icon: 'Sugar',
           }"
         />
-        {{ filtersPriceDiapazone }}
         <DiapazoneBox
           v-model="filtersPriceDiapazone"
           :data="{

@@ -1,13 +1,20 @@
 <template>
   <div class="card-item">
+    <div
+      class="card-item__activator"
+      :class="{'card-item__activator--active': selectedWines.includes(wineData)}"
+      @click="$emit('toggleList', wineData)"
+    >
+      <Ok />
+    </div>
     <img :src="wineData.wineData.images[0]" alt="" class="card-item__img">
     <div class="card-item__box">
       <h5 class="card-item__title">
         {{ wineData.wineData.name }}
       </h5>
-<!--      <div class="card-item__description">-->
-<!--        {{ wineData.wineData.description }}-->
-<!--      </div>-->
+      <!--      <div class="card-item__description">-->
+      <!--        {{ wineData.wineData.description }}-->
+      <!--      </div>-->
     </div>
     <div class="card-item__add-box">
       <div class="card-item__price-box">
@@ -27,9 +34,11 @@
 export default {
   name: 'Card',
   components: {
+    Ok: () => import('assets/icons/ok-2.svg'),
     AddBox: () => import('../form/AddBox')
   },
   props: {
+    selectedWines: {},
     wineData: {
       type: Object
     }
@@ -51,6 +60,32 @@ export default {
     flex-direction: column;
     align-items: center;
     position: relative;
+    .card-item__activator{
+      width: 40px;
+      height: 40px;
+      position: absolute;
+      right: 12px;
+      top: 12px;
+      border-radius: 50%;
+      cursor: pointer;
+      border: 3px solid #710000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      svg{
+        display: none;
+      }
+    }
+    .card-item__activator--active{
+      background-color: #710000;
+      svg{
+        display: block;
+        path{
+          stroke: white;
+        }
+      }
+
+    }
     &:hover{
       filter: drop-shadow(0px 16px 32px rgba(48, 49, 51, 0.24));
       transform: scale(1.042);
@@ -109,6 +144,8 @@ export default {
       }
       .card-item__title{
         margin-top: 22px;
+        max-width: 205px;
+        text-align: left;
         @include FontStyle('TimesNewRoman', normal, #710000, 20px, 23px);
       }
       .card-item__description{

@@ -161,6 +161,7 @@ export default {
         height: 32px;
         width: 32px;
         svg{
+          min-width: 19px;
           margin-top: 2px;
           transform: scale(0.7);
         }
@@ -178,6 +179,7 @@ export default {
         display: flex;
         padding: 0 21px;
         .svg-geolocation{
+          min-width: 33px;
           transform: scale(0.7);
           margin-right: 7px;
         }
@@ -190,6 +192,7 @@ export default {
           display: flex;
           align-items: center;
           .svg-arrow{
+            min-width: 33px;
             margin-left: 6px;
           }
         }

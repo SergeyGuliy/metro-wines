@@ -234,3 +234,16 @@ input, button, textarea{
   bottom: 0;
   right: 0;
 }
+
+.popup{
+  display: none;
+  background: #FFFFFF;
+  position: absolute;
+  width: 100%;
+  max-width: 565px;
+  padding: 20px 30px;
+  box-shadow: 0px 4px 18px rgba(0, 0, 0, 0.25);
+  border-radius: 15px;
+  @include FontStyle('Acrom', normal, #000000, 16px, 19px);
+  z-index: 1;
+}

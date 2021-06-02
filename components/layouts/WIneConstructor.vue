@@ -11,14 +11,17 @@
         >
           <div class="s-circle">
             <Ok />
+            <div class="popup s-circle__popup">
+              В одну винную карту можно добавить не больше {{ activeShablone> 2? '15': '20' }} позиций товара. Но вы можете создать несколько винных карт.
+            </div>
           </div>
           <img class="noselect" :src="require(`assets/images/shablob-item-${shablone}.jpg`)" alt="">
           <div class="wine-constructor__shablones-shadow" />
         </div>
       </div>
-      <div class="wine-constructor__shablones-shadow" />
+      <!--      <div class="wine-constructor__shablones-shadow" />-->
     </div>
-    <div class="wine-constructor__shablone-wrapper">
+    <div v-if="activeShablone> 0" class="wine-constructor__shablone-wrapper">
       <div class="wine-constructor__text">
         Отредактируйте стоимость вин, в соответствии с вашим ценообразованием, распечатайте готовый файл и вложите в ваше меню
       </div>
@@ -33,51 +36,28 @@
               Винная карта
             </div>
             <div class="shablone__row">
-              <div class="shablone__col">
-                <template v-for="(block, index) in items">
-                  <WineConstructorBlock
-                    v-if="index < 3"
-                    :key="index"
-                    :block-data="block"
-                  />
-                </template>
-              </div>
-              <div class="shablone__col">
-                <template v-for="(block, index) in items">
-                  <WineConstructorBlock
-                    v-if="index > 2"
-                    :key="index"
-                    :block-data="block"
-                  />
-                </template>
-              </div>
+              <template v-for="(block, index) in items">
+                <WineConstructorBlock
+                  :key="index"
+                  :block-data="block"
+                />
+              </template>
             </div>
           </div>
         </div>
+
         <div v-if="activeShablone === 2" class="shablone__inner-box shablone__inner-box--2">
           <div class="shablone__inner-content">
             <div class="shablone__title">
               Винная карта
             </div>
             <div class="shablone__row">
-              <div class="shablone__col">
-                <template v-for="(block, index) in items">
-                  <WineConstructorBlock
-                    v-if="index < 3"
-                    :key="index"
-                    :block-data="block"
-                  />
-                </template>
-              </div>
-              <div class="shablone__col">
-                <template v-for="(block, index) in items">
-                  <WineConstructorBlock
-                    v-if="index > 2"
-                    :key="index"
-                    :block-data="block"
-                  />
-                </template>
-              </div>
+              <template v-for="(block, index) in items">
+                <WineConstructorBlock
+                  :key="index"
+                  :block-data="block"
+                />
+              </template>
             </div>
           </div>
         </div>
@@ -130,6 +110,9 @@ export default {
     WineConstructorBlock: () => import('./WineConstructorBlock'),
     Ok: () => import('assets/icons/ok-2.svg')
   },
+  props: {
+    selectedWines: {}
+  },
   data () {
     return {
       activeShablone: 1,
@@ -149,7 +132,8 @@ export default {
       return this.activeShablone > 2 ? this.pageSizeSmall : this.pageSizeBig
     },
     items () {
-      const winesAttributes = Object.values(this.$userBucket).map(i => i.wineData.attributes.map(i => i.id === 308 ? i : false).filter(i => !!i))
+      console.log(this.selectedWines)
+      const winesAttributes = Object.values(this.selectedWines).map(i => i.wineData.attributes.map(i => i.id === 308 ? i : false).filter(i => !!i))
       // winesAttributes.map((i) => {
       //   console.log(i)
       // })
@@ -167,7 +151,7 @@ export default {
       })
 
       // 308
-      Object.values(this.$userBucket).forEach((i) => {
+      Object.values(this.selectedWines).forEach((i) => {
         const type = i.wineData.attributes.find(i => i.id === 308)
         if (type) {
           winesTypes[type.value_id].items.push({
@@ -265,27 +249,31 @@ export default {
         })
     },
     doResize (event, ui) {
-      const $wrapper = document.querySelector('.shablone__inner-content')
-      const elWidth = document.querySelector('.shablone__inner-box').clientWidth
-      const scale = elWidth / ui.clientWidth
-      if (this.activeShablone < 3) {
-        $wrapper.style.transform = `scale(${scale})`
-        $wrapper.style.width = `${this.currentPageSize.clientWidth}px`
-        $wrapper.style.height = `${this.currentPageSize.clientHeight}px`
-        $wrapper.style.top = `${((1 / scale) - 1) * (-50)}%`
-        $wrapper.style.left = `${((1 / scale) - 1) * (-50)}%`
-      } else if (scale < 1) {
-        $wrapper.style.transform = `scale(${scale})`
-        $wrapper.style.width = `${this.currentPageSize.clientWidth}px`
-        $wrapper.style.height = `${this.currentPageSize.clientHeight}px`
-        $wrapper.style.top = `${((1 / scale) - 1) * (-50)}%`
-        $wrapper.style.left = `${((1 / scale) - 1) * (-50)}%`
-      } else {
-        $wrapper.style.transform = 'scale(1)'
-        $wrapper.style.width = '693px'
-        $wrapper.style.height = '1957px'
-        $wrapper.style.top = '0'
-        $wrapper.style.left = '0'
+      try {
+        const $wrapper = document.querySelector('.shablone__inner-content')
+        const elWidth = document.querySelector('.shablone__inner-box').clientWidth
+        const scale = elWidth / ui.clientWidth
+        if (this.activeShablone < 3) {
+          $wrapper.style.transform = `scale(${scale})`
+          $wrapper.style.width = `${this.currentPageSize.clientWidth}px`
+          $wrapper.style.height = `${this.currentPageSize.clientHeight}px`
+          $wrapper.style.top = `${((1 / scale) - 1) * (-50)}%`
+          $wrapper.style.left = `${((1 / scale) - 1) * (-50)}%`
+        } else if (scale < 1) {
+          $wrapper.style.transform = `scale(${scale})`
+          $wrapper.style.width = `${this.currentPageSize.clientWidth}px`
+          $wrapper.style.height = `${this.currentPageSize.clientHeight}px`
+          $wrapper.style.top = `${((1 / scale) - 1) * (-50)}%`
+          $wrapper.style.left = `${((1 / scale) - 1) * (-50)}%`
+        } else {
+          $wrapper.style.transform = 'scale(1)'
+          $wrapper.style.width = '693px'
+          $wrapper.style.height = '1957px'
+          $wrapper.style.top = '0'
+          $wrapper.style.left = '0'
+        }
+      } catch (e) {
+
       }
     }
   }
@@ -312,7 +300,7 @@ export default {
         right: 0;
       }
       .shablone__inner-content{
-        padding: 169px 80px 80px 80px;
+        padding: 98px 80px 80px 80px;
         position: absolute;
         min-height: 100%;
         min-width: 100%;
@@ -325,17 +313,37 @@ export default {
         display: flex;
         justify-content: space-between;
         flex: 1 1 auto;
+        overflow: hidden;
       }
       .shablone__col{
         width: calc(50% - 31px);
       }
-      .shablone__col:last-child{
-        padding-top: 500px;
+      .shablone__col-2{
+        max-height: 100%;
+        overflow: hidden;
       }
+      /*.shablone__col:last-child{*/
+      /*  padding-top: 500px;*/
+      /*}*/
       .shablone__title{
         @include FontStyle('Acrom', normal, #FFFFFF, 90px, 180px);
         text-transform: uppercase;
         margin-bottom: 50px;
+      }
+      .shablone__inner-box--1, .shablone__inner-box--2{
+        .shablone__row{
+          flex-direction: column;
+          justify-content: unset;
+          flex-wrap: wrap;
+        }
+        .wcb{
+          width: calc(50% - 31px);
+          margin-right: 62px;
+        }
+        .wcb__left{
+          max-width: 380px;
+          min-width: 330px;
+        }
       }
       .shablone__inner-box--1{
         background-image: url("../../assets/images/chamblon-main-1.jpg");
@@ -432,15 +440,17 @@ export default {
       justify-content: space-between;
       padding: 0 10px;
       align-items: flex-end;
-      min-height: 345px;
-      overflow-x: auto;
+      min-height: 458px;
+      margin-top: -141px;
+      /*overflow-x: auto;*/
+      /*overflow-y: visible;*/
+      overflow: auto;
       position: relative;
       .wine-constructor__shablone-select-box{
         margin: 0 10px;
         width: calc(25% - 20px);
         position: relative;
         cursor: pointer;
-        z-index: 1;
         display: flex;
         align-items: flex-end;
         min-width: 336px;
@@ -462,6 +472,35 @@ export default {
           background: #FFFFFF;
           svg{
             display: block;
+          }
+          .s-circle__popup{
+            display: block;
+            width: 420px;
+            /*min-width: 420px;*/
+            left: calc(100% + -51px);
+            bottom: 148%;
+            /*position: relative;*/
+          }
+          &::after{
+            top: calc(100% - 63px);
+            transform: rotate(45deg);
+            position: absolute;
+            display: block;
+            content: '';
+            height: 20px;
+            width: 20px;
+            background-color: white;
+          }
+        }
+      }
+
+      .wine-constructor__shablone-select-box:nth-child(3), .wine-constructor__shablone-select-box:nth-child(4) {
+        .s-circle{
+          .s-circle__popup{
+            width: 420px;
+            left: unset;
+            right: calc(100% + -51px);
+            bottom: 148%;
           }
         }
       }
@@ -538,8 +577,10 @@ export default {
     }
     @media (max-width: 1080px) {
       .wine-constructor__shablones{
-        min-height: 336px;
-        margin: 0 -25px;
+        min-height: 428px;
+        margin-top: -106px;
+        margin-right: -25px;
+        margin-left: -25px;
       }
       .wine-constructor__shablone-wrapper{
         margin: 0 -30px;
@@ -588,15 +629,7 @@ export default {
           margin-bottom: 10px;
         }
         .button:last-child{
-          &::after{
-            display: block;
-            text-transform: uppercase !important;
-            @include FontStyle('Acrom', bold, #FFFFFF, 14px, 16px);
-            content: 'Отправить менеджеру'
-          }
-          .button__text{
-            display: none;
-          }
+
         }
       }
       .wine-constructor__shablones{
