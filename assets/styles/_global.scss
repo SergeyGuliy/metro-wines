@@ -116,6 +116,9 @@ input, button, textarea{
     }
   }
 }
+body {
+  touch-action: pan-x pan-y;
+}
 
 .custom-input-box {
   height: 70px;

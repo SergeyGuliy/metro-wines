@@ -11,7 +11,7 @@
         <ArrowBack />
       </button>
       <template v-for="(page) in Array.from({length:lastPage},(v,k)=>k+1)">
-        <template v-if="page < 3">
+        <template v-if="page < 4">
           <button
             :key="page"
             class="paginator__item"
@@ -21,7 +21,7 @@
             {{ page }}
           </button>
         </template>
-        <template v-else-if="page > lastPage - 2">
+        <template v-else-if="page > lastPage - 3">
           <button
             :key="page"
             class="paginator__item"
@@ -46,42 +46,72 @@
             ...
           </button>
         </template>
+        <template v-else-if="(page === 3 && value < 4)">
+          <button :key="page" class="paginator__item" disabled>
+            ...
+          </button>
+        </template>
+        <template v-else-if="(page === 4 && value < 4)">
+          <button :key="page" class="paginator__item" disabled>
+            ...
+          </button>
+        </template>
+        <template v-else-if="(page === 5 && value < 4)">
+          <button :key="page" class="paginator__item" disabled>
+            ...
+          </button>
+        </template>
+        <template v-else-if="(page === lastPage - 2 && value > lastPage - 3)">
+          <button :key="page" class="paginator__item" disabled>
+            ...
+          </button>
+        </template>
+        <template v-else-if="(page === lastPage - 3 && value > lastPage - 3)">
+          <button :key="page" class="paginator__item" disabled>
+            ...
+          </button>
+        </template>
+        <template v-else-if="(page === lastPage - 4 && value > lastPage - 3)">
+          <button :key="page" class="paginator__item" disabled>
+            ...
+          </button>
+        </template>
         <!--        <template v-else-if="(value < 2 || value > lastPage - 2)">-->
-        <template v-else-if="(value < 3 && page === 2)">
-          <button :key="page" class="paginator__item" disabled>
-            ...
-          </button>
-        </template>
-        <template v-else-if="(value < 3 && page === 3)">
-          <button :key="page" class="paginator__item" disabled>
-            ...
-          </button>
-        </template>
-        <template v-else-if="(value < 3 && page === 4)">
-          <button :key="page" class="paginator__item" disabled>
-            ...
-          </button>
-        </template>
-        <template v-else-if="(value < 3 && page === 5)">
-          <button :key="page" class="paginator__item" disabled>
-            ...
-          </button>
-        </template>
-        <template v-else-if="(value > lastPage - 3 && page === lastPage - 2)">
-          <button :key="page" class="paginator__item" disabled>
-            ...
-          </button>
-        </template>
-        <template v-else-if="(value > lastPage - 3 && page === lastPage - 3)">
-          <button :key="page" class="paginator__item" disabled>
-            ...
-          </button>
-        </template>
-        <template v-else-if="(value > lastPage - 3 && page === lastPage - 4)">
-          <button :key="page" class="paginator__item" disabled>
-            ...
-          </button>
-        </template>
+        <!--        <template v-else-if="(value < 3 && page === 2)">-->
+        <!--          <button :key="page" class="paginator__item" disabled>-->
+        <!--            ...-->
+        <!--          </button>-->
+        <!--        </template>-->
+        <!--        <template v-else-if="(value < 3 && page === 3)">-->
+        <!--          <button :key="page" class="paginator__item" disabled>-->
+        <!--            ...-->
+        <!--          </button>-->
+        <!--        </template>-->
+        <!--        <template v-else-if="(value < 3 && page === 4)">-->
+        <!--          <button :key="page" class="paginator__item" disabled>-->
+        <!--            ...-->
+        <!--          </button>-->
+        <!--        </template>-->
+        <!--        <template v-else-if="(value < 3 && page === 5)">-->
+        <!--          <button :key="page" class="paginator__item" disabled>-->
+        <!--            ...-->
+        <!--          </button>-->
+        <!--        </template>-->
+        <!--        <template v-else-if="(value > lastPage - 3 && page === lastPage - 2)">-->
+        <!--          <button :key="page" class="paginator__item" disabled>-->
+        <!--            ...-->
+        <!--          </button>-->
+        <!--        </template>-->
+        <!--        <template v-else-if="(value > lastPage - 3 && page === lastPage - 3)">-->
+        <!--          <button :key="page" class="paginator__item" disabled>-->
+        <!--            ...-->
+        <!--          </button>-->
+        <!--        </template>-->
+        <!--        <template v-else-if="(value > lastPage - 3 && page === lastPage - 4)">-->
+        <!--          <button :key="page" class="paginator__item" disabled>-->
+        <!--            ...-->
+        <!--          </button>-->
+        <!--        </template>-->
       </template>
       <button class="paginator__item paginator__next" @click="clickNext">
         <ArrowForward />

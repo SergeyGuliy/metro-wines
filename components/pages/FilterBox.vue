@@ -414,6 +414,9 @@ export default {
           display: flex;
           align-items: center;
           justify-content: center;
+          svg{
+            min-width: 25px;
+          }
         }
         .mobile-search-box__input{
           height: 100%;

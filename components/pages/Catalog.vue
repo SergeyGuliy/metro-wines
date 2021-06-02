@@ -69,9 +69,9 @@ export default {
         })
     },
     changePage (page) {
-      this.$scrollToCard()
+      // this.$scrollToCard()
       this.currentPage = page
-      this.fetchCatalog()
+      // this.fetchCatalog()
     },
     async fetchCatalog (filters = {}) {
       if (this.$userTradeCenter?.store_id) {
@@ -86,12 +86,12 @@ export default {
             const { last_page, current_page, data, to, from, total } = res.data
             this.cards = data
             // eslint-disable-next-line camelcase
-            this.currentPage = current_page
+            this.currentPage = +current_page
             // eslint-disable-next-line camelcase
-            this.lastPage = last_page
-            this.info.to = to
-            this.info.from = from
-            this.info.total = total
+            this.lastPage = +last_page
+            this.info.to = +to
+            this.info.from = +from
+            this.info.total = +total
           })
           .catch((e) => {
             console.log(e)
