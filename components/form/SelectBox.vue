@@ -19,7 +19,7 @@
         @click="toggleItem(item)"
       >
         <span class="select-box__item-title">{{ item.value.toLocaleLowerCase() }}</span>
-        <span v-if="index !== 0" class="select-box__item-count" />
+        <span v-if="!localValue.includes(item)" class="select-box__item-count" />
         <!--        <span v-if="index !== 0" class="select-box__item-count">{{ item.count }}</span>-->
         <Close v-else />
       </div>

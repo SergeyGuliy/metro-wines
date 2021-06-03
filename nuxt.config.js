@@ -38,6 +38,7 @@ export default {
   plugins: [
     { src: '~plugins/html2canvas.js', ssr: false },
     { src: '~plugins/mask.js', ssr: false },
+    { src: '~plugins/vuelidate.js', ssr: false },
     '~/plugins/vuePrototype.js',
     '~/plugins/bus.js'
     // '~/plugins/slider.js'

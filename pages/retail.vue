@@ -42,20 +42,26 @@ export default {
     }
   },
   async mounted () {
-    console.clear()
+    // console.clear()
     await this.$fetchTradecenters()
     await this.$loadGeoData()
     await this.$fetchBucket()
     await this.$selectUserAge()
     await this.$selectUserType()
     this.$routeMiddleWare()
-    // this.$openModal('BucketUser')
-    //   .then((data) => {
-    //     console.log(data)
-    //   })
-    //   .catch((e) => {
-    //     console.log(e)
-    //   })
+    console.log(this.$store?.state?.scrollTo)
+    try {
+      if (this.$store?.state?.scrollTo) {
+        document.getElementById('wineCard').scrollIntoView({
+          block: 'start',
+          behavior: 'smooth'
+        })
+      }
+    } catch (e) {
+      console.log('ERROR')
+    } finally {
+      this.$store.commit('SET_SCROLL_TO', false)
+    }
   }
 }
 </script>

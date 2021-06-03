@@ -1,7 +1,7 @@
 <template>
   <div
     class="input-box"
-    :class="depresed? 'input-box--depresed' : null"
+    :class="{'input-box--depresed': depresed, 'input-box--error': localError}"
   >
     <input
       v-model="localValue"
@@ -16,6 +16,9 @@
     <div class="input-box__append">
       <slot name="append" />
     </div>
+    <div class="input-box__error">
+      {{ localError }}
+    </div>
   </div>
 </template>
 
@@ -26,6 +29,7 @@ export default {
     Search: () => import('../../assets/icons/Search.svg')
   },
   props: {
+    errors: {},
     value: {
       required: true
     },
@@ -46,6 +50,9 @@ export default {
     return {}
   },
   computed: {
+    localError () {
+      return this.errors ? this.errors.filter(error => typeof error === 'string')[0] : ''
+    },
     localValue: {
       get () {
         return this.value
@@ -73,9 +80,9 @@ export default {
       padding: 0 8px;
       @include FontStyle('Acrom', normal, #000000, 20px, 25px);
     }
-    .input-field:focus{
-      border: 1px solid #737373;
-    }
+    /*.input-field:focus{*/
+    /*  border: 1px solid #737373;*/
+    /*}*/
     .input-field__search{
       padding: 0 8px 0 62px;
     }
@@ -100,10 +107,24 @@ export default {
     ::placeholder{
       @include FontStyle('Acrom', normal, #999999, 20px, 25px);
     }
+    .input-box__error{
+      display: none;
+    }
   }
   .input-box--depresed{
     .input-field{
       border: none;
+    }
+  }
+  .input-box--error{
+    .input-field{
+      border: 1px solid #710000;
+    }
+    .input-box__error{
+      display: block;
+      padding-left: 5px;
+      @include FontStyle('Acrom', normal, #710000, 12px, 13px);
+
     }
   }
 </style>

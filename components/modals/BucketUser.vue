@@ -20,7 +20,7 @@
         <span class="bucket-user-modal__symm-inner">{{ $getTotalPrice | number }} ₽</span>
       </div>
       <div class="bucket-user-modal__actions">
-        <Button :rounded="true" :uppercase="true" :bold="true" @click="close(true)">
+        <Button :rounded="true" :uppercase="true" :bold="true" @click="$downloadXLS">
           Скачать спецификацию
         </Button>
         <Button :filled="true" :uppercase="true" :bold="true" @click="close(true)">

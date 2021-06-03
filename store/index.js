@@ -7,7 +7,8 @@ export const state = () => ({
   tradeCenters: {},
   userTradeCenter: null,
   userHash: null,
-  userType: null
+  userType: null,
+  scrollTo: false
 })
 
 export const mutations = {
@@ -22,6 +23,9 @@ export const mutations = {
   },
   SET_USER_TRADE_CENTER (state, userTradeCenter) {
     Vue.set(state, 'userTradeCenter', userTradeCenter)
+  },
+  SET_SCROLL_TO (state, scrollTo) {
+    Vue.set(state, 'scrollTo', scrollTo)
   }
 }
 

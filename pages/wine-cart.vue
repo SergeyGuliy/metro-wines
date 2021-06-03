@@ -6,14 +6,16 @@
       <div class="container">
         <div class="wine-cart-main__title">
           В вашей винной карте {{ basketLength }} {{ basketLengthWinesNames[basketLength] || 'вин' }}
-          <div class="popup wine-cart-main__popup">В одну винную карту можно добавить не больше 20 позиций, выберите нужные и они автоматически попадут в шаблон. При необходимости вы можете создать несколько винных карт.</div>
+          <div class="popup wine-cart-main__popup">
+            В одну винную карту можно добавить не больше 20 позиций, выберите нужные и они автоматически попадут в шаблон. При необходимости вы можете создать несколько винных карт.
+          </div>
         </div>
         <WineCartList :selected-wines="selectedWines" @toggleList="toggleList" />
         <div class="wine-cart-main__actions">
-          <Button :filled="true" :uppercase="true" @click="downloadXLS">
+          <Button :filled="true" :uppercase="true" @click="$downloadXLS">
             Скачать EXCEL для заказа
           </Button>
-          <Button :filled="true" :uppercase="true">
+          <Button :filled="true" :uppercase="true" @click="openFeedBackModal">
             Отправить ассортимент менеджеру
           </Button>
         </div>
@@ -6952,6 +6954,15 @@ export default {
     this.$routeMiddleWare()
   },
   methods: {
+    openFeedBackModal () {
+      this.$openModal('FeedbackManadger')
+        .then((data) => {
+          console.log(data)
+        })
+        .catch((e) => {
+          console.log(e)
+        })
+    },
     toggleList (item) {
       if (this.selectedWines.includes(item)) {
         const index = this.selectedWines.findIndex(i => (i.wineData.article === item.wineData.article))
@@ -6959,81 +6970,6 @@ export default {
       } else {
         this.selectedWines.push(item)
       }
-    },
-    downloadXLS () {
-      const tableData = []
-      Object.values(this.$userBucket).forEach((wine) => {
-        tableData.push([
-          wine.wineData.name,
-          wine.wineData.article,
-          // wine.wineData.description,
-          wine.wineData.prices.price,
-          wine.count,
-          +wine.count * +wine.wineData.prices.price,
-          wine.wineData.attributes.find(i => i.id === 308)?.text || '',
-          wine.wineData.attributes.find(i => i.id === 4973)?.text || '',
-          wine.wineData.attributes.find(i => i.id === 309)?.text || '',
-          wine.wineData.attributes.find(i => i.id === 310)?.text || '',
-          wine.wineData.attributes.find(i => i.id === 311)?.text || '',
-          wine.wineData.attributes.find(i => i.id === 313)?.text || '',
-          wine.wineData.attributes.find(i => i.id === 1702)?.text || '',
-          wine.wineData.attributes.find(i => i.id === 4975)?.text || ''
-        ])
-      })
-      const wb = XLSX.utils.book_new()
-      wb.Props = {
-        Title: 'SheetJS Tutorial',
-        Subject: 'Test',
-        Author: 'Red Stapler',
-        CreatedDate: new Date(2017, 12, 19)
-      }
-      wb.SheetNames.push('Test Sheet')
-      const wsData = [[
-        'Наименование',
-        'Артикул',
-        // 'Описание',
-        'Цена за шт',
-        'Количество',
-        'Сумма',
-        'Цвет',
-        'Страна',
-        'Регион',
-        'Сорт винограда',
-        'Содержание сахара',
-        'Крепость (‰)',
-        'Объем, л',
-        'Категория вина'
-
-      ]]
-      tableData.forEach((data) => {
-        wsData.push(data)
-      })
-      const ws = XLSX.utils.aoa_to_sheet(wsData)
-      wb.Sheets['Test Sheet'] = ws
-      const wscols = [
-        { wpx: 200, hpx: 50 },
-        { wpx: 50, hpx: 50 },
-        // { wpx: 250, hpx: 50 },
-        { wpx: 75, hpx: 50 },
-        { wpx: 75, hpx: 50 },
-        { wpx: 75, hpx: 50 },
-        { wpx: 75, hpx: 50 },
-        { wpx: 75, hpx: 50 },
-        { wpx: 75, hpx: 50 },
-        { wpx: 75, hpx: 50 },
-        { wpx: 75, hpx: 50 },
-        { wpx: 75, hpx: 50 },
-        { wpx: 75, hpx: 50 }
-      ]
-      ws['!cols'] = wscols
-      const wbout = XLSX.write(wb, { bookType: 'xlsx', type: 'binary' })
-      saveAs(new Blob([this.s2ab(wbout)], { type: 'application/octet-stream' }), 'test.xlsx')
-    },
-    s2ab (s) {
-      const buf = new ArrayBuffer(s.length) // convert s to arrayBuffer
-      const view = new Uint8Array(buf) // create uint8array as viewer
-      for (let i = 0; i < s.length; i++) { view[i] = s.charCodeAt(i) & 0xFF } // convert to octet
-      return buf
     }
   }
 }

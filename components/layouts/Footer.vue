@@ -18,7 +18,7 @@
           Будни: с 7 до 22 часов<br>
           Выходные: с 8 до 22 часов
         </div>
-        <a href="#" class="footer__contact">
+        <a href="#" class="footer__contact" @click.prevent="openFeedBackModal">
           <div class="footer__svg-box">
             <Email />
           </div>

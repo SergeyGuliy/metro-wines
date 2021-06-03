@@ -8,10 +8,36 @@
       Наш специалист свяжется с вами для уточнениния деталей.
     </div>
     <div class="feedback-modal__form">
-      <InputBox v-model="form.name" placeholder="Имя" />
-      <InputBox v-model="form.email" placeholder="Электронная почта" />
-      <InputBox v-model="form.phone" placeholder="Телефон" />
-      <TextareaBox v-model="form.text" placeholder="Сообщение" />
+      <InputBox
+        v-model="form.name"
+        placeholder="Имя"
+        :errors="[
+          ($v.form.name.required || !$v.form.name.$dirty) || vt.required
+        ]"
+      />
+      <InputBox
+        v-model="form.email"
+        placeholder="Электронная почта"
+        :errors="[
+          ($v.form.email.required || !$v.form.email.$dirty) || vt.required,
+          ($v.form.email.regexEmail || !$v.form.email.$dirty) || vt.regexEmail]
+        "
+      />
+      <InputBox
+        v-model="form.phone"
+        placeholder="Телефон"
+        :errors="[
+          ($v.form.phone.required || !$v.form.phone.$dirty) || vt.required,
+          ($v.form.phone.regexPhone || !$v.form.phone.$dirty) || vt.regexPhone
+        ]"
+      />
+      <TextareaBox
+        v-model="form.text"
+        placeholder="Сообщение"
+        :errors="[
+          ($v.form.text.required || !$v.form.text.$dirty) || vt.required
+        ]"
+      />
     </div>
     <div class="feedback-modal__action">
       <Button :filled="true" :bold="true" @click="sendFeedback">
@@ -22,9 +48,11 @@
 </template>
 
 <script>
-import { api } from '../../assets/js/api'
+import { helpers, required } from 'vuelidate/lib/validators'
+import { validationMixin } from 'vuelidate'
 import modalMixin from './modalMixin'
-
+const regexPhone = helpers.regex('alpha', /^[+][7]{1}[(][0-9]{3}[)][-][0-9]{3}[-][0-9]{4}$/)
+const regexEmail = helpers.regex('alpha', /^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/)
 export default {
   name: 'Feedback',
   components: {
@@ -33,7 +61,7 @@ export default {
     TextareaBox: () => import('../form/TextareaBox'),
     Close: () => import('assets/icons/close.svg')
   },
-  mixins: [modalMixin],
+  mixins: [modalMixin, validationMixin],
   data () {
     return {
       form: {
@@ -44,14 +72,43 @@ export default {
       }
     }
   },
+
+  validations: {
+    form: {
+      name: {
+        required
+      },
+      email: {
+        required,
+        regexEmail
+      },
+      phone: {
+        required,
+        regexPhone
+      },
+      text: {
+        required
+      }
+    }
+  },
+  watch: {
+    form: {
+      deep: true,
+      handler (val) {
+        Object.keys(val).forEach((key) => {
+          if (val[key]) {
+            this.$v.form[key].$touch()
+          }
+        })
+      }
+    }
+  },
   methods: {
     sendFeedback () {
-      api.feedback.send(this.$userTradeCenter?.store_id, this.form).then((data) => {
-        console.log(data)
-        // this.close(true)
-      }).catch(({ response }) => {
-        console.error(response.data.errors)
-      })
+      this.$v.$touch()
+      if (!this.$v.$invalid) {
+        this.$mailTo(this.form)
+      }
     }
   }
 }
@@ -83,7 +140,7 @@ export default {
     .feedback-modal__form{
       .input-box{
         height: 40px;
-        margin-bottom: 10px;
+        margin-bottom: 15px;
         .input-field{
           @include FontStyle('Acrom', normal, #000000, 16px, 19px);
         }

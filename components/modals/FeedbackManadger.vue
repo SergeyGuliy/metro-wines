@@ -1,5 +1,5 @@
 <template>
-  <div class="feedback-modal">
+  <form class="feedback-modal" @submit.prevent="sendFeedback">
     <Close class="svg-close" @click="close" />
     <div class="feedback-modal__title">
       Заявка менеджеру
@@ -8,23 +8,61 @@
       Наш специалист свяжется с вами для уточнениния деталей.
     </div>
     <div class="feedback-modal__form">
-      <InputBox v-model="form.firstName" placeholder="Имя" />
-      <InputBox v-model="form.secondName" placeholder="Фамилия" />
-      <InputBox v-model="form.city" placeholder="Город" />
-      <InputBox v-model="form.email" placeholder="Электронная почта" />
-      <InputBox v-model="form.phone" placeholder="Телефон" />
+      <InputBox
+        v-model="form.firstName"
+        placeholder="Имя"
+        :errors="[
+          ($v.form.firstName.required || !$v.form.firstName.$dirty) || vt.required
+        ]"
+      />
+      <InputBox
+        v-model="form.secondName"
+        placeholder="Фамилия"
+        :errors="[
+          ($v.form.secondName.required || !$v.form.secondName.$dirty) || vt.required
+        ]"
+      />
+      <InputBox
+        v-model="form.city"
+        placeholder="Город"
+        :errors="[
+          ($v.form.city.required || !$v.form.city.$dirty) || vt.required
+        ]"
+      />
+      <InputBox
+        v-model="form.email"
+        placeholder="Электронная почта"
+        :errors="[
+          ($v.form.email.required || !$v.form.email.$dirty) || vt.required,
+          ($v.form.email.regexEmail || !$v.form.email.$dirty) || vt.regexEmail]
+        "
+      />
+      <InputBox
+        v-model="form.phone"
+        placeholder="Телефон"
+        :errors="[
+          ($v.form.phone.required || !$v.form.phone.$dirty) || vt.required,
+          ($v.form.phone.regexPhone || !$v.form.phone.$dirty) || vt.regexPhone
+        ]"
+      />
     </div>
     <div class="feedback-modal__action">
-      <Button :bold="true" :filled="true" @click="sendFeedback">
+      <Button :bold="true" :filled="true">
         ОТПРАВИТЬ
       </Button>
     </div>
-  </div>
+  </form>
 </template>
 
 <script>
-import { api } from '../../assets/js/api'
+// eslint-disable-next-line no-unused-vars
+import { required, helpers } from 'vuelidate/lib/validators'
+import { validationMixin } from 'vuelidate'
+
 import modalMixin from './modalMixin'
+//                                                +7(123)-456-7890
+const regexPhone = helpers.regex('alpha', /^[+][7]{1}[(][0-9]{3}[)][-][0-9]{3}[-][0-9]{4}$/)
+const regexEmail = helpers.regex('alpha', /^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/)
 
 export default {
   name: 'FeedbackManadger',
@@ -33,26 +71,58 @@ export default {
     InputBox: () => import('../form/InputBox'),
     Close: () => import('assets/icons/close.svg')
   },
-  mixins: [modalMixin],
+  mixins: [modalMixin, validationMixin],
+
+  validations: {
+    form: {
+      firstName: {
+        required
+      },
+      secondName: {
+        required
+      },
+      city: {
+        required
+      },
+      email: {
+        required,
+        regexEmail
+      },
+      phone: {
+        required,
+        regexPhone
+      }
+    }
+  },
   data () {
     return {
       form: {
-        firstName: '',
-        secondName: '',
-        city: '',
-        email: '',
-        phone: ''
+        firstName: 'йцуйцу',
+        secondName: 'йцуйцу',
+        city: 'йцуцйу',
+        email: 'dasd@gmasd.com',
+        phone: '+7(123)-456-7890'
+      }
+    }
+  },
+  watch: {
+    form: {
+      deep: true,
+      handler (val) {
+        Object.keys(val).forEach((key) => {
+          if (val[key]) {
+            this.$v.form[key].$touch()
+          }
+        })
       }
     }
   },
   methods: {
     sendFeedback () {
-      api.feedback.send(this.$userTradeCenter?.store_id, this.form).then((data) => {
-        console.log(data)
-        // this.close(true)
-      }).catch(({ response }) => {
-        console.error(response.data)
-      })
+      this.$v.$touch()
+      if (!this.$v.$invalid) {
+        this.$mailTo(this.form)
+      }
     }
   }
 }
@@ -85,7 +155,7 @@ export default {
     .feedback-modal__form{
       .input-box{
         height: 40px;
-        margin-bottom: 10px;
+        margin-bottom: 15px;
         .input-field{
           @include FontStyle('Acrom', normal, #000000, 16px, 19px);
         }
