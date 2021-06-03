@@ -69,9 +69,9 @@ export default {
         })
     },
     changePage (page) {
-      // this.$scrollToCard()
+      this.$scrollToCard()
       this.currentPage = page
-      // this.fetchCatalog()
+      this.fetchCatalog()
     },
     async fetchCatalog (filters = {}) {
       if (this.$userTradeCenter?.store_id) {
