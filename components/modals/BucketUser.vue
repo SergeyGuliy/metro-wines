@@ -17,7 +17,7 @@
     <div class="bucket-user-modal__footer">
       <div class="bucket-user-modal__symm">
         Всего товаров на сумму:
-        <span class="bucket-user-modal__symm-inner">{{ $getTotalPrice }} ₽</span>
+        <span class="bucket-user-modal__symm-inner">{{ $getTotalPrice | number }} ₽</span>
       </div>
       <div class="bucket-user-modal__actions">
         <Button :rounded="true" :uppercase="true" :bold="true" @click="close(true)">

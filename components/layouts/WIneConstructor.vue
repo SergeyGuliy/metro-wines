@@ -380,8 +380,8 @@ export default {
 
             }
             .wcb__left {
-              max-width: 350px;
-              min-width: 350px;
+              max-width: 320px;
+              min-width: 320px;
             }
           }
         }

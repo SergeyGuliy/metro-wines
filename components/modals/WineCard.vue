@@ -211,7 +211,8 @@ export default {
     @media (max-width: 767px) {
       height: unset;
       width: 300px;
-      max-height: calc(100vh - 30px);
+      max-height: calc(100vh - 80px);
+      transform: translate(-50%, calc(-50% + -10px));
       overflow: auto;
       flex-direction: column;
       padding: 0 15px 40px 15px;

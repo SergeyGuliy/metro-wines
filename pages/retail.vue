@@ -49,6 +49,13 @@ export default {
     await this.$selectUserAge()
     await this.$selectUserType()
     this.$routeMiddleWare()
+    // this.$openModal('BucketUser')
+    //   .then((data) => {
+    //     console.log(data)
+    //   })
+    //   .catch((e) => {
+    //     console.log(e)
+    //   })
   }
 }
 </script>
