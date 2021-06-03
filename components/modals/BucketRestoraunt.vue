@@ -18,6 +18,7 @@
     <div v-else class="bucket-restoraunt__filled">
       <div class="bucket-restoraunt__title">
         Корзина
+        <Close @click="close"/>
       </div>
 
       <div class="bucket-restoraunt__devider" />
@@ -148,6 +149,9 @@ export default {
       @include FontStyle('Acrom', normal, #000000, 26px, 31px);
       margin-bottom: 9px;
       padding: 0 30px;
+      svg{
+        display: none;
+      }
     }
     .bucket-restoraunt__devider{
       background: #710000;
@@ -245,20 +249,41 @@ export default {
     }
 
     @media (max-width: 767px) {
-      width: 300px;
-      top: calc(100vh - 366px);
+      width: 100vw;
+      height: 100vh;
       filter: unset;
-      position: static;
-      transform: unset !important;
-      margin-top: calc(100vh - 570px);
-      margin-left: auto;
-      margin-right: auto;
-      height: 450px;
+      position: fixed;
+      top: 0;
+      left: 0;
+      transform: translate(0, 0) !important;
+      max-height: unset;
+      border-radius: 0;
+      padding-bottom: 0;
+      display: flex;
+      flex-direction: column;
+      .bucket-restoraunt__title{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        svg{
+          display: block;
+        }
+      }
+      .bucket-restoraunt__filled{
+        height: 100%;
+        max-height: unset;
+      }
+      .bucket-restoraunt__body{
+        flex: 1 1 auto;
+        max-height: unset;
+      }
+      .bucket-restoraunt__devider{
+        margin-bottom: 5px;
+        margin-top: 5px;
+      }
+
       .bucket-restoraunt__actions{
-        position: fixed;
         background: #F4F3F1;
-        bottom: 0;
-        left: 0;
         width: 100vw;
         height: 122px;
         flex-direction: column;
@@ -304,6 +329,7 @@ export default {
           min-width: unset;
         }
       }
+
     }
   }
 </style>

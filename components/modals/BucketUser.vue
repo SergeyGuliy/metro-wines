@@ -126,20 +126,44 @@ export default {
     }
 
     @media (max-width: 767px) {
-      width: 300px;
-      top: calc(100vh - 366px);
+      width: 100vw;
+      height: 100vh;
       filter: unset;
-      position: static;
-      transform: unset;
-      margin-top: calc(100vh - 570px);
-      margin-left: auto;
-      margin-right: auto;
-      height: 450px;
-      .svg-close{
-        display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      transform: translate(0, 0) !important;
+      border-radius: 0;
+      padding-bottom: 0;
+      display: flex;
+      flex-direction: column;
+      max-height: 100vh;
+      /*.svg-close{*/
+      /*  display: none;*/
+      /*}*/
+      .bucket-user-modal__outset{
+        flex: 1 1 auto;
+        max-height: calc(100vh - 122px);
+        margin: 0;
       }
-
+      .bucket-user-modal__body{
+        flex: 1 1 auto;
+        height: unset;
+        overflow: auto;
+        max-height: calc(100vh - 191px);
+        .bucket-card{
+          /*padding: 0 30px;*/
+          padding-right: 30px;
+          padding-left: 30px;
+        }
+      }
+      .bucket-user-modal__devider{
+        margin: 0 30px;
+        width: unset;
+      }
       .bucket-user-modal__title{
+        margin: 0 30px;
+        margin-bottom: 10px;
         @include FontStyle('Acrom', normal, #000000, 20px, 24px);
       }
       .bucket-user-modal__symm{
@@ -148,18 +172,10 @@ export default {
       .bucket-user-modal__symm-inner{
         @include FontStyle('Acrom', bold, #000000, 18px, 22px);
       }
-      .bucket-user-modal__body{
-        height: 370px;
-      }
-      .bucket-user-modal__outset{
-        margin: 0 15px;
-      }
       .bucket-user-modal__footer{
-        position: fixed;
         background: #F4F3F1;
         bottom: 0;
         left: 0;
-        width: 100vw;
         height: 122px;
         flex-direction: column;
         align-items: baseline;
@@ -168,6 +184,7 @@ export default {
           display: flex;
         }
       }
+
     }
 
   }
