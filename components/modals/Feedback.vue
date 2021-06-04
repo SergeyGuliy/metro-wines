@@ -25,6 +25,7 @@
       />
       <InputBox
         v-model="form.phone"
+        v-mask="'+7(###)-###-####'"
         placeholder="Телефон"
         :errors="[
           ($v.form.phone.required || !$v.form.phone.$dirty) || vt.required,

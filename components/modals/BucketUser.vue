@@ -128,6 +128,7 @@ export default {
     @media (max-width: 767px) {
       width: 100vw;
       height: 100vh;
+      height: calc(var(--vh, 1vh) * 100);
       filter: unset;
       position: fixed;
       top: 0;

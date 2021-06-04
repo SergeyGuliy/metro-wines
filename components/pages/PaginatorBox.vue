@@ -198,6 +198,11 @@ export default {
       .paginator__next{
         border-radius:  0 6px 6px 0;
       }
+      .paginator__prev, .paginator__next{
+        svg{
+          min-width: 10px;
+        }
+      }
     }
 
     @media (max-width: 1080px) {

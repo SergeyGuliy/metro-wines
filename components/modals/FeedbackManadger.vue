@@ -40,6 +40,7 @@
       <InputBox
         v-model="form.phone"
         placeholder="Телефон"
+        v-mask="'+7(###)-###-####'"
         :errors="[
           ($v.form.phone.required || !$v.form.phone.$dirty) || vt.required,
           ($v.form.phone.regexPhone || !$v.form.phone.$dirty) || vt.regexPhone
@@ -97,11 +98,11 @@ export default {
   data () {
     return {
       form: {
-        firstName: 'йцуйцу',
-        secondName: 'йцуйцу',
-        city: 'йцуцйу',
-        email: 'dasd@gmasd.com',
-        phone: '+7(123)-456-7890'
+        firstName: '',
+        secondName: '',
+        city: '',
+        email: '',
+        phone: ''
       }
     }
   },

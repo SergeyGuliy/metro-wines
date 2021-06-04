@@ -47,16 +47,6 @@ export default {
         event.preventDefault()
       }
     }, false)
-    // const layoutInner = document.querySelector('.layout__inner')
-    //
-    // function outputsizeHeader () {
-    //   console.log(`-${layoutInner.offsetHeight / 5} px`)
-    //   console.log(document.querySelector('.layout__inner').style)
-    //   document.querySelector('.layout__inner').style.marginBottom = `-${(layoutInner.offsetHeight / 5).toFixed()}px`
-    // }
-    // outputsizeHeader()
-    //
-    // new ResizeObserver(outputsizeHeader).observe(layoutInner)
 
     const layoutInner = document.querySelector('.layout__inner')
     const layoutHeader = document.querySelector('.header')
@@ -91,25 +81,19 @@ export default {
     new ResizeObserver(outputsizeHeader).observe(layoutHeader)
     new ResizeObserver(outputsizeFooter).observe(layoutFooter)
 
-    // window.addEventListener('resize', () => {
-    //   outputsizeHeader()
-    //   outputsizeFooter()
-    //   outputsizeLayout()
-    // })
+    const vh = window.innerHeight * 0.01
+    document.documentElement.style.setProperty('--vh', `${vh}px`)
+    window.addEventListener('resize', () => {
+      const vh = window.innerHeight * 0.01
+      document.documentElement.style.setProperty('--vh', `${vh}px`)
+    })
   },
   methods: {
     disableScrolling () {
-      // const x = window.scrollX
-      // const y = window.scrollY
-      // window.onscroll = function (e) {
-      //   e.preventDefault()
-      //   window.scrollTo(x, y)
-      // }
       document.querySelector('body').style.overflow = 'hidden'
     },
 
     enableScrolling () {
-      // window.onscroll = function () {}
       document.querySelector('body').style.overflow = 'auto'
     }
   }
