@@ -7,7 +7,7 @@ export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   ssr: true,
   server: {
-    port: 7000,
+    port: 3000,
     host: 'local.mydomain.dk'
     // https: {
     //   key: fs.readFileSync(path.resolve(__dirname, 'localhost.key')),
