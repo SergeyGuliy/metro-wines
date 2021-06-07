@@ -3,7 +3,7 @@
     <div class="container header__container">
       <div class="header__info-box">
         <LogoMetro class="svg-logo-metro" @click="routerGo" />
-        <LogoMetroSmall class="svg-logo-metro-small" />
+        <LogoMetroSmall class="svg-logo-metro-small" @click="routerGo" />
         <Geolocation class="geo-big" />
       </div>
       <div id="bucket-activator" class="header__bucket-box" @click="openBucket">

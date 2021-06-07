@@ -49,7 +49,7 @@ export default {
     await this.$selectUserAge()
     await this.$selectUserType()
     this.$routeMiddleWare()
-    console.log(this.$store?.state?.scrollTo)
+    this.$createOrder()
     try {
       if (this.$store?.state?.scrollTo) {
         document.getElementById('wineCard').scrollIntoView({
@@ -58,7 +58,6 @@ export default {
         })
       }
     } catch (e) {
-      console.log('ERROR')
     } finally {
       this.$store.commit('SET_SCROLL_TO', false)
     }

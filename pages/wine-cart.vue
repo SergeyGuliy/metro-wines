@@ -7054,8 +7054,8 @@ export default {
     }
     @media (max-width: 767px) {
       .wine-cart-main__actions{
-        margin-top: 20px;
-        margin-bottom: 50px;
+        margin-top: 0px;
+        margin-bottom: 14px;
         .button{
           height: 40px;
           max-width: 100%;
@@ -7087,7 +7087,7 @@ export default {
       }
       .wine-cart-main__title{
         @include FontStyle('Acrom', normal, #000000, 16px, 19px);
-        margin-bottom: 102px;
+        /*margin-bottom: 102px;*/
       }
       .wine-cart-main__title.wine-cart-main__title-last{
         margin-bottom: 20px;

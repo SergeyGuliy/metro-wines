@@ -16,18 +16,20 @@
         class="filter-box__cubic"
         :search="true"
       />
-      <div
-        v-for="(item, index) in searchedItems"
-        :key="index"
-        class="search-select-box__item"
-        :class="{' search-select-box__item--active active': localValue.includes(item)}"
-        @click="toggleItem(item)"
-      >
-        <div class="checkbox" :class="{'checkbox--active':localValue.includes(item)}">
-          <Ok class="svg-ok" />
+      <div class="custom-input-box__inner-box--scrollable">
+        <div
+          v-for="(item, index) in searchedItems"
+          :key="index"
+          class="search-select-box__item"
+          :class="{' search-select-box__item--active active': localValue.includes(item)}"
+          @click="toggleItem(item)"
+        >
+          <div class="checkbox" :class="{'checkbox--active':localValue.includes(item)}">
+            <Ok class="svg-ok" />
+          </div>
+          <span class="search-select-box__item-title">{{ item.value.toLocaleLowerCase() }}</span>
+          <!--        <span class="search-select-box__item-count">{{ item.count }}</span>-->
         </div>
-        <span class="search-select-box__item-title">{{ item.value.toLocaleLowerCase() }}</span>
-        <!--        <span class="search-select-box__item-count">{{ item.count }}</span>-->
       </div>
     </div>
   </div>
@@ -46,6 +48,7 @@ export default {
     Bucket: () => import('assets/icons/bucket.svg'),
     Arrow: () => import('assets/icons/arrow-2.svg'),
     Close: () => import('assets/icons/close-2.svg'),
+    Sort: () => import('assets/icons/sort.svg'),
     Ok: () => import('assets/icons/ok.svg'),
     InputBox: () => import('./InputBox')
 
@@ -113,6 +116,9 @@ export default {
       justify-content: space-between;
       margin-bottom: 9px;
       padding: 10px;
+    }
+    .filter-box__cubic{
+      min-height: 38px;
     }
     .input-box{
       height: 38px;

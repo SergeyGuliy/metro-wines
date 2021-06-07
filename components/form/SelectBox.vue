@@ -2,8 +2,8 @@
   <div
     v-click-outside="hide"
     class="custom-input-box noselect"
-    @click="isOpen = true"
     :class="{'custom-input-box--open-mobile':isOpen}"
+    @click="isOpen = true"
   >
     <div class="custom-input-box__outer">
       <component :is="data.icon" class="custom-input-box__icon" />
@@ -11,17 +11,19 @@
       <Arrow class="custom-input-box__arrow" />
     </div>
     <div v-if="isOpen" class="custom-input-box__inner-box select-box">
-      <div
-        v-for="(item, index) in items"
-        :key="index"
-        class="select-box__item"
-        :class="{' select-box__item--active active': localValue.includes(item)}"
-        @click="toggleItem(item)"
-      >
-        <span class="select-box__item-title">{{ item.value.toLocaleLowerCase() }}</span>
-        <span v-if="!localValue.includes(item)" class="select-box__item-count" />
-        <!--        <span v-if="index !== 0" class="select-box__item-count">{{ item.count }}</span>-->
-        <Close v-else />
+      <div class="custom-input-box__inner-box--scrollable">
+        <div
+          v-for="(item, index) in items"
+          :key="index"
+          class="select-box__item"
+          :class="{' select-box__item--active active': localValue.includes(item)}"
+          @click="toggleItem(item)"
+        >
+          <span class="select-box__item-title">{{ item.value.toLocaleLowerCase() }}</span>
+          <span v-if="!localValue.includes(item)" class="select-box__item-count" />
+          <!--        <span v-if="index !== 0" class="select-box__item-count">{{ item.count }}</span>-->
+          <Close v-else />
+        </div>
       </div>
     </div>
   </div>

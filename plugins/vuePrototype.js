@@ -339,6 +339,54 @@ Vue.mixin({
           this.$store.commit('SET_USER_TRADE_CENTER', defaultCenter)
         })
       }
+    },
+    goToBucket (signature) {
+      window.location.href = `http://online.metro-cc.ru/cart?signature=${signature}`
+    },
+    async $createOrder () {
+      // this.$cookies.removeAll()
+      const busketToServer = Object.values(this.$userBucket).map((i) => {
+        return {
+          count: i.count,
+          article: i.wineData.article
+        }
+      })
+      const reqBody = {}
+      reqBody.articles = busketToServer.map(i => i.article)
+      busketToServer.forEach((item, index) => {
+        reqBody['articles.' + index + '.article'] = item.article
+        reqBody['articles.' + index + '.count'] = item.count
+      })
+      await api.bucket.getMyBasket(this.$userTradeCenter?.store_id)
+        .then((res) => {
+          // this.$cookies.set('metro_user_id', res.data.user_hash, {
+          //   domain: 'api.metro-cc.ru',
+          //   path: '/',
+          //   httpOnly: true
+          // })
+          return res.data.user_hash
+        })
+        .then((basketId) => {
+          api.bucket.fillBasket(this.$userTradeCenter?.store_id, basketId, busketToServer).then((r) => {
+            console.log(r)
+          }).catch((e) => {
+            console.log(e)
+          })
+        })
+        .catch((e) => {
+          console.log(e)
+        })
+      // await api.bucket.addItemToBucket(this.$userTradeCenter?.store_id, {
+      //   eshop_basket_id: 657739,
+      //   article: 395979,
+      //   count: 1
+      // })
+      //   .then((data) => {
+      //     console.log(data)
+      //   })
+      //   .catch((e) => {
+      //     console.log(e)
+      //   })
     }
   }
 })

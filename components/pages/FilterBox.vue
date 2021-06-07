@@ -40,7 +40,7 @@
         <Close @click="isMobileVisibleFilters = false" />
       </div>
       <div class="filter-box__filters">
-        <SelectBox
+        <SearchSelectBox
           v-if="filters.wineCategory && filtersData.wineCategory"
           v-model="filtersData.wineSugar"
           :items="filters.wineCategory.values"
@@ -67,7 +67,7 @@
             icon: 'Color',
           }"
         />
-        <SelectBox
+        <SearchSelectBox
           v-if="filters.wineSort && filtersData.wineSort"
           v-model="filtersData.wineSort"
           :items="filters.wineSort.values"
@@ -173,7 +173,7 @@ export default {
         4975: 'wineCategory',
         309: 'wineCountry',
         310: 'wineSort',
-        4973: 'wineRegion',
+        // 4973: 'wineRegion',
         311: 'wineSugar',
         308: 'wineType'
       }

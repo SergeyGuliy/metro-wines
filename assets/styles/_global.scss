@@ -98,6 +98,7 @@ input, button, textarea{
 
 .checkbox{
   width: 22px;
+  min-width: 22px;
   height: 22px;
   border: 1px solid #000000;
   border-radius: 3px;
@@ -144,10 +145,16 @@ body {
     box-shadow: 0px 16px 32px rgba(48, 49, 51, 0.24);
     border-radius: 5px;
     padding: 30px 20px 11px 20px;
-    max-height: 300px;
+    max-height: 456px;
+    overflow: hidden;
+    @include FontStyle('Acrom', normal, #000000, 20px, 24px);
+    display: flex;
+    flex-direction: column;
+  }
+  .custom-input-box__inner-box--scrollable{
+    flex: 1 1 auto;
     overflow-y: auto;
     overflow-x: hidden;
-    @include FontStyle('Acrom', normal, #000000, 20px, 24px);
   }
   .custom-input-box__outer{
     display: flex;
