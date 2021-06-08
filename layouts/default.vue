@@ -15,6 +15,7 @@
 </template>
 
 <script>
+import ResizeObserver from 'resize-observer-polyfill'
 
 export default {
   components: {
@@ -108,8 +109,12 @@ export default {
   display: flex;
   flex-direction: column;
   position: relative;
+  margin-top: 70px;
   .layout__inner{
     flex: 1 1 auto;
+  }
+  @media (max-width: 768px) {
+    margin-top: 100px;
   }
 }
 </style>

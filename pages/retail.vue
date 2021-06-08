@@ -41,14 +41,15 @@ export default {
       ]
     }
   },
-  async mounted () {
-    // console.clear()
-    await this.$fetchTradecenters()
-    await this.$loadGeoData()
-    await this.$fetchBucket()
-    await this.$selectUserAge()
-    await this.$selectUserType()
-    this.$routeMiddleWare()
+  async created () {
+    if (process.client) {
+      await this.$fetchBucket()
+      await this.$loadGeoData()
+      await this.$selectUserAge()
+      await this.$selectUserType()
+    }
+  },
+  mounted () {
     this.$createOrder()
     try {
       if (this.$store?.state?.scrollTo) {

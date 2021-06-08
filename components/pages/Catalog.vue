@@ -80,7 +80,7 @@ export default {
           ...filters
         })
           .then((res) => {
-            console.log(res.data)
+            // console.log(res.data)
 
             // eslint-disable-next-line camelcase,no-unused-vars
             const { last_page, current_page, data, to, from, total } = res.data

@@ -137,6 +137,14 @@ export default {
       flex-direction: row;
       flex-wrap: wrap;
       align-items: end;
+      .add-box{
+        max-width: unset;
+        /*min-width: 125px;*/
+        button{
+          width: 28px;
+          padding: 1px 0;
+        }
+      }
       .card-item__img{
         max-height: 100px;
         margin-top: 15px;

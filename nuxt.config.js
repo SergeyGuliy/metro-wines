@@ -7,7 +7,7 @@ export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   ssr: true,
   server: {
-    port: 3000
+    port: 5000
     // host: 'local.mydomain.dk'
     // https: {
     //   key: fs.readFileSync(path.resolve(__dirname, 'localhost.key')),
@@ -44,6 +44,10 @@ export default {
     // '~/plugins/slider.js'
   ],
 
+  router: {
+    middleware: 'initProject'
+  },
+
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: false,
 
@@ -60,7 +64,22 @@ export default {
     // https://go.nuxtjs.dev/pwa
     '@nuxtjs/pwa',
     '@nuxtjs/proxy',
-    'cookie-universal-nuxt'
+    'cookie-universal-nuxt',
+    ['nuxt-mail', {
+      message: [
+        // { name: 'support', to: 'Irina.naumova01@metro-cc' },
+        // { name: 'support', to: 'valeriya.morozova@metro-cc.ru' },
+        { name: 'support', to: 'xsehywx@gmail.com' }
+      ],
+      smtp: {
+        host: 'smtp-relay.sendinblue.com',
+        port: 587,
+        auth: {
+          user: 'xsehywx@gmail.com',
+          pass: 'xsmtpsib-2966df2ef71222d5a0b2ae285f8ce4387282c32b2c10676e32b416f170ca5cdd-I7m6t85spPdzSfvK'
+        }
+      }
+    }]
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
@@ -75,15 +94,16 @@ export default {
       lang: 'en'
     }
   },
-  proxy: {
-    '/api/v1': { target: 'https://api.metro-cc.ru', pathRewrite: { '^/api/v1': '' } }
-
-    // '/api/': { target: 'https://api.metro-cc.ru', pathRewrite: { '^/api/v1': '' }, changeOrigin: true }
-  },
+  // proxy: {
+  //   '/api/v1': { target: 'https://api.metro-cc.ru', pathRewrite: { '^/api/v1': '' } }
+  //
+  //   // '/api/': { target: 'https://api.metro-cc.ru', pathRewrite: { '^/api/v1': '' }, changeOrigin: true }
+  // },
   // ''
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
+    extractCSS: true,
     extend: (config) => {
       const svgRule = config.module.rules.find(rule => rule.test.test('.svg'))
 

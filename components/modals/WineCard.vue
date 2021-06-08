@@ -1,5 +1,5 @@
 <template>
-  <div class="card-modal">
+  <div class="card-modal" @click.stop="">
     <Close class="svg-close" @click="close" />
     <div class="card-modal__left">
       <SearchPlus class="svg-SearchPlus" />
@@ -32,7 +32,7 @@
         </span>
       </div>
       <div class="card-modal__new-price">
-        {{ data.prices.price | number  }} ₽/шт
+        {{ data.prices.price | number }} ₽/шт
       </div>
       <div class="card-modal__add-box">
         <AddBox :wine-data="data" />
@@ -56,6 +56,13 @@ export default {
     Close: () => import('assets/icons/close.svg')
   },
   mixins: [modalMixin],
+
+  created () {
+    this.$bus.on('clickModalWrapper', this.close)
+  },
+  beforeDestroy () {
+    this.$bus.off('clickModalWrapper', this.close)
+  },
   methods: {
     addToBucket () {
       if (this.$userBucket[this.data.article]) {
@@ -69,6 +76,7 @@ export default {
           count: 1
         })
       }
+      this.close()
     }
   }
 }

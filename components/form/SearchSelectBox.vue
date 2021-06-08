@@ -7,7 +7,8 @@
     <div class="custom-input-box__outer">
       <component :is="data.icon" class="custom-input-box__icon" />
       <span class="custom-input-box__outer-text">{{ data.title }}</span>
-      <Arrow class="custom-input-box__arrow" />
+      <Arrow v-if="!value.length" class="custom-input-box__arrow" />
+      <Delete v-else @click.stop="$emit('input', [])" />
     </div>
     <div v-if="isOpen" class="custom-input-box__inner-box search-select-box">
       <InputBox
@@ -50,7 +51,8 @@ export default {
     Close: () => import('assets/icons/close-2.svg'),
     Sort: () => import('assets/icons/sort.svg'),
     Ok: () => import('assets/icons/ok.svg'),
-    InputBox: () => import('./InputBox')
+    InputBox: () => import('./InputBox'),
+    Delete: () => import('assets/icons/delete.svg')
 
   },
   props: {

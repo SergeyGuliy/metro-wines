@@ -7,7 +7,8 @@
     <div class="custom-input-box__outer">
       <component :is="data.icon" class="custom-input-box__icon" />
       <span class="custom-input-box__outer-text">{{ data.title }}</span>
-      <Arrow class="custom-input-box__arrow" />
+      <Arrow v-if="min === 0 && max === 10000" class="custom-input-box__arrow" />
+      <Delete v-else @click.stop="$emit('input', [0, 10000])" />
     </div>
     <div v-show="isOpen" class="custom-input-box__inner-box diapazone-box">
       <div class="diapazone-box__inputs">
@@ -56,7 +57,8 @@ export default {
     Sugar: () => import('assets/icons/sugar.svg'),
     Arrow: () => import('assets/icons/arrow-2.svg'),
     Close: () => import('assets/icons/close-2.svg'),
-    veeno: () => import('veeno')
+    veeno: () => import('veeno'),
+    Delete: () => import('assets/icons/delete.svg')
   },
   props: {
     value: {
@@ -68,13 +70,18 @@ export default {
   },
   data () {
     return {
-      handles: [35, 55],
       range: {
         min: 0,
         max: 10000
       },
       isOpen: false
     }
+  },
+  mounted () {
+    setTimeout(() => {
+      this.min = 0
+      this.max = 10000
+    }, 1000)
   },
   computed: {
     min: {

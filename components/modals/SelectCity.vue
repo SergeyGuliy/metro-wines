@@ -113,6 +113,7 @@ export default {
         return this.$userTradeCenter
       },
       set (val) {
+        console.log(val)
         this.$cookies.set('userTradeCenterId', val.store_id)
         this.$store.commit('SET_USER_TRADE_CENTER', val)
       }

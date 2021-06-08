@@ -1,7 +1,7 @@
 <template>
   <div class="card">
-    <img :src="cardData.images[0]" alt="" class="card__img">
-    <h5 class="card__title">
+    <img :src="cardData.images[0]" alt="" class="card__img" @click="openWineCard">
+    <h5 class="card__title" @click="openWineCard">
       {{ cardData.name }}
     </h5>
     <!--    <div class="card__description truncate-overflow">-->
@@ -108,10 +108,12 @@ export default {
     .card__img{
       height: 318px;
       object-fit: contain;
+      cursor: pointer;
     }
     .card__title{
       text-align: center;
       margin-bottom: 14px;
+      cursor: pointer;
       @include FontStyle('TimesNewRoman', normal, #710000, 25px, 29px);
     }
     .card__description{

@@ -11,9 +11,6 @@
         >
           <div class="s-circle">
             <Ok />
-            <div class="popup s-circle__popup">
-              В одну винную карту можно добавить не больше {{ activeShablone> 2? '15': '20' }} позиций товара. Но вы можете создать несколько винных карт.
-            </div>
           </div>
           <img class="noselect" :src="require(`assets/images/shablob-item-${shablone}.jpg`)" alt="">
           <div class="wine-constructor__shablones-shadow" />
@@ -115,7 +112,7 @@ export default {
   },
   data () {
     return {
-      activeShablone: 1,
+      activeShablone: 0,
       shablones: [1, 2, 3, 4],
       pageSizeBig: {
         clientWidth: 1382,
@@ -198,6 +195,7 @@ export default {
     activeShablone (val) {
       this.$nextTick(() => {
         this.doResize(null, this.currentPageSize)
+        this.$emit('changeActiveShablone', val)
       })
     }
   },
@@ -481,16 +479,16 @@ export default {
             bottom: 148%;
             /*position: relative;*/
           }
-          &::after{
-            top: calc(100% - 63px);
-            transform: rotate(45deg);
-            position: absolute;
-            display: block;
-            content: '';
-            height: 20px;
-            width: 20px;
-            background-color: white;
-          }
+          /*&::after{*/
+          /*  top: calc(100% - 63px);*/
+          /*  transform: rotate(45deg);*/
+          /*  position: absolute;*/
+          /*  display: block;*/
+          /*  content: '';*/
+          /*  height: 20px;*/
+          /*  width: 20px;*/
+          /*  background-color: white;*/
+          /*}*/
         }
       }
 

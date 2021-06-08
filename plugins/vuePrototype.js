@@ -31,15 +31,6 @@ Vue.mixin({
     $userTradeCenter () {
       return this.$store?.state?.userTradeCenter
     },
-    $userHash: {
-      get () {
-        return this.$store?.state?.userHash
-      },
-      set (userHash) {
-        this.$cookies.set('userHash', userHash)
-        this.$store.commit('SET_USER_HASH', userHash)
-      }
-    },
     $userType: {
       get () {
         return this.$store?.state?.userType
@@ -102,7 +93,8 @@ Vue.mixin({
         `)
         string.push(`${keysMapTranslator.phone} ${body.phone}
         `)
-        string.push(`${keysMapTranslator.text} ${body.text}
+        string.push(`${keysMapTranslator.text} 
+        ${body.text}
         `)
       } else {
         string.push(`${keysMapTranslator.firstName} ${body.firstName}
@@ -123,11 +115,11 @@ Vue.mixin({
         `)
         })
       }
-      const link = mailtoLink({ to: 'Irina.naumova01@metro-cc,valeriya.morozova@metro-cc.ru', subject: 'Feedback message', body: string.join('') })
-      const element = document.createElement('a')
-      element.style.display = 'none'
-      element.href = link
-      element.click()
+      this.$mail.send({
+        from: body.email,
+        subject: Object.keys(body).includes('text') ? 'Обратная связь' : 'Заявка менеджеру',
+        text: string.join('')
+      })
     },
     $downloadXLS () {
       const tableData = []
@@ -263,23 +255,23 @@ Vue.mixin({
       })
     },
     $routeMiddleWare () {
-      if (this.$userType === 'restoraunt') {
-        if (!['retail', 'wine-cart'].includes(this.$route.name)) {
-          this.$router.push({ name: 'retail' })
-        }
-      } else if (this.$userType === 'self') {
-        if (['retail', 'wine-cart'].includes(this.$route.name)) {
-          this.$router.push({ name: 'index' })
-        }
-      }
+      // if (this.$userType === 'restoraunt') {
+      //   if (!['retail', 'wine-cart'].includes(this.$route.name)) {
+      //     this.$router.push({ name: 'retail' })
+      //   }
+      // } else if (this.$userType === 'self') {
+      //   if (['retail', 'wine-cart'].includes(this.$route.name)) {
+      //     this.$router.push({ name: 'index' })
+      //   }
+      // }
       defender()
     },
     async $selectUserAge () {
-      const is18 = localStorage.getItem('is18')
+      const is18 = this.$cookies.get('is18')
       if (!is18) {
         await this.$openModal('Is18YearsOld')
           .then(() => {
-            localStorage.setItem('is18', 'yes')
+            this.$cookies.set('is18', 'yes')
           })
           .catch((e) => {
             window.location.href = 'https://www.metro-cc.ru/'
@@ -287,14 +279,20 @@ Vue.mixin({
       }
     },
     async $selectUserType () {
-      const userType = localStorage.getItem('userType')
+      const userType = this.$cookies.get('userType')
       if (userType) {
         this.$store.commit('SET_USER_TYPE', userType)
       } else {
         await this.$openModal('WineOwner')
           .then((data) => {
-            localStorage.setItem('userType', data)
+            console.log(data)
+            this.$cookies.set('userType', data)
             this.$store.commit('SET_USER_TYPE', data)
+            if (data === 'self') {
+              this.$router.push({ name: 'index' })
+            } else {
+              this.$router.push({ name: 'retail' })
+            }
           })
           .catch((e) => {
             console.log(e)
@@ -351,33 +349,57 @@ Vue.mixin({
           article: i.wineData.article
         }
       })
-      const reqBody = {}
-      reqBody.articles = busketToServer.map(i => i.article)
-      busketToServer.forEach((item, index) => {
-        reqBody['articles.' + index + '.article'] = item.article
-        reqBody['articles.' + index + '.count'] = item.count
-      })
-      await api.bucket.getMyBasket(this.$userTradeCenter?.store_id)
-        .then((res) => {
-          // this.$cookies.set('metro_user_id', res.data.user_hash, {
-          //   domain: 'api.metro-cc.ru',
-          //   path: '/',
-          //   httpOnly: true
-          // })
-          return res.data.user_hash
+      // const reqBody = {}
+      // reqBody.articles = busketToServer.map(i => i.article)
+      // busketToServer.forEach((item, index) => {
+      //   reqBody['articles.' + index + '.article'] = item.article
+      //   reqBody['articles.' + index + '.count'] = item.count
+      // })
+      // await api.bucket.getMyBasket(this.$userTradeCenter?.store_id)
+      //   .then((res) => {
+      //     // this.$cookies.set('metro_user_id', res.data.user_hash, {
+      //     //   domain: 'api.metro-cc.ru',
+      //     //   path: '/',
+      //     //   httpOnly: true
+      //     // })
+      //     return res.data.user_hash
+      //   })
+      //   .then((basketId) => {
+      //     api.bucket.fillBasket(this.$userTradeCenter?.store_id, basketId, busketToServer).then((r) => {
+      //       console.log(r)
+      //     }).catch((e) => {
+      //       console.log(e)
+      //     })
+      //   })
+      //   .catch((e) => {
+      //     console.log(e)
+      //   })
+
+      await this.$axios
+        .post('http://localhost:5000/api/createOrder', {
+          tradeCenter: this.$userTradeCenter?.store_id,
+          busketToServer
         })
-        .then((basketId) => {
-          api.bucket.fillBasket(this.$userTradeCenter?.store_id, basketId, busketToServer).then((r) => {
-            console.log(r)
-          }).catch((e) => {
-            console.log(e)
-          })
+        .then((data) => {
+          console.log(data.data)
         })
-        .catch((e) => {
-          console.log(e)
+        .catch((err) => {
+          console.log(err.response.data.message)
         })
+
+      // eslint-disable-next-line camelcase
+      // let eshop_basket_id
+      // await api.bucket.getMyBasket1(this.$userTradeCenter?.store_id)
+      //   .then((res) => {
+      //     // eslint-disable-next-line camelcase
+      //     eshop_basket_id = res.data.basket.eshop_basket_id
+      //   })
+      //   .catch((e) => {
+      //     console.log(e)
+      //   })
+      // console.log(eshop_basket_id)
       // await api.bucket.addItemToBucket(this.$userTradeCenter?.store_id, {
-      //   eshop_basket_id: 657739,
+      //   eshop_basket_id,
       //   article: 395979,
       //   count: 1
       // })

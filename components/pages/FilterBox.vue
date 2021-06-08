@@ -42,7 +42,7 @@
       <div class="filter-box__filters">
         <SearchSelectBox
           v-if="filters.wineCategory && filtersData.wineCategory"
-          v-model="filtersData.wineSugar"
+          v-model="filtersData.wineCategory"
           :items="filters.wineCategory.values"
           :data="{
             title: 'Категория вина',
@@ -168,7 +168,7 @@ export default {
       isPremium: false,
       filtersData: {},
       filters: {},
-      filtersPriceDiapazone: [1, 10000],
+      filtersPriceDiapazone: [0, 10000],
       usedIds: {
         4975: 'wineCategory',
         309: 'wineCountry',

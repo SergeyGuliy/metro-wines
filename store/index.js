@@ -6,7 +6,6 @@ export const strict = false
 export const state = () => ({
   tradeCenters: {},
   userTradeCenter: null,
-  userHash: null,
   userType: null,
   scrollTo: false
 })
@@ -14,9 +13,6 @@ export const state = () => ({
 export const mutations = {
   SET_TRADE_CENTERS (state, tradeCenters) {
     Vue.set(state, 'tradeCenters', tradeCenters)
-  },
-  SET_USER_HASH (state, userHash) {
-    Vue.set(state, 'userHash', userHash)
   },
   SET_USER_TYPE (state, userType) {
     Vue.set(state, 'userType', userType)
@@ -37,6 +33,14 @@ export const actions = {
     }).catch((e) => {
       console.log(e)
     })
+    const userType = $cookies.get('userType')
+    const userTradeCenterId = $cookies.get('userTradeCenterId')
+    if (userType) {
+      commit('SET_USER_TYPE', userType)
+    }
+    if (userTradeCenterId) {
+      commit('SET_USER_TRADE_CENTER', state.tradeCenters.find(i => +i.store_id === +userTradeCenterId))
+    }
   }
 }
 

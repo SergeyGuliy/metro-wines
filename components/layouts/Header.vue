@@ -67,6 +67,10 @@ export default {
     height: 100px;
     width: 100%;
     background-color: #710000;
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 1;
     .svg-logo-metro-small{
       display: none;
     }

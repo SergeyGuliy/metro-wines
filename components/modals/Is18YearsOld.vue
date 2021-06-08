@@ -89,6 +89,7 @@ export default {
         @include FontStyle('TimesNewRoman', normal, #710000, 36px, 41px);
       }
       .old-modal__description{
+        padding-right: 15px;
         margin: 32px 0;
         @include FontStyle('Acrom', normal, #000000, 20px, 140%);
       }
@@ -119,6 +120,10 @@ export default {
         }
         .old-modal__img-medium{
           display: block;
+        }
+      }
+      .old-modal__right {
+        .old-modal__title {
         }
       }
       .old-modal__title{

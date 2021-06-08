@@ -8,7 +8,8 @@
     <div class="custom-input-box__outer">
       <component :is="data.icon" class="custom-input-box__icon" />
       <span class="custom-input-box__outer-text">{{ data.title }}</span>
-      <Arrow class="custom-input-box__arrow" />
+      <Arrow v-if="!value.length" class="custom-input-box__arrow" />
+      <Delete v-else @click.stop="$emit('input', [])" />
     </div>
     <div v-if="isOpen" class="custom-input-box__inner-box select-box">
       <div class="custom-input-box__inner-box--scrollable">
@@ -44,8 +45,8 @@ export default {
     Map: () => import('assets/icons/map.svg'),
     Sugar: () => import('assets/icons/sugar.svg'),
     Arrow: () => import('assets/icons/arrow-2.svg'),
-    Close: () => import('assets/icons/close-2.svg')
-
+    Close: () => import('assets/icons/close-2.svg'),
+    Delete: () => import('assets/icons/delete.svg')
   },
   props: {
     value: {
