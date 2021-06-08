@@ -115,7 +115,9 @@ Vue.mixin({
         `)
         })
       }
-      this.$mail.send({
+      // window.location.origin
+
+      this.$axios.$post(`${window.location.origin}/mail/send`, {
         from: body.email,
         subject: Object.keys(body).includes('text') ? 'Обратная связь' : 'Заявка менеджеру',
         text: string.join('')
@@ -342,6 +344,8 @@ Vue.mixin({
       window.location.href = `http://online.metro-cc.ru/cart?signature=${signature}`
     },
     async $createOrder () {
+      console.error(window.location.origin)
+
       // this.$cookies.removeAll()
       const busketToServer = Object.values(this.$userBucket).map((i) => {
         return {
@@ -376,7 +380,7 @@ Vue.mixin({
       //   })
 
       await this.$axios
-        .post('http://localhost:5000/api/createOrder', {
+        .post(`${window.location.origin}/api/createOrder`, {
           tradeCenter: this.$userTradeCenter?.store_id,
           busketToServer
         })
