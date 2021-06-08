@@ -3,7 +3,7 @@ ENV APP_ROOT /web
 ENV NODE_ENV production
 WORKDIR ${APP_ROOT}
 ADD . ${APP_ROOT}
-RUN npm audit fix --force
+#RUN npm audit fix --force
 RUN ls
 RUN npm i
 RUN npm run build
