@@ -387,28 +387,13 @@ Vue.mixin({
           console.log(err.response.data.message)
         })
 
-      // eslint-disable-next-line camelcase
-      // let eshop_basket_id
-      // await api.bucket.getMyBasket1(this.$userTradeCenter?.store_id)
-      //   .then((res) => {
-      //     // eslint-disable-next-line camelcase
-      //     eshop_basket_id = res.data.basket.eshop_basket_id
-      //   })
-      //   .catch((e) => {
-      //     console.log(e)
-      //   })
-      // console.log(eshop_basket_id)
-      // await api.bucket.addItemToBucket(this.$userTradeCenter?.store_id, {
-      //   eshop_basket_id,
-      //   article: 395979,
-      //   count: 1
-      // })
-      //   .then((data) => {
-      //     console.log(data)
-      //   })
-      //   .catch((e) => {
-      //     console.log(e)
-      //   })
+      await api.bucket.fillBasket(this.$userTradeCenter?.store_id, 'fffb', busketToServer)
+        .then((data) => {
+          console.log(data)
+        })
+        .catch((e) => {
+          console.log(e)
+        })
     }
   }
 })

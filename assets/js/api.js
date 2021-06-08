@@ -1,4 +1,6 @@
 import axios from 'axios'
+import { CookieJar } from 'tough-cookie'
+import axiosCookieJarSupport from 'axios-cookiejar-support'
 
 // eslint-disable-next-line no-unused-vars
 const originDev = 'https://api.staging.metro-cc.ru/api/v1/'
@@ -44,12 +46,22 @@ export const api = {
     changeItemCount: async storeId => (await _axios.put(`${storeId}/eshop/basket`)).data,
     addItem: async (storeId, bucketData) => (await _axios.post(`${storeId}/eshop/basket`, bucketData)).data,
     deleteItem: async (storeId, bucketData) => (await _axios.delete(`${storeId}/eshop/basket`, bucketData)).data,
-    fillBasket: async (storeId, bucketId, bucketData) => (await _axios.post(`${storeId}/eshop/basket`, { articles: bucketData }, {
-      params: {
+    fillBasket: async (storeId, userHash, bucketData) => {
+      const jar = new CookieJar()
+      const cookies = jar.getCookiesSync(originDev)
+      _axios.defaults.headers['X-XSRF-TOKEN'] = cookies.find(x => x.key === 'XSRF-TOKEN').value
+      axiosCookieJarSupport(_axios)
 
-      },
-      withCredentials: true
-    })).data,
+      return (await _axios.post(`${storeId}/eshop/basket`, { articles: bucketData }, {
+        withCredentials: true,
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+
+          // eslint-disable-next-line camelcase
+          Cookie: `metro_user_id=${userHash};`
+        }
+      }))
+    },
     addItemToBucket: async (storeId, bucketData) => (await _axios.put(`${storeId}/eshop/basket`, {}, {
       params: bucketData,
       withCredentials: true
