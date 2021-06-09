@@ -20,10 +20,22 @@
         <span class="bucket-user-modal__symm-inner">{{ $getTotalPrice | number }} ₽</span>
       </div>
       <div class="bucket-user-modal__actions">
-        <Button :rounded="true" :uppercase="true" :bold="true" @click="$downloadXLS">
+        <Button
+          v-if="Object.keys($userBucket).length"
+          :rounded="true"
+          :uppercase="true"
+          :bold="true"
+          @click="$downloadXLS"
+        >
           Скачать спецификацию
         </Button>
-        <Button :filled="true" :uppercase="true" :bold="true" @click="close(true)">
+        <Button
+          v-if="Object.keys($userBucket).length"
+          :filled="true"
+          :uppercase="true"
+          :bold="true"
+          @click="createOrder"
+        >
           Оформить заказ
         </Button>
       </div>
@@ -49,6 +61,16 @@ export default {
         email: '',
         phone: '',
         message: ''
+      }
+    }
+  },
+  methods: {
+    async createOrder () {
+      if (Object.keys(this.$userBucket).length) {
+        const key = await this.$createOrder()
+        const link = `https://online.metro-cc.ru/cart?signature=${key}`
+        window.location.href = link
+        this.close()
       }
     }
   }

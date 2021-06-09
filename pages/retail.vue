@@ -50,7 +50,6 @@ export default {
     }
   },
   mounted () {
-    this.$createOrder()
     try {
       if (this.$store?.state?.scrollTo) {
         document.getElementById('wineCard').scrollIntoView({

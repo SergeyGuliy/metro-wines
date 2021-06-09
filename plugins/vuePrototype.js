@@ -256,18 +256,6 @@ Vue.mixin({
         window.addEventListener('modalClose', callback)
       })
     },
-    $routeMiddleWare () {
-      // if (this.$userType === 'restoraunt') {
-      //   if (!['retail', 'wine-cart'].includes(this.$route.name)) {
-      //     this.$router.push({ name: 'retail' })
-      //   }
-      // } else if (this.$userType === 'self') {
-      //   if (['retail', 'wine-cart'].includes(this.$route.name)) {
-      //     this.$router.push({ name: 'index' })
-      //   }
-      // }
-      defender()
-    },
     async $selectUserAge () {
       const is18 = this.$cookies.get('is18')
       if (!is18) {
@@ -300,6 +288,7 @@ Vue.mixin({
             console.log(e)
           })
       }
+      defender()
     },
     $calculateDiscount (oldPrice, newPrice) {
       return ((1 - (+newPrice / +oldPrice)) * 100).toFixed()
@@ -353,50 +342,16 @@ Vue.mixin({
           article: i.wineData.article
         }
       })
-      // const reqBody = {}
-      // reqBody.articles = busketToServer.map(i => i.article)
-      // busketToServer.forEach((item, index) => {
-      //   reqBody['articles.' + index + '.article'] = item.article
-      //   reqBody['articles.' + index + '.count'] = item.count
-      // })
-      // await api.bucket.getMyBasket(this.$userTradeCenter?.store_id)
-      //   .then((res) => {
-      //     // this.$cookies.set('metro_user_id', res.data.user_hash, {
-      //     //   domain: 'api.metro-cc.ru',
-      //     //   path: '/',
-      //     //   httpOnly: true
-      //     // })
-      //     return res.data.user_hash
-      //   })
-      //   .then((basketId) => {
-      //     api.bucket.fillBasket(this.$userTradeCenter?.store_id, basketId, busketToServer).then((r) => {
-      //       console.log(r)
-      //     }).catch((e) => {
-      //       console.log(e)
-      //     })
-      //   })
-      //   .catch((e) => {
-      //     console.log(e)
-      //   })
-
-      await this.$axios
+      return await this.$axios
         .post(`${window.location.origin}/api/createOrder`, {
           tradeCenter: this.$userTradeCenter?.store_id,
           busketToServer
         })
         .then((data) => {
-          console.log(data.data)
+          return data.data.user_hash
         })
         .catch((err) => {
           console.log(err.response.data.message)
-        })
-
-      await api.bucket.fillBasket(this.$userTradeCenter?.store_id, 'fffb', busketToServer)
-        .then((data) => {
-          console.log(data)
-        })
-        .catch((e) => {
-          console.log(e)
         })
     }
   }
