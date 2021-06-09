@@ -8,6 +8,7 @@ const origins = {
   dev: 'https://api.staging.metro-cc.ru/api/v1/',
   prod: 'https://api.metro-cc.ru/api/v1/'
 }
+
 const origin = origins[TYPE]
 const appKey = '5C63A1CB1E8954499E3BB93939B7B/'
 
@@ -30,9 +31,6 @@ router.post('/', async (req, res) => {
     })
   }
   const busketToServer = req.body.busketToServer
-  console.log(req.body.tradeCenter)
-  console.log(user_hash)
-  console.log(busketToServer)
   await axios.post(`${origin}${appKey}${req.body.tradeCenter}/eshop/basket`, {
     articles: busketToServer
   }, {

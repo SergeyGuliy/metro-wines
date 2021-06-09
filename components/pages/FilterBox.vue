@@ -379,6 +379,7 @@ export default {
       .custom-input-box--open-mobile{
         padding: 0;
         height: unset;
+        min-height: unset !important;
         .custom-input-box__outer{
           display: none;
         }
@@ -386,7 +387,7 @@ export default {
           position: static;
           padding-left: 0;
           padding-right: 0;
-          height: 100%;
+          height: fit-content;
         }
         .select-box__item{
           margin-left: 19px;
@@ -483,7 +484,8 @@ export default {
         }
         .filter-box__filters{
           margin: 0;
-          height: calc(100vh - 132px);
+          height: 100%;
+          max-height: calc(100vh - 132px);
           overflow: auto;
           flex-direction: column;
           flex-wrap: nowrap;
