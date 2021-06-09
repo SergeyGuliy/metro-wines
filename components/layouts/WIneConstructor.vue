@@ -374,8 +374,11 @@ export default {
         .shablone__inner-content{
           padding: 169px 74px 80px 74px;
           .wcb{
-            .wcb__title{
+            .wcb__item{
 
+            }
+            .wcb__price-box{
+              max-width: calc(100% - 370px);
             }
             .wcb__left {
               max-width: 320px;

@@ -386,6 +386,7 @@ export default {
           position: static;
           padding-left: 0;
           padding-right: 0;
+          height: 100%;
         }
         .select-box__item{
           margin-left: 19px;
@@ -478,12 +479,15 @@ export default {
         .custom-input-box{
           width: calc(100% - 20px);
           margin-bottom: 4px;
+          min-height: 70px;
         }
         .filter-box__filters{
           margin: 0;
           height: calc(100vh - 132px);
           overflow: auto;
           flex-direction: column;
+          flex-wrap: nowrap;
+          padding: 10px 0;
         }
       }
       .custom-input-box__inner-box{

@@ -39,6 +39,16 @@ export default {
     }
   },
   mounted () {
+    try {
+      document.querySelector('.sub-hero .container .sub-hero__row').children.forEach((i) => {
+        i.children.forEach((j) => {
+          j.innerHTML = j.innerHTML.replace(/\u2028/g, ' ')
+          j.innerHTML = j.innerHTML.replace(/&#8232;/g, ' ')
+        })
+      })
+    } catch (e) {
+
+    }
     document.addEventListener('gesturestart', function (e) {
       e.preventDefault()
     })

@@ -2,6 +2,7 @@
   <div
     v-click-outside="hide"
     class="custom-input-box noselect"
+    :class="{'custom-input-box--open-mobile':isOpen}"
     @click="isOpen = true"
   >
     <div class="custom-input-box__outer">

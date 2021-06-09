@@ -101,7 +101,9 @@ export default {
       text-transform: uppercase;
       margin-bottom: 36px;
     }
-    .wcb__body{}
+    .wcb__body{
+      max-width: 100%;
+    }
     .wcb__item{
       display: flex;
       justify-content: space-between;

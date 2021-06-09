@@ -75,27 +75,51 @@ export default {
     },
     async fetchCatalog (filters = {}) {
       if (this.$userTradeCenter?.store_id) {
-        await api.products.getProduct(this.$userTradeCenter?.store_id, {
-          page: this.currentPage,
-          ...filters
-        })
-          .then((res) => {
-            // console.log(res.data)
+        if (this.$userType === 'restoraunt') {
+          await api.products.getOptProduct(this.$userTradeCenter?.store_id, {
+            page: this.currentPage,
+            ...filters
+          })
+            .then((res) => {
+              // console.log(res.data)
 
-            // eslint-disable-next-line camelcase,no-unused-vars
-            const { last_page, current_page, data, to, from, total } = res.data
-            this.cards = data
-            // eslint-disable-next-line camelcase
-            this.currentPage = +current_page
-            // eslint-disable-next-line camelcase
-            this.lastPage = +last_page
-            this.info.to = +to
-            this.info.from = +from
-            this.info.total = +total
+              // eslint-disable-next-line camelcase,no-unused-vars
+              const { last_page, current_page, data, to, from, total } = res.data
+              this.cards = data
+              // eslint-disable-next-line camelcase
+              this.currentPage = +current_page
+              // eslint-disable-next-line camelcase
+              this.lastPage = +last_page
+              this.info.to = +to
+              this.info.from = +from
+              this.info.total = +total
+            })
+            .catch((e) => {
+              console.log(e)
+            })
+        } else {
+          await api.products.getProduct(this.$userTradeCenter?.store_id, {
+            page: this.currentPage,
+            ...filters
           })
-          .catch((e) => {
-            console.log(e)
-          })
+            .then((res) => {
+              // console.log(res.data)
+
+              // eslint-disable-next-line camelcase,no-unused-vars
+              const { last_page, current_page, data, to, from, total } = res.data
+              this.cards = data
+              // eslint-disable-next-line camelcase
+              this.currentPage = +current_page
+              // eslint-disable-next-line camelcase
+              this.lastPage = +last_page
+              this.info.to = +to
+              this.info.from = +from
+              this.info.total = +total
+            })
+            .catch((e) => {
+              console.log(e)
+            })
+        }
       }
     }
   }

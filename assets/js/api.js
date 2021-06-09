@@ -34,6 +34,16 @@ export const api = {
         }
       })).data
     },
+    getOptProduct: async (storeId, query) => {
+      return (await _axios.get(`${storeId}/products`, {
+        params: {
+          category_id: [412971],
+          paginate: 12,
+          disabled_categories: 1,
+          ...query
+        }
+      })).data
+    },
     search: async (storeId, name) => (await _axios.get(`${storeId}/search`, {
       params: {
         q: name,
