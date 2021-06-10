@@ -32,6 +32,11 @@
           ($v.form.phone.regexPhone || !$v.form.phone.$dirty) || vt.regexPhone
         ]"
       />
+      <InputBox
+        v-model="form.city"
+        placeholder="Введите ваш город"
+        :errors="[($v.form.city.required || !$v.form.city.$dirty) || vt.required]"
+      />
       <TextareaBox
         v-model="form.text"
         placeholder="Сообщение"
@@ -69,6 +74,7 @@ export default {
         name: '',
         email: '',
         phone: '',
+        city: '',
         text: ''
       }
     }
@@ -77,6 +83,9 @@ export default {
   validations: {
     form: {
       name: {
+        required
+      },
+      city: {
         required
       },
       email: {

@@ -4,7 +4,27 @@
       <div class="header__info-box">
         <LogoMetro class="svg-logo-metro" @click="routerGo" />
         <LogoMetroSmall class="svg-logo-metro-small" @click="routerGo" />
-        <Geolocation class="geo-big" />
+        <Geolocation
+          class="geo-big"
+          @setUser="setUser"
+        />
+      </div>
+      <div class="header__toogler-box media-desktop media-mobile">
+        <span>Заказ вина</span>
+        <button
+          :class="{'header__toggler-btn--active': $userType === 'self'}"
+          class="header__toggler-btn"
+          @click="setUser('self')"
+        >
+          для себя
+        </button>
+        <button
+          :class="{'header__toggler-btn--active': $userType === 'restoraunt'}"
+          class="header__toggler-btn"
+          @click="setUser('restoraunt')"
+        >
+          для ресторана
+        </button>
       </div>
       <div id="bucket-activator" class="header__bucket-box" @click="openBucket">
         <nuxt-link to="">
@@ -41,6 +61,10 @@ export default {
     }
   },
   methods: {
+    setUser (newType) {
+      this.$userType = newType
+      this.routerGo()
+    },
     routerGo () {
       if (this.$userType === 'restoraunt') {
         this.$router.push({ name: 'retail' })
@@ -71,6 +95,24 @@ export default {
     top: 0;
     right: 0;
     z-index: 1;
+    .header__toogler-box{
+      display: none;
+      @include FontStyle('Acrom', normal, #ffffff, 18px, 22px);
+      .header__toggler-btn{
+        height: 35px;
+        padding: 0 10px;
+        border-radius: 60px;
+        border: none;
+        cursor: pointer;
+        background-color: #7f1919;
+        @include FontStyle('Acrom', normal, #ffffff, 18px, 22px);
+      }
+      .header__toggler-btn--active{
+        background-color: #ffffff;
+        @include FontStyle('Acrom', normal, #710000, 18px, 22px);
+
+      }
+    }
     .svg-logo-metro-small{
       display: none;
     }
@@ -149,6 +191,24 @@ export default {
 
     @media (max-width: 767px) {
       height: 103px;
+      .bucket.bucket--active{
+        margin-left: 0;
+      }
+      .header__toogler-box{
+        margin-left: 15px;
+        margin-right: auto;
+        span{
+          display: none;
+        }
+        .header__toggler-btn.header__toggler-btn--active{
+          display: none !important;
+        }
+        .header__toggler-btn{
+          font-size: 14px;
+          line-height: 14px;
+          padding: 0 8px;
+        }
+      }
       .header__info-box{
         .svg-logo-metro{
           display: none;
@@ -201,6 +261,21 @@ export default {
           }
         }
       }
+    }
+  }
+  @media (min-width: 1080px) {
+    .media-desktop{
+      display: block !important;
+    }
+  }
+  @media (min-width: 767px) and(max-width: 1080px) {
+    .media-tablet{
+      display: block !important;
+    }
+  }
+  @media (max-width: 767px) {
+    .media-mobile{
+      display: block !important;
     }
   }
 </style>

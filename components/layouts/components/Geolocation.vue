@@ -9,6 +9,24 @@
         {{ getTradeCenterName }}
         <arrow class="svg-arrow" />
       </div>
+
+      <div class="header__toogler-box media-tablet" @click.stop="">
+        Заказ вина
+        <button
+          :class="{'header__toggler-btn--active': $userType === 'self'}"
+          class="header__toggler-btn"
+          @click.stop="$emit('setUser', 'self')"
+        >
+          для себя
+        </button>
+        <button
+          :class="{'header__toggler-btn--active': $userType === 'restoraunt'}"
+          class="header__toggler-btn"
+          @click.stop="$emit('setUser', 'restoraunt')"
+        >
+          для ресторана
+        </button>
+      </div>
     </div>
   </div>
 </template>
@@ -57,6 +75,21 @@ export default {
     }
     .dropdown-box{
       @include FontStyle('Acrom', normal, #ffffff, 18px, 22px);
+    }
+
+    @media (max-width: 1080px) {
+      .dropdown-box__bottom{
+        margin-bottom: 10px;
+      }
+      .dropdown-box__top{
+        display: none;
+      }
+    }
+
+    @media (max-width: 767px) {
+      .dropdown-box__bottom{
+        margin-bottom: 0px;
+      }
     }
   }
 </style>

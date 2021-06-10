@@ -75,7 +75,7 @@ Vue.mixin({
       for (let i = 0; i < s.length; i++) { view[i] = s.charCodeAt(i) & 0xFF } // convert to octet
       return buf
     },
-    $mailTo (body) {
+    async $mailTo (body) {
       // eslint-disable-next-line no-unused-vars
       const keysMapTranslator = {
         firstName: 'Имя: ',
@@ -89,6 +89,8 @@ Vue.mixin({
       const string = []
       if (Object.keys(body).includes('text')) {
         string.push(`${keysMapTranslator.name} ${body.name}
+        `)
+        string.push(`${keysMapTranslator.city} ${body.city}
         `)
         string.push(`${keysMapTranslator.email} ${body.email}
         `)
@@ -118,11 +120,11 @@ Vue.mixin({
       }
       // window.location.origin
 
-      this.$axios.$post(`${window.location.origin}/mail/send`, {
+      await this.$axios.$post(`${window.location.origin}/mail/send`, {
         from: body.email,
         subject: Object.keys(body).includes('text') ? 'Обратная связь' : 'Заявка менеджеру',
         text: string.join('')
-      })
+      }).then(this.$openModal('Notification'))
     },
     $downloadXLS () {
       const tableData = []
