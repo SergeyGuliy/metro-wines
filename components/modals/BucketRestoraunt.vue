@@ -82,7 +82,7 @@
 
 <script>
 import ClickOutside from 'vue-click-outside'
-import modalMixin from './modalMixin'
+import modalMixin from '../../mixins/modalMixin'
 
 export default {
   name: 'BucketRestoraunt',

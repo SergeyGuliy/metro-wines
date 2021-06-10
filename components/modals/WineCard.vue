@@ -45,7 +45,7 @@
 </template>
 
 <script>
-import modalMixin from './modalMixin'
+import modalMixin from '../../mixins/modalMixin'
 
 export default {
   name: 'WineCard',

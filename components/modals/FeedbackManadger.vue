@@ -60,7 +60,7 @@
 import { required, helpers } from 'vuelidate/lib/validators'
 import { validationMixin } from 'vuelidate'
 
-import modalMixin from './modalMixin'
+import modalMixin from '../../mixins/modalMixin'
 //                                                +7(123)-456-7890
 const regexPhone = helpers.regex('alpha', /^[+][7]{1}[(][0-9]{3}[)][-][0-9]{3}[-][0-9]{4}$/)
 const regexEmail = helpers.regex('alpha', /^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/)
