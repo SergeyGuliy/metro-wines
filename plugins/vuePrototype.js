@@ -36,6 +36,7 @@ Vue.mixin({
         return this.$store?.state?.userType
       },
       set (userType) {
+        this.$cookies.set('userType', userType)
         this.$store.commit('SET_USER_TYPE', userType)
       }
     },
@@ -211,7 +212,6 @@ Vue.mixin({
       }
     },
     $openProductModal (item) {
-      console.log(item)
       this.$openModal('WineCard', item)
         .then((data) => {
           console.log(data)

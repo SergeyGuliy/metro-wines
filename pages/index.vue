@@ -17,7 +17,7 @@
 <script>
 // eslint-disable-next-line no-unused-vars
 import { api } from '../assets/js/api'
-
+import routeMixin from '../mixins/routeMixin'
 export default {
   components: {
     Hero: () => import('../components/layouts/Hero'),
@@ -25,6 +25,7 @@ export default {
     FilterBox: () => import('../components/pages/FilterBox'),
     Catalog: () => import('../components/pages/Catalog')
   },
+  mixins: [routeMixin],
   data () {
     return {
       subHeroItems: [
@@ -41,14 +42,6 @@ export default {
           small: 'СОБЕРИТЕ  выбранный ассортимент  в ТЦ или оформите самовывоз'
         }
       ]
-    }
-  },
-  async created () {
-    if (process.client) {
-      await this.$fetchBucket()
-      await this.$loadGeoData()
-      await this.$selectUserAge()
-      await this.$selectUserType()
     }
   }
 }

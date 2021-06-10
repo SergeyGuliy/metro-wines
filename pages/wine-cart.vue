@@ -23,7 +23,7 @@
         <div class="wine-cart-main__title wine-cart-main__title-last">
           Выберите шаблон для винной карты
         </div>
-        <div class="wine-cart-main__subtitle" v-if="activeShablone > 0">
+        <div v-if="activeShablone > 0" class="wine-cart-main__subtitle">
           В одну винную карту можно добавить не больше {{ activeShablone> 2? '15': '20' }} позиций товара. Но вы можете создать несколько винных карт.
         </div>
         <WIneConstructor
@@ -39,11 +39,7 @@
 </template>
 
 <script>
-// eslint-disable-next-line no-unused-vars
-import XLSX from 'xlsx'
-// eslint-disable-next-line no-unused-vars
-import { saveAs } from 'file-saver'
-// eslint-disable-next-line no-unused-vars
+import routeMixin from '../mixins/routeMixin'
 export default {
   components: {
     Hero: () => import('../components/layouts/Hero'),
@@ -51,11 +47,11 @@ export default {
     WIneConstructor: () => import('../components/layouts/WIneConstructor'),
     Button: () => import('../components/form/Button')
   },
+  mixins: [routeMixin],
   data () {
     return {
       selectedWines: [],
       activeShablone: 0
-      // selectedWines: Object.values(mock)
     }
   },
   computed: {
@@ -70,14 +66,6 @@ export default {
         3: 'винa',
         4: 'винa'
       }
-    }
-  },
-  async created () {
-    if (process.client) {
-      await this.$fetchBucket()
-      await this.$loadGeoData()
-      await this.$selectUserAge()
-      await this.$selectUserType()
     }
   },
   methods: {
