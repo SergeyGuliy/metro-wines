@@ -38,7 +38,9 @@ export const actions = {
       commit('SET_USER_TYPE', userType)
     }
     if (userTradeCenterId) {
-      commit('SET_USER_TRADE_CENTER', state.tradeCenters.find(i => +i.store_id === +userTradeCenterId))
+      try {
+        commit('SET_USER_TRADE_CENTER', state.tradeCenters.find(i => +i.store_id === +userTradeCenterId))
+      } catch (e) {}
     }
   }
 }

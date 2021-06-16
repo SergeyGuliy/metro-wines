@@ -31,7 +31,8 @@ export default {
       set (val) {
         this.$store.commit('bucket/SET_TO_BUCKET', {
           wineData: this.wineData,
-          count: val
+          count: val,
+          userType: this.$cookies.get('userType')
         })
       }
     }

@@ -30,6 +30,7 @@ export default {
       cards: [],
       currentPage: null,
       lastPage: null,
+      filters: {},
       info: {
         to: null,
         from: null,
@@ -56,7 +57,9 @@ export default {
   },
   methods: {
     async useFilters (data) {
-      await this.fetchCatalog(data)
+      this.$set(this, 'filters', data)
+      this.currentPage = 1
+      await this.fetchCatalog()
     },
     async search (data) {
       await api.products.search(this.$userTradeCenter?.store_id, data)
@@ -73,12 +76,12 @@ export default {
       this.currentPage = page
       this.fetchCatalog()
     },
-    async fetchCatalog (filters = {}) {
+    async fetchCatalog () {
       if (this.$userTradeCenter?.store_id) {
         if (this.$userType === 'restoraunt') {
-          await api.products.getOptProduct(this.$userTradeCenter?.store_id, {
+          await api.products.getProduct(this.$userTradeCenter?.store_id, {
             page: this.currentPage,
-            ...filters
+            ...this.filters
           })
             .then((res) => {
               // console.log(res.data)
@@ -100,7 +103,7 @@ export default {
         } else {
           await api.products.getProduct(this.$userTradeCenter?.store_id, {
             page: this.currentPage,
-            ...filters
+            ...this.filters
           })
             .then((res) => {
               // console.log(res.data)

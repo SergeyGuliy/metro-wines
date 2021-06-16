@@ -296,11 +296,16 @@ Vue.mixin({
       return ((1 - (+newPrice / +oldPrice)) * 100).toFixed()
     },
     $fetchBucket () {
-      if (localStorage.getItem('bucket')) {
-        const bucket = JSON.parse(localStorage.getItem('bucket'))
+      const userType = this.$cookies.get('userType')
+      const currentBusket = userType === 'self' ? localStorage.getItem('bucketSelf') : localStorage.getItem('bucketRest')
+      if (currentBusket) {
+        const bucket = JSON.parse(currentBusket)
         if (typeof bucket === 'object') {
           this.$store.commit('bucket/SET_BUCKET', bucket)
         }
+      } else {
+        console.log('else')
+        this.$store.commit('bucket/SET_BUCKET', {})
       }
     },
     async $loadGeoData () {

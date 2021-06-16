@@ -129,7 +129,6 @@ export default {
       return this.activeShablone > 2 ? this.pageSizeSmall : this.pageSizeBig
     },
     items () {
-      console.log(this.selectedWines)
       const winesAttributes = Object.values(this.selectedWines).map(i => i.wineData.attributes.map(i => i.id === 308 ? i : false).filter(i => !!i))
       // winesAttributes.map((i) => {
       //   console.log(i)

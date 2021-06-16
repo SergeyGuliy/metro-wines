@@ -94,9 +94,7 @@ export default {
   methods: {
     openFeedBackModal () {
       this.$openModal('Feedback')
-        .then((data) => {
-          console.log(data)
-        })
+        .then(() => {})
         .catch((e) => {
           console.log(e)
         })

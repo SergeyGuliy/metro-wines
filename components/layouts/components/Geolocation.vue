@@ -49,9 +49,7 @@ export default {
   methods: {
     openSelectCity () {
       this.$openModal('SelectCity', { activator: '#geolocation-activator' })
-        .then((data) => {
-          console.log(data)
-        })
+        .then(() => {})
         .catch((e) => {
           console.log(e)
         })

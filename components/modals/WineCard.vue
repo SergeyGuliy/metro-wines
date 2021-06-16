@@ -68,12 +68,14 @@ export default {
       if (this.$userBucket[this.data.article]) {
         this.$store.commit('bucket/SET_TO_BUCKET', {
           wineData: this.data,
-          count: +(this.$userBucket[this.data.article].count + 1)
+          count: +(this.$userBucket[this.data.article].count + 1),
+          userType: this.$cookies.get('userType')
         })
       } else {
         this.$store.commit('bucket/SET_TO_BUCKET', {
           wineData: this.data,
-          count: 1
+          count: 1,
+          userType: this.$cookies.get('userType')
         })
       }
       this.close()

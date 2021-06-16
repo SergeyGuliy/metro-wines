@@ -9,7 +9,6 @@ const origins = {
 const origin = origins[TYPE]
 const appKey = '5C63A1CB1E8954499E3BB93939B7B/'
 const baseURL = `${origin}${appKey}`
-console.log(baseURL)
 const config = {
   baseURL,
   withCredentials: true

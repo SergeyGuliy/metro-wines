@@ -18,7 +18,7 @@
     <div v-else class="bucket-restoraunt__filled">
       <div class="bucket-restoraunt__title">
         Корзина
-        <Close @click="close"/>
+        <Close @click="close" />
       </div>
 
       <div class="bucket-restoraunt__devider" />
@@ -112,7 +112,10 @@ export default {
       this.close()
     },
     deleteFromBucket (wine) {
-      this.$store.commit('bucket/DELETE_FROM_BUCKET', wine.wineData.article)
+      this.$store.commit('bucket/DELETE_FROM_BUCKET', {
+        articleId: wine.wineData.article,
+        userType: this.$cookies.get('userType')
+      })
     }
   }
 }

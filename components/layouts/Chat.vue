@@ -125,7 +125,6 @@ export default {
   },
   methods: {
     closeChat () {
-      console.log('closeChat')
       this.chatVisible = false
     }
   }
