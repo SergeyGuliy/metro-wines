@@ -43,15 +43,15 @@ export const api = {
         }
       })).data
     },
-    search: async (storeId, name) => (await _axios.get(`${storeId}/search`, {
+    search: async (storeId, name, query) => (await _axios.get(`${storeId}/search`, {
       params: {
         q: name,
         category_id: 412338,
         paginate: 12,
-        limit: 30,
+        limit: 12,
         content: 1,
-        page: 1,
-        in_stock: 0
+        in_stock: 0,
+        ...query
       }
     })).data,
     wineProducts: async (storeId, categoryId) => (await _axios.get(`${storeId}/categories/${categoryId}`)).data

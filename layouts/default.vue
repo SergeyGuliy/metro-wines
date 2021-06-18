@@ -39,6 +39,11 @@ export default {
     }
   },
   mounted () {
+    document.addEventListener('keyup', (event) => {
+      if (event.keyCode === 13) {
+        this.$bus.emit('clickEnter')
+      }
+    })
     try {
       document.querySelector('.sub-hero .container .sub-hero__row').children.forEach((i) => {
         i.children.forEach((j) => {

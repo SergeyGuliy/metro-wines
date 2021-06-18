@@ -1,5 +1,6 @@
 <template>
   <div class="card">
+<!--    <pre>{{cardData.article}}</pre>-->
     <img :src="cardData.images[0]" alt="" class="card__img" @click="openWineCard">
     <h5 class="card__title" @click="openWineCard">
       {{ cardData.name }}
@@ -15,14 +16,14 @@
       {{ cardData.prices.price | number }} ₽/шт
     </div>
     <div class="card__add-box">
-      <AddBox :wineData="cardData"/>
-      <Button :filled="true" :uppercase="true" :bold="true" @click="openWineCard">
-        Посмотреть
+      <AddBox :wine-data="cardData" />
+      <Button :filled="true" :uppercase="true" :bold="true" @click="$addToBucket(cardData.article, cardData)">
+        Добавить в корзину
       </Button>
     </div>
     <div class="card__actions">
-<!--      <Discount class="card__icon-discount" />-->
-<!--      <Favourite class="card__icon-favorite" />-->
+      <!--      <Discount class="card__icon-discount" />-->
+      <!--      <Favourite class="card__icon-favorite" />-->
     </div>
   </div>
 </template>

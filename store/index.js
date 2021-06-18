@@ -7,7 +7,8 @@ export const state = () => ({
   tradeCenters: {},
   userTradeCenter: null,
   userType: null,
-  scrollTo: false
+  scrollTo: false,
+  cities: []
 })
 
 export const mutations = {
@@ -22,6 +23,9 @@ export const mutations = {
   },
   SET_SCROLL_TO (state, scrollTo) {
     Vue.set(state, 'scrollTo', scrollTo)
+  },
+  SET_CITIES (state, cities) {
+    Vue.set(state, 'cities', cities)
   }
 }
 
@@ -42,6 +46,13 @@ export const actions = {
         commit('SET_USER_TRADE_CENTER', state.tradeCenters.find(i => +i.store_id === +userTradeCenterId))
       } catch (e) {}
     }
+    const cities = []
+    state.tradeCenters.forEach((tradecenter) => {
+      if (!cities.includes(tradecenter.city)) {
+        cities.push(tradecenter.city)
+      }
+    })
+    commit('SET_CITIES', cities)
   }
 }
 

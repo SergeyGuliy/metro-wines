@@ -106,7 +106,22 @@ export default {
           cities[tradecenter.city] = [tradecenter]
         }
       })
-      return cities
+      const sortedCitiesKeys = Object.keys(cities).sort((a, b) => {
+        const nameA = a.toLowerCase()
+        const nameB = b.toLowerCase()
+        if (nameA < nameB) {
+          return -1
+        }
+        if (nameA > nameB) {
+          return 1
+        }
+        return 0
+      })
+      const sortedCities = {}
+      sortedCitiesKeys.forEach((cityKey) => {
+        sortedCities[cityKey] = cities[cityKey]
+      })
+      return sortedCities
     },
     tradeCenterSelected: {
       get () {

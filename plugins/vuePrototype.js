@@ -28,6 +28,9 @@ Vue.mixin({
     $tradeCenters () {
       return this.$store?.state?.tradeCenters
     },
+    $cities () {
+      return this.$store?.state?.cities
+    },
     $userTradeCenter () {
       return this.$store?.state?.userTradeCenter
     },
@@ -126,6 +129,22 @@ Vue.mixin({
         text: string.join('')
       }).then(this.$openModal('Notification'))
     },
+
+    $addToBucket (article, wineData) {
+      if (this.$userBucket[article]) {
+        this.$store.commit('bucket/SET_TO_BUCKET', {
+          wineData,
+          count: +(this.$userBucket[article].count + 1),
+          userType: this.$cookies.get('userType')
+        })
+      } else {
+        this.$store.commit('bucket/SET_TO_BUCKET', {
+          wineData,
+          count: 1,
+          userType: this.$cookies.get('userType')
+        })
+      }
+    },
     $downloadXLS () {
       const tableData = []
       Object.values(this.$userBucket).forEach((wine) => {
@@ -137,8 +156,8 @@ Vue.mixin({
           wine.count,
           +wine.count * +wine.wineData.prices.price,
           wine.wineData.attributes.find(i => i.id === 308)?.text || '',
-          wine.wineData.attributes.find(i => i.id === 4973)?.text || '',
           wine.wineData.attributes.find(i => i.id === 309)?.text || '',
+          wine.wineData.attributes.find(i => i.id === 4973)?.text || '',
           wine.wineData.attributes.find(i => i.id === 310)?.text || '',
           wine.wineData.attributes.find(i => i.id === 311)?.text || '',
           wine.wineData.attributes.find(i => i.id === 313)?.text || '',

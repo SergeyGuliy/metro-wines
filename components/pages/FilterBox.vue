@@ -5,7 +5,7 @@
     </div>
     <div class="filter-box__row">
       <InputBox v-model="searchField" :depresed="true" placeholder="Поиск по названию" class="filter-box__cubic" :search="true" />
-      <Button :bold="true" class="filter-box__cubic" :depresed="true" @click="search">
+      <Button :bold="true" class="filter-box__cubic" :depresed="true" @click="useFilters">
         ИСКАТЬ
       </Button>
     </div>
@@ -133,7 +133,7 @@
       <div class="filter-box__filters">
         <div class="mobile-search-box">
           <input v-model="searchField" type="text" class="mobile-search-box__input" placeholder="Поиск по названию">
-          <button class="mobile-search-box__btn" @click="search">
+          <button class="mobile-search-box__btn" @click="useFilters">
             <Search3 />
           </button>
         </div>
@@ -202,13 +202,48 @@ export default {
           if (Object.keys(this.usedIds).includes(i.id.toString())) {
             const key = this.usedIds[i.id]
             this.$set(this.filtersData, key, [])
-            this.$set(this.filters, key, i)
+            console.log(i)
+            if (i.id === 308) {
+              // Hardcoding to custom select required fields in "Color of wine"
+              // values ids to show 841 842 843 848
+              // console.log(i.values)
+              const idsToShow = [841, 842, 843, 848]
+              i.values = i.values.filter(j => idsToShow.includes(j.value_id))
+              this.$set(this.filters, key, i)
+            } else if (i.id === 4975) {
+              // Hardcoding to custom select required fields in "Category of wine"
+              // values ids to show 14497 14594
+              // console.log(i.values)
+              const idsToShow = [14497, 14594]
+              i.values = i.values.filter(j => idsToShow.includes(j.value_id))
+              this.$set(this.filters, key, i)
+            } else if (i.id === 309) {
+              // Hardcoding to custom select required fields in "Country of wine"
+              i.values = i.values.sort((a, b) => {
+                const nameA = a.value.toLowerCase()
+                const nameB = b.value.toLowerCase()
+                if (nameA < nameB) {
+                  return -1
+                }
+                if (nameA > nameB) {
+                  return 1
+                }
+                return 0
+              })
+              this.$set(this.filters, key, i)
+            } else {
+              this.$set(this.filters, key, i)
+            }
           }
         })
       })
       .catch((e) => {
         console.log(e)
       })
+    this.$bus.on('clickEnter', this.useFilters)
+  },
+  beforeDestroy () {
+    this.$bus.off('clickEnter', this.useFilters)
   },
   methods: {
     resetFilters () {
@@ -243,14 +278,14 @@ export default {
         })
         key = key + 1
       })
-      this.$bus.$emit('useFilters', {
-        ...filters,
-        ...stringedAtributes
+      this.$bus.emit('searchFilter', {
+        filters: {
+          ...filters,
+          ...stringedAtributes
+        },
+        searchField: this.searchField
       })
       this.isMobileVisibleFilters = false
-    },
-    search () {
-      this.$bus.$emit('search', this.searchField)
       this.isMobileVisibleSearch = false
     }
   }

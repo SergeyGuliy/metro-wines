@@ -78,10 +78,18 @@ export default {
     }
   },
   mounted () {
+    this.$bus.on('clickEnter', () => {
+      this.isOpen = false
+    })
     setTimeout(() => {
       this.min = 0
       this.max = 10000
     }, 1000)
+  },
+  beforeDestroy () {
+    this.$bus.off('clickEnter', () => {
+      this.isOpen = false
+    })
   },
   computed: {
     min: {

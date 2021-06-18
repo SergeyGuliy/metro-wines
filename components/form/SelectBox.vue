@@ -73,6 +73,16 @@ export default {
       }
     }
   },
+  mounted () {
+    this.$bus.on('clickEnter', () => {
+      this.isOpen = false
+    })
+  },
+  beforeDestroy () {
+    this.$bus.off('clickEnter', () => {
+      this.isOpen = false
+    })
+  },
   methods: {
     hide () {
       this.isOpen = false

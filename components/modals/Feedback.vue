@@ -34,6 +34,7 @@
       />
       <InputBox
         v-model="form.city"
+        :show-recomendation="true"
         placeholder="Введите ваш город"
         :errors="[($v.form.city.required || !$v.form.city.$dirty) || vt.required]"
       />

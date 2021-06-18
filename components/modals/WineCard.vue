@@ -36,7 +36,7 @@
       </div>
       <div class="card-modal__add-box">
         <AddBox :wine-data="data" />
-        <Button :filled="true" @click="addToBucket">
+        <Button :filled="true" @click="addToBucket(data.article)">
           Добавить в корзину
         </Button>
       </div>
@@ -64,20 +64,8 @@ export default {
     this.$bus.off('clickModalWrapper', this.close)
   },
   methods: {
-    addToBucket () {
-      if (this.$userBucket[this.data.article]) {
-        this.$store.commit('bucket/SET_TO_BUCKET', {
-          wineData: this.data,
-          count: +(this.$userBucket[this.data.article].count + 1),
-          userType: this.$cookies.get('userType')
-        })
-      } else {
-        this.$store.commit('bucket/SET_TO_BUCKET', {
-          wineData: this.data,
-          count: 1,
-          userType: this.$cookies.get('userType')
-        })
-      }
+    addToBucket (article) {
+      this.$addToBucket(article, this.data)
       this.close()
     }
   }

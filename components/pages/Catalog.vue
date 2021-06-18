@@ -31,6 +31,7 @@ export default {
       currentPage: null,
       lastPage: null,
       filters: {},
+      searchField: '',
       info: {
         to: null,
         from: null,
@@ -48,28 +49,18 @@ export default {
   },
   mounted () {
     this.fetchCatalog()
-    this.$bus.$on('useFilters', this.useFilters)
-    this.$bus.$on('search', this.search)
+    this.$bus.$on('searchFilter', this.useFilters)
   },
   beforeDestroy () {
-    this.$bus.$off('useFilters', this.useFilters)
-    this.$bus.$off('search', this.search)
+    this.$bus.$off('searchFilter', this.useFilters)
   },
   methods: {
     async useFilters (data) {
-      this.$set(this, 'filters', data)
+      console.log(data)
+      this.$set(this, 'filters', data.filters)
+      this.$set(this, 'searchField', data.searchField)
       this.currentPage = 1
       await this.fetchCatalog()
-    },
-    async search (data) {
-      await api.products.search(this.$userTradeCenter?.store_id, data)
-        .then((res) => {
-          this.cards = res.data.products
-          this.lastPage = null
-        })
-        .catch((e) => {
-          console.log(e)
-        })
     },
     changePage (page) {
       this.$scrollToCard()
@@ -77,6 +68,36 @@ export default {
       this.fetchCatalog()
     },
     async fetchCatalog () {
+      if (this.searchField.length) {
+        await this.searchInCatalog()
+      } else {
+        await this.filtredCatalog()
+      }
+    },
+    async searchInCatalog () {
+      await api.products.search(this.$userTradeCenter?.store_id, this.searchField, {
+        page: this.currentPage,
+        ...this.filters
+      })
+        .then((res) => {
+          // eslint-disable-next-line camelcase
+          const { total_pages, page, total } = res.data
+          this.cards = res.data.products
+          this.lastPage = null
+          this.currentPage = +page
+          // eslint-disable-next-line camelcase
+          this.lastPage = +total_pages
+          // eslint-disable-next-line camelcase
+          this.info.from = ((+page - 1) * 12) + 1
+          // eslint-disable-next-line camelcase
+          this.info.to = ((+page) * 12) < +total ? ((+page) * 12) : +total
+          this.info.total = +total
+        })
+        .catch((e) => {
+          console.log(e)
+        })
+    },
+    async filtredCatalog () {
       if (this.$userTradeCenter?.store_id) {
         if (this.$userType === 'restoraunt') {
           await api.products.getProduct(this.$userTradeCenter?.store_id, {
