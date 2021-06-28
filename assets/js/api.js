@@ -29,6 +29,7 @@ export const api = {
         params: {
           category_id: [412338],
           paginate: 12,
+          disabled_categories: 1,
           ...query
         }
       })).data

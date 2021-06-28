@@ -50,13 +50,15 @@ export default {
   mounted () {
     this.fetchCatalog()
     this.$bus.$on('searchFilter', this.useFilters)
+    // this.$watch('$userType', function () {
+    //   console.log('a thing changed')
+    // }, { deep: true })
   },
   beforeDestroy () {
     this.$bus.$off('searchFilter', this.useFilters)
   },
   methods: {
     async useFilters (data) {
-      console.log(data)
       this.$set(this, 'filters', data.filters)
       this.$set(this, 'searchField', data.searchField)
       this.currentPage = 1
@@ -100,7 +102,7 @@ export default {
     async filtredCatalog () {
       if (this.$userTradeCenter?.store_id) {
         if (this.$userType === 'restoraunt') {
-          await api.products.getProduct(this.$userTradeCenter?.store_id, {
+          await api.products.getOptProduct(this.$userTradeCenter?.store_id, {
             page: this.currentPage,
             ...this.filters
           })

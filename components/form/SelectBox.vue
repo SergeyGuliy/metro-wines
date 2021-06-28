@@ -25,6 +25,13 @@
           <!--        <span v-if="index !== 0" class="select-box__item-count">{{ item.count }}</span>-->
           <Close v-else />
         </div>
+        <div class="custom-input-box__devider" />
+        <div class="custom-input-box__select-all" @click="toogleAll">
+          <div class="checkbox" :class="{'checkbox--active': isAllSelected}">
+            <Ok class="svg-ok" />
+          </div>
+          <span class="custom-input-box__item-title">{{ isAllSelected? 'Отменить все': 'Выбрать все' }}</span>
+        </div>
       </div>
     </div>
   </div>
@@ -46,7 +53,8 @@ export default {
     Sugar: () => import('assets/icons/sugar.svg'),
     Arrow: () => import('assets/icons/arrow-2.svg'),
     Close: () => import('assets/icons/close-2.svg'),
-    Delete: () => import('assets/icons/delete.svg')
+    Delete: () => import('assets/icons/delete.svg'),
+    Ok: () => import('assets/icons/ok.svg')
   },
   props: {
     value: {
@@ -64,6 +72,15 @@ export default {
     }
   },
   computed: {
+    isAllSelected () {
+      const searchedItems = [...this.items].sort((a, b) => {
+        return a.value_id - b.value_id
+      })
+      const selectedItems = [...this.localValue].sort((a, b) => {
+        return a.value_id - b.value_id
+      })
+      return JSON.stringify(searchedItems) === JSON.stringify(selectedItems)
+    },
     localValue: {
       get () {
         return this.value
@@ -84,6 +101,17 @@ export default {
     })
   },
   methods: {
+    toogleAll () {
+      if (this.isAllSelected) {
+        this.localValue = []
+      } else {
+        this.items.forEach((item) => {
+          if (!this.localValue.includes(item)) {
+            this.localValue.push(item)
+          }
+        })
+      }
+    },
     hide () {
       this.isOpen = false
     },

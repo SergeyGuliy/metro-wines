@@ -4,11 +4,16 @@
     <!--    <pre>{{ $userBucket }}</pre>-->
     <div class="wine-cart-main__container">
       <div class="container">
-        <div class="wine-cart-main__title">
-          В вашей винной карте {{ basketLength }} {{ basketLengthWinesNames[basketLength] || 'вин' }}
-          <div class="popup wine-cart-main__popup">
-            В одну винную карту можно добавить не больше 20 позиций, выберите нужные и они автоматически попадут в шаблон. При необходимости вы можете создать несколько винных карт.
+        <div class="wine-cart-main__top">
+          <div class="wine-cart-main__title">
+            В вашей винной карте {{ basketLength }} {{ basketLengthWinesNames[basketLength] || 'вин' }}
+            <div class="popup wine-cart-main__popup">
+              В одну винную карту можно добавить не больше 20 позиций, выберите нужные и они автоматически попадут в шаблон. При необходимости вы можете создать несколько винных карт.
+            </div>
           </div>
+          <Button class="wine-cart-main__add-all" :filled="true" :uppercase="true" @click="selectAllWines">
+            Добавить все в винную карту
+          </Button>
         </div>
         <WineCartList :selected-wines="selectedWines" @toggleList="toggleList" />
         <div class="wine-cart-main__actions">
@@ -69,6 +74,13 @@ export default {
     }
   },
   methods: {
+    selectAllWines () {
+      Object.values(this.$userBucket).forEach((item) => {
+        if (!this.selectedWines.includes(item)) {
+          this.selectedWines.push(item)
+        }
+      })
+    },
     changeActiveShablone (newVal) {
       this.activeShablone = newVal
     },
@@ -102,6 +114,15 @@ export default {
       background: url("../assets/images/page-main_top.png"), #f4f4f4;
       background-repeat: no-repeat;
       background-size: 100%;
+    }
+    .wine-cart-main__top{
+      display: flex;
+      align-items: center;
+    }
+    .wine-cart-main__add-all{
+      min-height: 40px;
+      margin-left: 25px;
+      margin-bottom: 20px;
     }
     .wine-cart-main__title{
       display: inline-block;
@@ -147,6 +168,9 @@ export default {
         @include FontStyle('Acrom', normal, #000000, 30px, 36px);
         margin-bottom: 43px;
       }
+      .wine-cart-main__add-all{
+        margin-bottom: 38px;
+      }
     }
     @media (max-width: 1080px) {
       .wine-cart-main__container{
@@ -175,6 +199,15 @@ export default {
       }
     }
     @media (max-width: 767px) {
+
+      .wine-cart-main__top{
+        display: block;
+      }
+      .wine-cart-main__add-all{
+        display: block;
+        min-height: 40px;
+        margin: 0 auto 20px auto;
+      }
       .wine-cart-main__actions{
         margin-top: 0px;
         margin-bottom: 14px;
@@ -210,6 +243,7 @@ export default {
       .wine-cart-main__title{
         @include FontStyle('Acrom', normal, #000000, 16px, 19px);
         /*margin-bottom: 102px;*/
+        margin-bottom: 20px;
       }
       .wine-cart-main__subtitle{
         @include FontStyle('Acrom', normal, #000000, 14px, 15px);

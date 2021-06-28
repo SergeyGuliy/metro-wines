@@ -33,6 +33,13 @@
           <!--        <span class="search-select-box__item-count">{{ item.count }}</span>-->
         </div>
       </div>
+      <div class="custom-input-box__devider" />
+      <div class="custom-input-box__select-all" @click="toogleAll">
+        <div class="checkbox" :class="{'checkbox--active': isAllSelected}">
+          <Ok class="svg-ok" />
+        </div>
+        <span class="custom-input-box__item-title">{{ isAllSelected? 'Отменить все': 'Выбрать все' }}</span>
+      </div>
     </div>
   </div>
 </template>
@@ -81,6 +88,15 @@ export default {
         return this.items
       }
     },
+    isAllSelected () {
+      const searchedItems = [...this.searchedItems].sort((a, b) => {
+        return a.value_id - b.value_id
+      })
+      const selectedItems = [...this.localValue].sort((a, b) => {
+        return a.value_id - b.value_id
+      })
+      return JSON.stringify(searchedItems) === JSON.stringify(selectedItems)
+    },
     localValue: {
       get () {
         return this.value
@@ -101,6 +117,17 @@ export default {
     })
   },
   methods: {
+    toogleAll () {
+      if (this.isAllSelected) {
+        this.localValue = []
+      } else {
+        this.searchedItems.forEach((item) => {
+          if (!this.localValue.includes(item)) {
+            this.localValue.push(item)
+          }
+        })
+      }
+    },
     hide () {
       this.isOpen = false
     },
