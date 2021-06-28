@@ -37,7 +37,7 @@ export const api = {
     getOptProduct: async (storeId, query) => {
       return (await _axios.get(`${storeId}/products`, {
         params: {
-          category_id: [412971],
+          category_id: [413081],
           paginate: 12,
           disabled_categories: 1,
           ...query
