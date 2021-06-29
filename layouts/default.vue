@@ -2,6 +2,7 @@
   <div class="layout-default" :class="{'overflow-hidden': component}">
     <Header class="sizer" />
     <!--    <Chat />-->
+    <pre v-if="$getServerErrors.length">{{ $getServerErrors }}</pre>
     <div class="layout__inner sizer">
       <Nuxt />
     </div>

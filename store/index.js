@@ -8,7 +8,8 @@ export const state = () => ({
   userTradeCenter: null,
   userType: null,
   scrollTo: false,
-  cities: []
+  cities: [],
+  error: []
 })
 
 export const mutations = {
@@ -26,6 +27,9 @@ export const mutations = {
   },
   SET_CITIES (state, cities) {
     Vue.set(state, 'cities', cities)
+  },
+  PUSH_ERROR (state, error) {
+    Vue.set(state, 'error', [...state.error, error])
   }
 }
 
@@ -33,9 +37,9 @@ export const actions = {
   async nuxtServerInit ({ dispatch, commit, state }, { $cookies }) {
     await api.tradecenters.getAll().then((res) => {
       commit('SET_TRADE_CENTERS', res.data)
-      console.log(res.data)
+      // console.log(res.data)
     }).catch((e) => {
-      console.log(e)
+      commit('PUSH_ERROR', e)
     })
     const userType = $cookies.get('userType')
     const userTradeCenterId = $cookies.get('userTradeCenterId')
@@ -48,12 +52,16 @@ export const actions = {
       } catch (e) {}
     }
     const cities = []
-    state.tradeCenters.forEach((tradecenter) => {
-      if (!cities.includes(tradecenter.city)) {
-        cities.push(tradecenter.city)
-      }
-    })
-    commit('SET_CITIES', cities)
+    try {
+      state.tradeCenters.forEach((tradecenter) => {
+        if (!cities.includes(tradecenter.city)) {
+          cities.push(tradecenter.city)
+        }
+      })
+      commit('SET_CITIES', cities)
+    } catch (e) {
+      commit('PUSH_ERROR', e)
+    }
   }
 }
 

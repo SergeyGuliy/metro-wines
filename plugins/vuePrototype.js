@@ -28,6 +28,9 @@ Vue.mixin({
     $tradeCenters () {
       return this.$store?.state?.tradeCenters
     },
+    $getServerErrors () {
+      return this.$store?.state?.error
+    },
     $cities () {
       return this.$store?.state?.cities
     },
