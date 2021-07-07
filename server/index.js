@@ -12,9 +12,10 @@ app.use(bodyParser.urlencoded({
 }))
 
 const isDev = process.env.NODE_ENV !== 'production'
+console.log(isDev ? 'dev' : 'start')
 async function start () {
   try {
-    const nuxt = await loadNuxt(isDev ? 'dev' : 'start')
+    const nuxt = await loadNuxt('dev')
     app.use(nuxt.render)
     if (isDev) {
       build(nuxt)
