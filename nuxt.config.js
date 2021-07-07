@@ -68,16 +68,16 @@ export default {
     'cookie-universal-nuxt',
     ['nuxt-mail', {
       message: [
-        // { name: 'support', to: 'Irina.naumova01@metro-cc' },
-        // { name: 'support', to: 'valeriya.morozova@metro-cc.ru' },
+        { name: 'support', to: 'Irina.naumova01@metro-cc.ru' },
+        { name: 'support', to: 'valeriya.morozova@metro-cc.ru' },
         { name: 'support', to: 'xsehywx@gmail.com' }
       ],
       smtp: {
-        host: 'smtp-relay.sendinblue.com',
-        port: 587,
+        host: 'mail1.metro-cc.ru',
+        port: 465,
         auth: {
-          user: 'xsehywx@gmail.com',
-          pass: 'xsmtpsib-2966df2ef71222d5a0b2ae285f8ce4387282c32b2c10676e32b416f170ca5cdd-I7m6t85spPdzSfvK'
+          user: 'support@winelist.metro-cc.ru',
+          pass: 'pLSG3x5JtF'
         }
       }
     }]
