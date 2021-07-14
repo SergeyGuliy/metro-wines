@@ -68,9 +68,12 @@ export default {
     async createOrder () {
       if (Object.keys(this.$userBucket).length) {
         const key = await this.$createOrder()
-        const link = `https://online.metro-cc.ru/cart?signature=${key}`
-        window.location.href = link
-        this.close()
+        console.log(key)
+        setTimeout(() => {
+          const link = `https://online.metro-cc.ru/cart?signature=${key}`
+          window.location.href = link
+          this.close()
+        }, 1000)
       }
     }
   }

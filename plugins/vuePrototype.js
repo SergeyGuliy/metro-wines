@@ -125,7 +125,7 @@ Vue.mixin({
         })
       }
       // window.location.origin
-
+      console.log(window.location.origin)
       await this.$axios.$post(`${window.location.origin}/mail/send`, {
         from: 'support@winelist.metro-cc.ru',
         subject: Object.keys(body).includes('text') ? 'Обратная связь' : 'Заявка менеджеру',

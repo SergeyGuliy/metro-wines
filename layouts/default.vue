@@ -1,5 +1,5 @@
 <template>
-  <div class="layout-default" :class="{'overflow-hidden': component}">
+  <div class="layout-default" :class="{'overflow-hidden': component}" @click="hide">
     <Header class="sizer" />
     <!--    <Chat />-->
     <pre v-if="$getServerErrors.length">{{ $getServerErrors }}</pre>
@@ -106,6 +106,9 @@ export default {
     })
   },
   methods: {
+    hide () {
+      console.log('hide')
+    },
     disableScrolling () {
       document.querySelector('body').style.overflow = 'hidden'
     },

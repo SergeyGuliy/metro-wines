@@ -3,7 +3,7 @@
     v-click-outside="hide"
     class="custom-input-box noselect"
     :class="{'custom-input-box--open-mobile':isOpen}"
-    @click="isOpen = true"
+    @click.stop="isOpen = true"
   >
     <div class="custom-input-box__outer">
       <component :is="data.icon" class="custom-input-box__icon" />
@@ -20,7 +20,7 @@
       />
       <div class="custom-input-box__inner-box--scrollable">
         <div
-          v-for="(item, index) in searchedItems"
+          v-for="(item, index) in value"
           :key="index"
           class="search-select-box__item"
           :class="{' search-select-box__item--active active': localValue.includes(item)}"
@@ -32,6 +32,22 @@
           <span class="search-select-box__item-title">{{ item.value.toLocaleLowerCase() }}</span>
           <!--        <span class="search-select-box__item-count">{{ item.count }}</span>-->
         </div>
+        <template v-for="(item, index) in searchedItems">
+          <template v-if="!value.includes(item)">
+            <div
+              :key="`k-${index}`"
+              class="search-select-box__item"
+              :class="{' search-select-box__item--active active': localValue.includes(item)}"
+              @click="toggleItem(item)"
+            >
+              <div class="checkbox" :class="{'checkbox--active':localValue.includes(item)}">
+                <Ok class="svg-ok" />
+              </div>
+              <span class="search-select-box__item-title">{{ item.value.toLocaleLowerCase() }}</span>
+              <!--        <span class="search-select-box__item-count">{{ item.count }}</span>-->
+            </div>
+          </template>
+        </template>
       </div>
       <div class="custom-input-box__devider" />
       <div class="custom-input-box__select-all" @click="toogleAll">

@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "nodemon server/index.js --watch server",
+    "restartDev": "c && kill -9 $(lsof -t -i:5000) || nr dev",
     "build": "nuxt build",
     "start": "node server/index.js",
     "generate": "nuxt generate",

@@ -70,11 +70,38 @@
           v-for="(tradecenter, index) in cities[citySelected]"
           :key="index"
           class="tab__city pointer noselect"
-          @click="selectTradecenter(tradecenter)"
+          @click="selectLocalTradecenter(tradecenter)"
         >
           {{ tradecenter.name }}
         </div>
       </div>
+    </div>
+    <div v-if="tab === 5 && localTradeCenterSelected" class="select-city-tab select-city-tab-2">
+      <div class="select-city-modal__title">
+        {{ localTradeCenterSelected.name }}
+        <span
+          class="tab__select-another noselect"
+          @click="selectTradecenter"
+        >
+          Выбрать
+        </span>
+      </div>
+      <a href="#" class="tab__contact">
+        <span>{{ localTradeCenterSelected.contacts.phone }}</span>
+      </a>
+      <div class="tab__work-time">
+        Будни: с {{ localTradeCenterSelected.work_mode }}<br>
+        <!--        Выходные: с 8 до 22 часов-->
+      </div>
+      <a href="mailto://merservise.store10@metro-cc.ru" class="tab__work-time tab__link">
+        {{ localTradeCenterSelected.contacts.email }}
+      </a>
+      <span
+        class="tab__select-another noselect"
+        @click="cleanCity"
+      >
+        Выбрать другой
+      </span>
     </div>
   </div>
 </template>
@@ -93,7 +120,8 @@ export default {
   data () {
     return {
       citySelected: null,
-      tab: 1
+      tab: 1,
+      localTradeCenterSelected: null
     }
   },
   computed: {
@@ -144,12 +172,19 @@ export default {
       this.citySelected = city
       this.tab = 4
     },
-    selectTradecenter (tradecenter) {
-      this.tradeCenterSelected = tradecenter
+    selectLocalTradecenter (tradecenter) {
+      // this.localTradeCenterSelected = tradecenter
+      this.$set(this, 'localTradeCenterSelected', tradecenter)
+      this.tab = 5
+      // this.close()
+    },
+    selectTradecenter () {
+      this.tradeCenterSelected = this.localTradeCenterSelected
       this.close()
     },
     cleanCity () {
       this.tab = 3
+      this.$set(this, 'localTradeCenterSelected', null)
     }
   }
 }
@@ -175,6 +210,10 @@ export default {
       svg{
         margin-right: 27px;
       }
+      .tab__select-another{
+        align-self: unset !important;
+        margin-top: 0 !important;
+      }
     }
     .select-city-tab{
       display: flex;
@@ -199,6 +238,7 @@ export default {
       .tab__select-another{
         align-self: flex-end;
         margin-top: 35px;
+        margin-left: 10px;
         width: fit-content;
         text-decoration: underline;
         cursor: pointer;
@@ -213,11 +253,22 @@ export default {
         width: 800px;
       }
       .tab__city{
-        margin-right: 60px;
+        margin-right: 20px;
         @include FontStyle('Acrom', normal, #000000, 14px, 17px);
         margin-bottom: 5px;
         white-space: nowrap;
-        cursor: pointer;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        .tab__select-another{
+          margin: 0 5px;
+        }
+      }
+      .tab__tradecenter{
+        justify-content: flex-start;
+        .tab__select-another{
+          margin-left: 10px;
+        }
       }
     }
     .select-city-tab-1{
