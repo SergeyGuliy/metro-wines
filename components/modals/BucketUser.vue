@@ -69,6 +69,7 @@ export default {
       if (Object.keys(this.$userBucket).length) {
         const key = await this.$createOrder()
         console.log(key)
+        console.log(`https://online.metro-cc.ru/cart?signature=${key}`)
         setTimeout(() => {
           const link = `https://online.metro-cc.ru/cart?signature=${key}`
           window.location.href = link

@@ -7,7 +7,7 @@ const origins = {
   prod: 'https://api.metro-cc.ru/api/v1/'
 }
 const origin = origins[TYPE]
-const appKey = '5C63A1CB1E8954499E3BB93939B7B/'
+const appKey = 'C98BB1B547ECCC17D8AEBEC7116D6/'
 const baseURL = `${origin}${appKey}`
 const config = {
   baseURL,
