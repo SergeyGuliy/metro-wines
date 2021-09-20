@@ -10,7 +10,7 @@ const origins = {
 }
 
 const origin = origins[TYPE]
-const appKey = '5C63A1CB1E8954499E3BB93939B7B/'
+const appKey = 'C98BB1B547ECCC17D8AEBEC7116D6/'
 
 router.post('/', async (req, res) => {
   // eslint-disable-next-line camelcase
@@ -30,6 +30,9 @@ router.post('/', async (req, res) => {
       error: e
     })
   }
+
+  console.log(user_hash)
+
   const busketToServer = req.body.busketToServer
   await axios.post(`${origin}${appKey}${req.body.tradeCenter}/eshop/basket`, {
     articles: busketToServer
@@ -43,7 +46,6 @@ router.post('/', async (req, res) => {
     .then(() => {
       res.status(200).json({ user_hash })
     }).catch((e) => {
-      console.log('ERROR 2')
       res.status(500).send({
         step: 2,
         error: e

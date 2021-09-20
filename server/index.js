@@ -5,7 +5,9 @@ const { loadNuxt, build } = require('nuxt')
 const bodyParser = require('body-parser')
 
 const pageRoutes = require('./routes/page')
+const mailRoutes = require('./routes/mail')
 app.use('/api/createOrder', pageRoutes)
+app.use('/mail/send', mailRoutes)
 
 app.use(bodyParser.urlencoded({
   extended: true
