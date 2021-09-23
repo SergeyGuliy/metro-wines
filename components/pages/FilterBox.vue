@@ -173,7 +173,7 @@ export default {
         4975: 'wineCategory',
         309: 'wineCountry',
         310: 'wineSort',
-        // 4973: 'wineRegion',
+        4973: 'wineRegion',
         311: 'wineSugar',
         308: 'wineType'
       }
@@ -198,11 +198,11 @@ export default {
   async mounted () {
     await api.products.wineProducts(this.$userTradeCenter?.store_id, 413103)
       .then((data) => {
+        console.warn(data.data.attributes)
         data.data.attributes.forEach((i) => {
           if (Object.keys(this.usedIds).includes(i.id.toString())) {
             const key = this.usedIds[i.id]
             this.$set(this.filtersData, key, [])
-            console.log(i)
             if (i.id === 308) {
               // Hardcoding to custom select required fields in "Color of wine"
               // values ids to show 841 842 843 848
@@ -236,6 +236,7 @@ export default {
             }
           }
         })
+        console.warn(this.filters)
       })
       .catch((e) => {
         console.log(e)

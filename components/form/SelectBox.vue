@@ -13,6 +13,7 @@
     </div>
     <div v-if="isOpen" class="custom-input-box__inner-box select-box">
       <div class="custom-input-box__inner-box--scrollable">
+        <pre>{{ value }}</pre>
         <div
           v-for="(item, index) in value"
           :key="index"
@@ -20,24 +21,33 @@
           :class="{' select-box__item--active active': localValue.includes(item)}"
           @click="toggleItem(item)"
         >
-          <span class="select-box__item-title">{{ item.value.toLocaleLowerCase() }}</span>
-          <span v-if="!localValue.includes(item)" class="select-box__item-count" />
-          <!--        <span v-if="index !== 0" class="select-box__item-count">{{ item.count }}</span>-->
+          <template v-if="item.value">
+            <span class="select-box__item-title">{{ item.value.toLocaleLowerCase() }}</span>
+            <span v-if="!localValue.includes(item)" class="select-box__item-count" />
+            <!--        <span v-if="index !== 0" class="select-box__item-count">{{ item.count }}</span>-->
+          </template>
+          <template v-else-if="item">
+            <span class="select-box__item-title">{{ item.toLocaleLowerCase() }}</span>
+            <span v-if="!localValue.includes(item)" class="select-box__item-count" />
+            <!--        <span v-if="index !== 0" class="select-box__item-count">{{ item.count }}</span>-->
+          </template>
           <Close v-else />
         </div>
         <template v-for="(item, index) in items">
           <template v-if="!value.includes(item)">
-            <div
-              :key="`key-${index}`"
-              class="select-box__item"
-              :class="{' select-box__item--active active': localValue.includes(item)}"
-              @click="toggleItem(item)"
-            >
-              <span class="select-box__item-title">{{ item.value.toLocaleLowerCase() }}</span>
-              <span v-if="!localValue.includes(item)" class="select-box__item-count" />
-              <!--        <span v-if="index !== 0" class="select-box__item-count">{{ item.count }}</span>-->
-              <Close v-else />
-            </div>
+            <template v-if="item.value">
+              <div
+                :key="`key-${index}`"
+                class="select-box__item"
+                :class="{' select-box__item--active active': localValue.includes(item)}"
+                @click="toggleItem(item)"
+              >
+                <span class="select-box__item-title">{{ item.value.toLocaleLowerCase() }}</span>
+                <span v-if="!localValue.includes(item)" class="select-box__item-count" />
+                <!--        <span v-if="index !== 0" class="select-box__item-count">{{ item.count }}</span>-->
+                <Close v-else />
+              </div>
+            </template>
           </template>
         </template>
         <div class="custom-input-box__devider" />
