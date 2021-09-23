@@ -196,7 +196,7 @@ export default {
     }
   },
   async mounted () {
-    await api.products.wineProducts(this.$userTradeCenter?.store_id, 412338)
+    await api.products.wineProducts(this.$userTradeCenter?.store_id, 413103)
       .then((data) => {
         data.data.attributes.forEach((i) => {
           if (Object.keys(this.usedIds).includes(i.id.toString())) {
