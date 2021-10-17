@@ -380,12 +380,16 @@ export default {
     .wine-constructor__form{
       display: inline-flex;
       height: 68px;
+      width: 770px;
     }
     .wine-constructor__form-input{
       margin-right: 12px;
-      width: 500px;
+      width: auto;
+      max-width: 500px;
+      flex: 1 1 auto;
       .input-field{
-        width: 500px;
+        width: -webkit-fill-available;
+        max-width: 500px;
         padding-left: 15px !important;
         padding-right: 15px !important;
         border: 3px solid #710000;
@@ -396,7 +400,8 @@ export default {
       }
     }
     .wine-constructor__form-send{
-      width: 270px;
+      width: auto;
+      max-width: 270px;
     }
     .shabloneCanvas{
       position: fixed;
@@ -715,6 +720,18 @@ export default {
         min-height: unset;
         margin: 0 -15px;
       }
+      .wine-constructor__form{
+        height: unset;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      .wine-constructor__form-input{
+        margin: 0 0 10px 0;
+      }
+      .wine-constructor__send-email{
+        width: unset;
+      }
       .wine-constructor__shablone-wrapper{
         margin: 0 -20px;
         padding-bottom: 26px;
@@ -764,6 +781,15 @@ export default {
     }
     @media (max-width: 500px) {
       .wine-constructor__actions .button{
+        width: 100%;
+      }
+      .wine-constructor__form{
+        width: 100%;
+      }
+      .wine-constructor__form-input{
+        width: 100%;
+      }
+      .wine-constructor__send-email{
         width: 100%;
       }
     }
