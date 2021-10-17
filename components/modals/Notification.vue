@@ -6,7 +6,7 @@
       Сообщение успешно
       отправлено!
     </div>
-    <div class="notification-modal__subtitle">
+    <div v-if="!data.hideSub" class="notification-modal__subtitle">
       Наш специалист свяжется с вами для уточнениния деталей.
     </div>
   </div>

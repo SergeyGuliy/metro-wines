@@ -198,7 +198,6 @@ export default {
   async mounted () {
     await api.products.wineProducts(this.$userTradeCenter?.store_id, 413103)
       .then((data) => {
-        console.warn(data.data.attributes)
         data.data.attributes.forEach((i) => {
           if (Object.keys(this.usedIds).includes(i.id.toString())) {
             const key = this.usedIds[i.id]

@@ -88,6 +88,23 @@
         <Button :filled="true" :uppercase="true" @click="downloadPDF">
           Скачать pdf
         </Button>
+        <Button v-if="!isEmailSendInited" class="wine-constructor__send-email" :filled="true" :uppercase="true" @click="initSendEmail">
+          отправить на email
+        </Button>
+        <form v-else class="wine-constructor__form" @submit.prevent="sendEmail">
+          <InputBox
+            v-model="form.email"
+            class="wine-constructor__form-input"
+            placeholder="ВВЕДИТЕ EMAIL"
+            :errors="[
+              ($v.form.email.required || !$v.form.email.$dirty) || vt.required,
+              ($v.form.email.regexEmail || !$v.form.email.$dirty) || vt.regexEmail]
+            "
+          />
+          <Button :filled="true" :uppercase="true" class="wine-constructor__form-send">
+            отправить
+          </Button>
+        </form>
         <!--        <Button :filled="true" :uppercase="true">-->
         <!--          Скачать для редактирования (eps)-->
         <!--        </Button>-->
@@ -95,23 +112,38 @@
     </div>
   </div>
 </template>
-
 <script>
 import domtoimage from 'dom-to-image'
 import jsPDF from 'jspdf'
+import { helpers, required } from 'vuelidate/lib/validators'
+const regexEmail = helpers.regex('alpha', /^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/)
 
 export default {
   name: 'WIneConstructor',
   components: {
     Button: () => import('../form/Button'),
     WineConstructorBlock: () => import('./WineConstructorBlock'),
+    InputBox: () => import('../form/InputBox'),
     Ok: () => import('assets/icons/ok-2.svg')
   },
   props: {
     selectedWines: {}
   },
+
+  validations: {
+    form: {
+      email: {
+        required,
+        regexEmail
+      }
+    }
+  },
   data () {
     return {
+      form: {
+        email: ''
+      },
+      isEmailSendInited: false,
       activeShablone: 0,
       shablones: [1, 2, 3, 4],
       pageSizeBig: {
@@ -121,7 +153,8 @@ export default {
       pageSizeSmall: {
         clientWidth: 693,
         clientHeight: 1957
-      }
+      },
+      pdf: null
     }
   },
   computed: {
@@ -208,7 +241,67 @@ export default {
     window.removeEventListener('resize', () => {})
   },
   methods: {
-    downloadPDF () {
+    initSendEmail () {
+      this.isEmailSendInited = true
+    },
+    async sendEmail () {
+      this.$v.$touch()
+      if (!this.$v.$invalid) {
+        const newDiv = document.querySelector('.shablone').cloneNode(true) // клонируем элемент с его потомками
+        document.querySelector('.shablone__printer').appendChild(newDiv)
+
+        document.querySelectorAll('.shablone__printer input').forEach((i) => {
+          i.style.display = 'none'
+        })
+
+        document.querySelectorAll('.shablone__printer .print-text').forEach((i) => {
+          i.style.display = 'inline-block'
+        })
+
+        await domtoimage.toJpeg(document.querySelector('.shablone__printer .shablone'), {
+          quality: 2
+        })
+          // eslint-disable-next-line require-await
+          .then(async (dataUrl) => {
+            if (this.activeShablone < 3) {
+              // eslint-disable-next-line new-cap
+              this.pdf = new jsPDF('p', 'mm', 'a4')
+            } else {
+              // eslint-disable-next-line new-cap
+              this.pdf = new jsPDF('p', 'mm', [693, 1957])
+            }
+            const width = this.pdf.internal.pageSize.getWidth()
+            const height = this.pdf.internal.pageSize.getHeight()
+
+            this.pdf.addImage(dataUrl, 'JPEG', 0, 0, width, height)
+
+            const pdf = this.pdf.output('blob')
+
+            const formData = new FormData()
+            formData.append('pdf', pdf)
+            formData.append('to', this.form.email)
+            formData.append('subject', 'Винная карта')
+            formData.append('from', 'support@winelist.metro-cc.ru')
+
+            await this.$axios.$post(`${window.location.origin}/mail/send/pdf`, formData, {
+              headers: { 'Content-Type': 'multipart/form-data' }
+            }).then(this.$openModal('Notification', { hideSub: true }))
+            this.isEmailSendInited = false
+          })
+          .catch(function (error) {
+            console.error('oops, something went wrong!', error)
+          })
+          .finally(() => {
+            document.querySelector('.shablone__printer').removeChild(newDiv)
+            console.log('created')
+          })
+      }
+    },
+    async downloadPDF () {
+      await this.createPDF()
+      this.pdf.save('download.pdf')
+    },
+    async createPDF () {
       const newDiv = document.querySelector('.shablone').cloneNode(true) // клонируем элемент с его потомками
       document.querySelector('.shablone__printer').appendChild(newDiv)
 
@@ -220,29 +313,28 @@ export default {
         i.style.display = 'inline-block'
       })
 
-      domtoimage.toJpeg(document.querySelector('.shablone__printer .shablone'), {
+      await domtoimage.toJpeg(document.querySelector('.shablone__printer .shablone'), {
         quality: 2
       })
         .then((dataUrl) => {
-          let pdf
           if (this.activeShablone < 3) {
             // eslint-disable-next-line new-cap
-            pdf = new jsPDF('p', 'mm', 'a4')
+            this.pdf = new jsPDF('p', 'mm', 'a4')
           } else {
             // eslint-disable-next-line new-cap
-            pdf = new jsPDF('p', 'mm', [693, 1957])
+            this.pdf = new jsPDF('p', 'mm', [693, 1957])
           }
-          const width = pdf.internal.pageSize.getWidth()
-          const height = pdf.internal.pageSize.getHeight()
+          const width = this.pdf.internal.pageSize.getWidth()
+          const height = this.pdf.internal.pageSize.getHeight()
 
-          pdf.addImage(dataUrl, 'JPEG', 0, 0, width, height)
-          pdf.save('download.pdf')
+          this.pdf.addImage(dataUrl, 'JPEG', 0, 0, width, height)
         })
         .catch(function (error) {
           console.error('oops, something went wrong!', error)
         })
         .finally(() => {
           document.querySelector('.shablone__printer').removeChild(newDiv)
+          console.log('created')
         })
     },
     doResize (event, ui) {
@@ -281,6 +373,31 @@ export default {
   @import "@/assets/styles/mixins.scss";
 
   .wine-constructor {
+
+    .wine-constructor__send-email{
+      width: 500px;
+    }
+    .wine-constructor__form{
+      display: inline-flex;
+      height: 68px;
+    }
+    .wine-constructor__form-input{
+      margin-right: 12px;
+      width: 500px;
+      .input-field{
+        width: 500px;
+        padding-left: 15px !important;
+        padding-right: 15px !important;
+        border: 3px solid #710000;
+      }
+      .input-field::placeholder{
+        color: #710000;
+
+      }
+    }
+    .wine-constructor__form-send{
+      width: 270px;
+    }
     .shabloneCanvas{
       position: fixed;
       z-index: -2;
